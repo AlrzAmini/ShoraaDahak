@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_MetaTags" />
+    <title>دهک و دولت آباد | @ViewBag.Title</title>
+
+   <partial name="_Styles"/>
+
+</head>
+
+<body class="grocery-theme">
+
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div id="preloader"><div class="preloader"><span></span><span></span></div></div>
+
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<!-- Start Navigation -->
+<partial name="_Header" />
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<!-- ======================== Banner Start ==================== -->
+<partial name="_Banner"/>
+<!-- ======================== Banner End ==================== -->
+<!-- ======================== Choose Category Start ==================== -->
+<partial name="_Subjects"/>
+<!-- ======================== Choose Category End ==================== -->
+<!-- ======================== Fresh Vegetables Start ==================== -->
+<partial name="_Services"/>
+<!-- ======================== Fresh Vegetables End ==================== -->
+<!-- =========================== Customer Reviews =================================== -->
+<partial name="_News"/>
+<!-- =========================== Customer Reviews =================================== -->
+<!-- ======================== Fresh & Fast Fruits Start ==================== -->
+<section>
+<div class="container">
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="sec-heading-flex pl-2 pr-2">
+            <div class="sec-heading-flex-one">
+            </div>
+            <div class="sec-heading-flex-last">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<div class="clearfix"></div>
+<!-- ======================== Fresh & Fast Fruits End ==================== -->
+<!-- ======================== Offer Banner Start ==================== -->
+<partial name="_Blogs"/>
+<!-- ======================== Offer Banner End ==================== -->
+<!-- ======================== Fresh Vegetables & Fruits Start ==================== -->
+
+<!-- ======================== Fresh Vegetables & Fruits End ==================== -->
+<!-- ============================ Call To Action ================================== -->
+
+<!-- ============================ Call To Action End ================================== -->
+<!-- ============================ Footer Start ================================== -->
+<partial name="_Footer"/>
+<!-- ============================ Footer End ================================== -->
+
+
+</div>
+
+<partial name="_Scripts"/>
+</body>
+</html>
+@RenderBody()
