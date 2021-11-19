@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using ShoraaDahak.Core.Services;
 using ShoraaDahak.DataLayer.Context;
+using ShoraaDahak.Core.Services.Interfaces;
 
 namespace ShoraaDahak.Web
 {
@@ -74,6 +76,12 @@ namespace ShoraaDahak.Web
             });
 
             #endregion
+
+            #region IoC
+
+            services.AddScoped<IUserService, UserService>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,14 +89,14 @@ namespace ShoraaDahak.Web
         {
             #region App use ...
 
-            app.Use(async (context, next) =>
-            {
-                await next();
-                if (context.Response.StatusCode == 404)
-                {
-                    context.Response.Redirect("/Error404");
-                }
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    await next();
+            //    if (context.Response.StatusCode == 404)
+            //    {
+            //        context.Response.Redirect("/Error404");
+            //    }
+            //});
 
             if (env.IsDevelopment())
             {

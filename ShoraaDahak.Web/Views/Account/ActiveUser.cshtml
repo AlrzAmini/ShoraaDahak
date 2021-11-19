@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "فعالسازی";
+}
+
+<div class="row align-items-center justify-content-center">
+
+    @if (ViewBag.IsActive)
+    {
+        <div class="col-md-8 col-sm-8 col-lg-8 alert alert-success m-4">
+            <p>
+                احراز هویت شما انجام و حساب کاربری شما فعال گردید.
+            </p>
+        </div>
+        <div class="col-md-8 col-sm-8 col-lg-8 mb-4">
+            <a class="btn btn-info" href="/Login">ورود به سایت</a>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-8 col-sm-8 col-lg-8 alert alert-danger m-4">
+            <p>
+                فعالسازی حساب کاربری شما با شکست مواجه شد.
+            </p>
+        </div>
+    }
+
+</div>
+

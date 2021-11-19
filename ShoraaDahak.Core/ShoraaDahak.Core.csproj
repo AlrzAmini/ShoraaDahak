@@ -5,13 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Convertors\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Generators\" />
     <Folder Include="Consts\" />
     <Folder Include="Senders\" />
-    <Folder Include="Security\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
