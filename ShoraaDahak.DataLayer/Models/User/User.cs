@@ -35,7 +35,8 @@ namespace ShoraaDahak.DataLayer.Models.User
 
         [DisplayName("کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public int NCode { get; set; }
+        [MaxLength(50, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string NCode { get; set; }
 
         #endregion
 

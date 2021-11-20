@@ -23,7 +23,7 @@ namespace ShoraaDahak.Core.DTOs
 
         [DisplayName("کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public int NCode { get; set; }
+        public string NCode { get; set; }
          
         #endregion
 
@@ -79,7 +79,7 @@ namespace ShoraaDahak.Core.DTOs
 
         [DisplayName("کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public int NCode { get; set; }
+        public string NCode { get; set; }
 
         #endregion
 
@@ -100,4 +100,43 @@ namespace ShoraaDahak.Core.DTOs
 
         #endregion
     }
+
+    public class ForgotPasswordViewModel
+    {
+        #region Email
+
+        [DisplayName("ایمیل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(400, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نیست !")]
+        public string Email { get; set; }
+
+        #endregion
+    }
+
+    public class ResetPasswordViewModel
+    {
+        #region Password
+
+        [DisplayName("رمز عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string Password { get; set; }
+
+        #endregion
+
+        #region Re Password
+
+        [DisplayName("تکرار رمز عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        [Compare("Password", ErrorMessage = "رمز عبور و تکرار آن با هم یکسان نیستند")]
+        public string RePassword { get; set; }
+
+        #endregion
+
+        public string ActiveCode { get; set; }
+    }
+
+
 }

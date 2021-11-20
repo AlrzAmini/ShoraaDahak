@@ -10,6 +10,7 @@ using ShoraaDahak.Core.Convertors;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Generators;
 using ShoraaDahak.Core.Security;
+using ShoraaDahak.Core.Senders;
 using ShoraaDahak.Core.Services.Interfaces;
 using ShoraaDahak.DataLayer.Models.User;
 
@@ -18,10 +19,12 @@ namespace ShoraaDahak.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IViewRenderService _renderService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, IViewRenderService renderService)
         {
             _userService = userService;
+            _renderService = renderService;
         }
 
         #region Register
@@ -51,12 +54,11 @@ namespace ShoraaDahak.Web.Controllers
             // Check Email
             if (_userService.IsEmailExist(FixText.EmailFixer(register.Email)))
             {
-                ModelState.AddModelError("Email", "ایمیل وارد شده تکراری است");
+                ModelState.AddModelError("Email", "ایمیل وارد شده تکراری است"); 
                 return View(register);
             }
 
             // Register User
-
             DataLayer.Models.User.User user = new User()
             {
                 Email = FixText.EmailFixer(register.Email),
@@ -71,7 +73,12 @@ namespace ShoraaDahak.Web.Controllers
             };
             _userService.AddUser(user);
 
-            //TODO: Send Email
+            #region Send Activation Email
+
+            string body = _renderService.RenderToStringAsync("_ActivationEmail", user); 
+            SendEmail.Send(user.Email,"فعالسازی حساب کاربری",body);
+
+            #endregion
 
             return View("RegisterConfirmed", user);
         }
@@ -128,7 +135,7 @@ namespace ShoraaDahak.Web.Controllers
                 return Redirect("/");
             }
 
-            ModelState.AddModelError("Password", "کاربری با این مشخصات ثبت نشده است");
+            ModelState.AddModelError("Password", "کد ملی یا رمز عبور اشتباه است");
             return View(login);
 
         }
@@ -148,6 +155,7 @@ namespace ShoraaDahak.Web.Controllers
 
         #endregion
 
+
         #region Logout
 
         [Route("Logout")]
@@ -155,6 +163,79 @@ namespace ShoraaDahak.Web.Controllers
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/");
+        }
+
+        #endregion
+
+
+        #region Forgot Password
+
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgot)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(forgot);
+            }
+
+            DataLayer.Models.User.User user = _userService.GetUserByEmail(FixText.EmailFixer(forgot.Email));
+
+            // check user exist
+            if (user == null)
+            {
+                ModelState.AddModelError("Email", "کاربری با این مشخصات ثبت نشده است");
+                return View(forgot);
+            }
+
+            string body = _renderService.RenderToStringAsync("_ForgotPasswordEmail", user);
+            SendEmail.Send(user.Email,"بازیابی رمز عبور",body);
+            ViewBag.IsSuccess = true;
+
+            return View();
+        }
+
+        #endregion
+
+
+        #region Reset Password
+
+
+        public IActionResult ResetPassword(string id) // id = Activation code
+        {
+            return View(new ResetPasswordViewModel()
+            {
+                ActiveCode = id
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel reset) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(reset);
+            }
+
+            DataLayer.Models.User.User user = _userService.GetUserByActivationCode(reset.ActiveCode);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Password = PasswordHasher.EncodePasswordMd5(reset.Password);
+
+            _userService.UpdateUser(user);
+
+            return Redirect("/Login");
+
         }
 
         #endregion

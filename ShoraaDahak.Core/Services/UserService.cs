@@ -34,7 +34,7 @@ namespace ShoraaDahak.Core.Services
             return user.UserId;
         }
 
-        public bool IsNCodeExist(int nCode)
+        public bool IsNCodeExist(string nCode)
         {
             return _context.Users.Any(u => u.NCode == nCode);
         }
@@ -60,6 +60,22 @@ namespace ShoraaDahak.Core.Services
             _context.SaveChanges();
 
             return true;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _context.Users.SingleOrDefault(u => u.Email == email);
+        }
+
+        public User GetUserByActivationCode(string activeCode)
+        {
+            return _context.Users.SingleOrDefault(u => u.ActivationCode == activeCode);
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

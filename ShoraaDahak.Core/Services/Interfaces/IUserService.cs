@@ -15,7 +15,7 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         bool IsEmailExist(string email);
 
-        bool IsNCodeExist(int nCode);
+        bool IsNCodeExist(string nCode);
 
         int AddUser(User user);
 
@@ -30,6 +30,16 @@ namespace ShoraaDahak.Core.Services.Interfaces
         #region Active User
 
         bool ActiveUser(string activeCode);
+
+        #endregion
+
+        #region Forgot Password
+
+        User GetUserByEmail(string email);
+
+        User GetUserByActivationCode(string activeCode);
+
+        void UpdateUser(User user);
 
         #endregion
 

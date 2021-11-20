@@ -16,5 +16,11 @@ namespace ShoraaDahak.Web.Controllers
         {
             return View();
         }
+
+        [Route("/Error404")]
+        public IActionResult Error404()
+        {
+            return View();
+        }
     }
 }
