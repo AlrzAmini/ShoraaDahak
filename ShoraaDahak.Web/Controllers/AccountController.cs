@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ShoraaDahak.Core.Convertors;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Generators;
@@ -103,6 +106,25 @@ namespace ShoraaDahak.Web.Controllers
                     return View(login);
                 }
 
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
+                    new Claim(ClaimTypes.Name,user.Name),
+                    new Claim(ClaimTypes.Email,user.Email),
+                    new Claim(ClaimTypes.MobilePhone,user.PhoneNumber)
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                var properties = new AuthenticationProperties()
+                {
+                    IsPersistent = login.RememberMe
+                };
+
+                // command for login user
+                HttpContext.SignInAsync(principal, properties);
+
                 return Redirect("/");
             }
 
@@ -118,9 +140,21 @@ namespace ShoraaDahak.Web.Controllers
 
         public IActionResult ActiveUser(string id)
         {
+            // if user was active or was null return = null
             ViewBag.IsActive = _userService.ActiveUser(id);
 
             return View();
+        }
+
+        #endregion
+
+        #region Logout
+
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("/");
         }
 
         #endregion

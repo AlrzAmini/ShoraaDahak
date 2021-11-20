@@ -10,9 +10,17 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-8 text-right">
                     <div class="topbar_menu">
                         <ul>
-                            <li><a href="/Register"><i class="ti-widget"></i>ثبت نام</a></li>
-                            <li class="hide-m"><a href="/Login"><i class="ti-signal"></i>ورود</a></li>
-                            <li><a href="/UserPanel"><i class="ti-user"></i>حساب کاربری</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/UserPanel" class="btn btn-outline-info btn-sm">@User.Identity.Name خوش آمدید</a></li>
+                                <li><a href="/Logout" class="btn btn-outline-danger btn-sm">خروج</a></li>
+
+                            }
+                            else
+                            {
+                                <li><a href="/Register" class="btn btn-outline-info btn-sm">ثبت نام</a></li>
+                                <li><a href="/Login" class="btn btn-outline-success btn-sm">ورود</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
