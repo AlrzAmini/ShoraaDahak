@@ -43,5 +43,17 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         #endregion
 
+        #region User Panel
+
+        User GetUserByNCode(string nCode);
+
+        UserInformationViewModel GetUserInformation(string nCode);
+
+        EditUserInfoViewModel GetUserInfoForEdit(string email);
+
+        void EditUserInfo(string email, EditUserInfoViewModel info);
+
+        #endregion
+
     }
 }

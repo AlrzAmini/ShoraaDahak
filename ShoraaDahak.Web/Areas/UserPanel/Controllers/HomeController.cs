@@ -1,0 +1,63 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using ShoraaDahak.Core.DTOs;
+using ShoraaDahak.Core.Services.Interfaces;
+
+namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
+{
+    [Area("UserPanel")]
+    [Authorize]
+    public class HomeController : Controller
+    {
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        public IActionResult Index()
+        {
+            return View(_userService.GetUserInformation(User.FindFirstValue(ClaimTypes.SerialNumber)));
+        }
+
+
+        #region Edit Information
+
+        [Route("UserPanel/EditInfo")]
+        public IActionResult EditInfo()
+        {
+            return View(_userService.GetUserInfoForEdit(User.FindFirstValue(ClaimTypes.Email)));
+        }
+
+        [HttpPost]
+        [Route("UserPanel/EditInfo")]
+        public IActionResult EditInfo(EditUserInfoViewModel edit)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(edit);
+            }
+
+            if (_userService.IsNCodeExist(edit.NCode) && edit.NCode != User.FindFirstValue(ClaimTypes.SerialNumber))
+            {
+                ModelState.AddModelError("NCode", "کد ملی وارد شده تکراری است");
+                return View(edit);
+            }
+
+
+            _userService.EditUserInfo(User.FindFirstValue(ClaimTypes.Email),edit);
+            ViewBag.IsSuccess = true;
+
+            return View(_userService.GetUserInfoForEdit(User.FindFirstValue(ClaimTypes.Email)));
+
+        }
+
+        #endregion
+    }
+}

@@ -118,7 +118,8 @@ namespace ShoraaDahak.Web.Controllers
                     new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
                     new Claim(ClaimTypes.Name,user.Name),
                     new Claim(ClaimTypes.Email,user.Email),
-                    new Claim(ClaimTypes.MobilePhone,user.PhoneNumber)
+                    new Claim(ClaimTypes.MobilePhone,user.PhoneNumber),
+                    new Claim(ClaimTypes.SerialNumber,user.NCode)
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

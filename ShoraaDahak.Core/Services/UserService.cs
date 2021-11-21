@@ -77,5 +77,54 @@ namespace ShoraaDahak.Core.Services
             _context.Users.Update(user);
             _context.SaveChanges();
         }
+
+        public User GetUserByNCode(string nCode)
+        {
+            return _context.Users.SingleOrDefault(u => u.NCode == nCode);
+        }
+
+        public UserInformationViewModel GetUserInformation(string nCode)
+        {
+            var user = GetUserByNCode(nCode);
+
+            var information = new UserInformationViewModel
+            {
+                Email = user.Email,
+                NCode = user.NCode,
+                PhoneNumber = user.PhoneNumber,
+                Name = user.Name,
+                BirthDate = user.BirthDate,
+                RegisterDate = user.RegisterDate
+            };
+
+            return information;
+        }
+
+        public EditUserInfoViewModel GetUserInfoForEdit(string email)
+        {
+            
+
+            return _context.Users.Where(u=>u.Email == email)
+                .Select(u=> new EditUserInfoViewModel()
+                {
+                    Email = u.Email,
+                    NCode = u.NCode,
+                    BirthDate = u.BirthDate,
+                    Name = u.Name,
+                    PhoneNumber = u.PhoneNumber
+                }).Single();
+        }
+
+        public void EditUserInfo(string email,EditUserInfoViewModel info)
+        {
+            User user = GetUserByEmail(email);
+
+            user.BirthDate = info.BirthDate;
+            user.NCode = info.NCode;
+            user.Name = info.Name;
+            user.PhoneNumber = info.PhoneNumber;
+
+            UpdateUser(user);
+        }
     }
 }
