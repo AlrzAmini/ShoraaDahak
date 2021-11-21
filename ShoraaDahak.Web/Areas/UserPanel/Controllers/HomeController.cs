@@ -59,5 +59,37 @@ namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
         }
 
         #endregion
+
+        #region Change Password
+
+        [Route("UserPanel/ChangePassword")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("UserPanel/ChangePassword")]
+        public IActionResult ChangePassword(ChangePasswordViewModel change)
+        {
+            string email = User.FindFirstValue(ClaimTypes.Email);
+            if (!ModelState.IsValid)
+            {
+                return View(change);
+            }
+
+            if (!_userService.CompareOldPassword(email,change.OldPassword))
+            {
+                ModelState.AddModelError("OldPassword","رمز عبور فعلی صحیح نمی باشد");
+                return View(change);
+            }
+
+            _userService.ChangePassword(email,change.Password);
+            ViewBag.IsSuccess = true;
+
+            return View();
+        }
+
+        #endregion
     }
 }

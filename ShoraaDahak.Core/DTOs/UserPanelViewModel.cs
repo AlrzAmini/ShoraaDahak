@@ -64,4 +64,35 @@ namespace ShoraaDahak.Core.DTOs
 
         #endregion
     }
+
+    public class ChangePasswordViewModel
+    {
+        #region Password
+
+        [DisplayName("رمز عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string Password { get; set; }
+
+        #endregion
+
+        #region Re Password
+
+        [DisplayName("تکرار رمز عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        [Compare("Password", ErrorMessage = "رمز عبور و تکرار آن با هم یکسان نیستند")]
+        public string RePassword { get; set; }
+
+        #endregion
+
+        #region Old Password
+
+        [DisplayName("رمز عبور فعلی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string OldPassword { get; set; }
+
+        #endregion
+    }
 }

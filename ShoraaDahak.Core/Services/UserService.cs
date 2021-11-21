@@ -126,5 +126,20 @@ namespace ShoraaDahak.Core.Services
 
             UpdateUser(user);
         }
+
+        public bool CompareOldPassword(string email, string oldPass)
+        {
+            string hashedOldPass = PasswordHasher.EncodePasswordMd5(oldPass);
+            return _context.Users.Any(u => u.Email == email && u.Password == hashedOldPass);
+        }
+
+        public void ChangePassword(string email, string newPass)
+        {
+            User user = GetUserByEmail(email);
+
+            user.Password = PasswordHasher.EncodePasswordMd5(newPass);
+
+            UpdateUser(user);
+        }
     }
 }

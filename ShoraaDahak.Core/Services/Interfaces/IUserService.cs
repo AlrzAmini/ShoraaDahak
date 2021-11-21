@@ -53,6 +53,10 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         void EditUserInfo(string email, EditUserInfoViewModel info);
 
+        bool CompareOldPassword(string email, string oldPass);
+
+        void ChangePassword(string email, string newPass);
+
         #endregion
 
     }
