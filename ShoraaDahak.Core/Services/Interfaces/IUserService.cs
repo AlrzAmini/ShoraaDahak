@@ -65,6 +65,16 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         int AddUserFromAdmin(CreateUserViewModel user);
 
+        EditUserViewModel GetUserForEditInAdmin(int userId);
+
+        void EditUserFromAdmin(EditUserViewModel editUser);
+
+        User GetUserByUserId(int userId);
+
+        DeleteUserViewModel GetUserForDeleteInAdmin(int userId);
+
+        void DeleteUserFromAdmin(int userId);
+
         #endregion
 
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShoraaDahak.Core.Consts;
+using ShoraaDahak.Core.Convertors;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Generators;
 using ShoraaDahak.Core.Security;
@@ -187,6 +188,57 @@ namespace ShoraaDahak.Core.Services
             };
 
             return AddUser(mUser);
+        }
+
+        public EditUserViewModel GetUserForEditInAdmin(int userId)
+        {
+            return _context.Users.Where(u => u.UserId == userId).Select(u => new EditUserViewModel()
+            {
+                UserId = u.UserId,
+                BirthDate = u.BirthDate,
+                Email = u.Email,
+                NCode = u.NCode,
+                Name = u.Name,
+                PhoneNumber = u.PhoneNumber,
+                UserRoles = u.UserRoles.Select(r => r.RoleId).ToList()
+            }).Single();
+        }
+
+        public User GetUserByUserId(int userId)
+        {
+            return _context.Users.Find(userId);
+        }
+
+        public void EditUserFromAdmin(EditUserViewModel editUser)
+        {
+            User user = GetUserByUserId(editUser.UserId);
+
+            user.BirthDate = editUser.BirthDate;
+            user.NCode = editUser.NCode;
+            if (!string.IsNullOrEmpty(editUser.Password))
+            {
+                user.Password = PasswordHasher.EncodePasswordMd5(editUser.Password);
+            }
+            user.PhoneNumber = editUser.PhoneNumber;
+
+            UpdateUser(user);
+        }
+
+        public DeleteUserViewModel GetUserForDeleteInAdmin(int userId)
+        {
+            return _context.Users.Where(u=>u.UserId == userId).Select(u=> new DeleteUserViewModel()
+            {
+                UserId = u.UserId,
+                Name = u.Name,
+                NCode = u.NCode
+            }).Single();
+        }
+
+        public void DeleteUserFromAdmin(int userId)
+        {
+            var user = GetUserByUserId(userId);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
     }
 }
