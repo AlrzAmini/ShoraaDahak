@@ -21,4 +21,10 @@
     <ProjectReference Include="..\ShoraaDahak.DataLayer\ShoraaDahak.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Admin\News\" />
+    <Folder Include="Pages\Admin\Services\" />
+    <Folder Include="Pages\Admin\Roles\" />
+  </ItemGroup>
+
 </Project>

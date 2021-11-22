@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.Core.Consts;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Generators;
 using ShoraaDahak.Core.Security;
@@ -102,10 +103,10 @@ namespace ShoraaDahak.Core.Services
 
         public EditUserInfoViewModel GetUserInfoForEdit(string email)
         {
-            
 
-            return _context.Users.Where(u=>u.Email == email)
-                .Select(u=> new EditUserInfoViewModel()
+
+            return _context.Users.Where(u => u.Email == email)
+                .Select(u => new EditUserInfoViewModel()
                 {
                     Email = u.Email,
                     NCode = u.NCode,
@@ -115,7 +116,7 @@ namespace ShoraaDahak.Core.Services
                 }).Single();
         }
 
-        public void EditUserInfo(string email,EditUserInfoViewModel info)
+        public void EditUserInfo(string email, EditUserInfoViewModel info)
         {
             User user = GetUserByEmail(email);
 
@@ -140,6 +141,52 @@ namespace ShoraaDahak.Core.Services
             user.Password = PasswordHasher.EncodePasswordMd5(newPass);
 
             UpdateUser(user);
+        }
+
+        public UsersForAdminViewModel GetAllUsers(int pageId = 1, string filterName = "", string filterNCode = "")
+        {
+            IQueryable<User> result = _context.Users;
+
+            if (!string.IsNullOrEmpty(filterName))
+            {
+                result = result.Where(u => u.Name.Contains(filterName));
+            }
+
+            if (!string.IsNullOrEmpty(filterNCode))
+            {
+                result = result.Where(u => u.NCode.Contains(filterNCode));
+            }
+
+            // Paging
+            int take = Pagings.TakeUserInAdmin;
+            int skip = (pageId - 1) * take;
+
+            UsersForAdminViewModel users = new UsersForAdminViewModel()
+            {
+                CurrentPage = pageId,
+                TotalPages = (int)Math.Ceiling((decimal)result.Count() / take),
+                Users = result.OrderByDescending(u => u.Name).Skip(skip).Take(take).ToList()
+            };
+
+            return users;
+        }
+
+        public int AddUserFromAdmin(CreateUserViewModel user)
+        {
+            User mUser = new User()
+            {
+                Name = user.Name,
+                NCode = user.NCode,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                BirthDate = user.BirthDate,
+                IsActive = true,
+                Password = PasswordHasher.EncodePasswordMd5(user.Password),
+                ActivationCode = CodeGenerator.GenerateUniqCode(),
+                RegisterDate = DateTime.Now
+            };
+
+            return AddUser(mUser);
         }
     }
 }

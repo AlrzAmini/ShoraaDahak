@@ -84,6 +84,9 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<IViewRenderService, RenderViewToString>();
 
+            services.AddScoped<IPermissionService, PermissionService>();
+
+
             #endregion
         }
 

@@ -59,5 +59,13 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         #endregion
 
+        #region Admin Panel
+
+        UsersForAdminViewModel GetAllUsers(int pageId = 1, string filterName = "", string filterNCode = "");
+
+        int AddUserFromAdmin(CreateUserViewModel user);
+
+        #endregion
+
     }
 }

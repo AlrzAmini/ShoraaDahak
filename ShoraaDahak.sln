@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoraaDahak.Web", "ShoraaDahak.Web\ShoraaDahak.Web.csproj", "{4C05862F-6569-42F1-8A0F-9895E4BD5CE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoraaDahak.Web", "ShoraaDahak.Web\ShoraaDahak.Web.csproj", "{4C05862F-6569-42F1-8A0F-9895E4BD5CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoraaDahak.DataLayer", "ShoraaDahak.DataLayer\ShoraaDahak.DataLayer.csproj", "{91D51C3B-029D-47E4-8926-9866FD07B1C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoraaDahak.DataLayer", "ShoraaDahak.DataLayer\ShoraaDahak.DataLayer.csproj", "{91D51C3B-029D-47E4-8926-9866FD07B1C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoraaDahak.Core", "ShoraaDahak.Core\ShoraaDahak.Core.csproj", "{CB257E7A-D25E-4FE9-880E-D2815CC08702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoraaDahak.Core", "ShoraaDahak.Core\ShoraaDahak.Core.csproj", "{CB257E7A-D25E-4FE9-880E-D2815CC08702}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
