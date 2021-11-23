@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.DataLayer.Models.Permission;
 
 namespace ShoraaDahak.DataLayer.Models.User
 {
@@ -22,6 +23,8 @@ namespace ShoraaDahak.DataLayer.Models.User
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }
+
+        public List<RolePermission> RolePermissions { get; set; }
 
         #endregion
     }

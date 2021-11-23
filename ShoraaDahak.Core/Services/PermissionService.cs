@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ShoraaDahak.Core.Services.Interfaces;
 using ShoraaDahak.DataLayer.Context;
+using ShoraaDahak.DataLayer.Models.Permission;
 using ShoraaDahak.DataLayer.Models.User;
 
 namespace ShoraaDahak.Core.Services
@@ -81,68 +82,68 @@ namespace ShoraaDahak.Core.Services
             _context.SaveChanges();
         }
 
-        //public List<Permission> GetAllPermissions()
-        //{
-        //    return _context.Permission.ToList();
-        //}
-
-        //public void AddPermissionsToRole(int roleId, List<int> permission)
-        //{
-        //    foreach (var item in permission)
-        //    {
-        //        _context.RolePermission.Add(new RolePermission()
-        //        {
-        //            PermissionId = item,
-        //            RoleId = roleId
-        //        });
-        //    }
-
-        //    _context.SaveChanges();
-        //}
-
-        //public List<int> PermissionsRole(int roleId)
-        //{
-        //    return _context.RolePermission
-        //        .Where(r => r.RoleId == roleId)
-        //        .Select(r => r.PermissionId).ToList();
-        //}
-
-        //public void EditPermissionsRole(int roleId, List<int> permissions)
-        //{
-        //    _context.RolePermission.Where(p => p.RoleId == roleId)
-        //        .ToList().ForEach(p => _context.RolePermission.Remove(p));
-
-        //    AddPermissionsToRole(roleId, permissions);
-        //}
-
-        public int GetUserIdByUserName(string name)
+        public List<Permission> GetAllPermissions()
         {
-            return _context.Users.Single(u => u.Name == name).UserId;
+            return _context.Permission.ToList();
         }
 
-        //public bool CheckPermission(int permissionId, string userName)
-        //{
-        //    int userId = GetUserIdByUserName(userName);
+        public void AddPermissionsToRole(int roleId, List<int> permission)
+        {
+            foreach (var item in permission)
+            {
+                _context.RolePermission.Add(new RolePermission()
+                {
+                    PermissionId = item,
+                    RoleId = roleId
+                });
+            }
 
-        //    // this(username is in input) user roles
-        //    List<int> UserRoles = _context.UserRoles
-        //        .Where(r => r.UserId == userId)
-        //        .Select(r => r.RoleId)
-        //        .ToList();
+            _context.SaveChanges();
+        }
 
-        //    if (!UserRoles.Any())
-        //    {
-        //        return false;
-        //    }
+        public List<int> PermissionsRole(int roleId)
+        {
+            return _context.RolePermission
+                .Where(r => r.RoleId == roleId)
+                .Select(r => r.PermissionId).ToList();
+        }
 
-        //    // this permissions role
-        //    List<int> RolesPermission = _context.RolePermission
-        //        .Where(p => p.PermissionId == permissionId)
-        //        .Select(p => p.RoleId)
-        //        .ToList();
+        public void EditPermissionsRole(int roleId, List<int> permissions)
+        {
+            _context.RolePermission.Where(p => p.RoleId == roleId)
+                .ToList().ForEach(p => _context.RolePermission.Remove(p));
 
-        //    return RolesPermission.Any(p => UserRoles.Contains(p));
-        //}
+            AddPermissionsToRole(roleId, permissions);
+        }
+
+        public int GetUserIdByEmail(string email)
+        {
+            return _context.Users.Single(u => u.Email == email).UserId;
+        }
+
+        public bool CheckPermission(int permissionId, string email)
+        {
+            int userId = GetUserIdByEmail(email);
+
+            // this(username is in input) user roles
+            List<int> UserRoles = _context.UserRoles
+                .Where(r => r.UserId == userId)
+                .Select(r => r.RoleId)
+                .ToList();
+
+            if (!UserRoles.Any())
+            {
+                return false;
+            }
+
+            // this permissions role
+            List<int> RolesPermission = _context.RolePermission
+                .Where(p => p.PermissionId == permissionId)
+                .Select(p => p.RoleId)
+                .ToList();
+
+            return RolesPermission.Any(p => UserRoles.Contains(p));
+        }
 
 
     }

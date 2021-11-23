@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.DataLayer.Models.Permission;
 using ShoraaDahak.DataLayer.Models.User;
 
 namespace ShoraaDahak.Core.Services.Interfaces
@@ -29,21 +30,21 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         #region Permissions
 
-        //List<Permission> GetAllPermissions();
+        List<Permission> GetAllPermissions();
 
-        //void AddPermissionsToRole(int roleId, List<int> permission);
+        void AddPermissionsToRole(int roleId, List<int> permission);
 
-        //List<int> PermissionsRole(int roleId);
+        List<int> PermissionsRole(int roleId);
 
-        //void EditPermissionsRole(int roleId, List<int> permissions);
+        void EditPermissionsRole(int roleId, List<int> permissions);
 
-        //bool CheckPermission(int permissionId, string userName);
+        bool CheckPermission(int permissionId, string email);
 
         #endregion
 
         #region User
 
-        public int GetUserIdByUserName(string name);
+        public int GetUserIdByEmail(string email);
 
         #endregion
     }

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.RazorPages
+@using ShoraaDahak.Core.Consts
+@using ShoraaDahak.Core.Services.Interfaces
+@using System.Security.Claims
+@inject IPermissionService _permissionService;
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -6,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>پنل مدیریت دهک و دولت آباد</title>
+    <title>پنل مدیریت | @ViewData["Title"]</title>
 
     <!-- Core CSS - Include with every page -->
     <link href="/AdminPanel/css/bootstrap-rtl.css" rel="stylesheet">
@@ -57,26 +62,28 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> مدیریت <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                               
-                                @*@if (_permissionService.CheckPermission(PerIds.ManageUsers, User.Identity.Name))
-                                {*@
+
+                                @if (_permissionService.CheckPermission(PerIds.AdminUsers, User.FindFirstValue(ClaimTypes.Email)))
+                                {
                                     <li>
                                         <a href="/Admin/Users">کاربران</a>
                                     </li>
-                                @*}
-                                @if (_permissionService.CheckPermission(PerIds.ManageCourses, User.Identity.Name))
-                                {*@
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.AdminRoles, User.FindFirstValue(ClaimTypes.Email)))
+                                {
                                     <li>
-                                        <a href="/Admin/ManageCourses">خدمات</a>
+                                        <a href="/Admin/Roles">نقش ها</a>
                                     </li>
-                                @*}
-                                @if (_permissionService.CheckPermission(PerIds.ManageGroups, User.Identity.Name))
-                                {*@
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.AdminServices, User.FindFirstValue(ClaimTypes.Email)))
+                                {
                                     <li>
-                                        <a href="/Admin/ManageGroups">اخبار</a>
+                                        <a href="/Admin/Services">خدمات</a>
                                     </li>
-                                @*}*@
-
+                                }
+                                <li>
+                                    <a href="/Admin/News">اخبار</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

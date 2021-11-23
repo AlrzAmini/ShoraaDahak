@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="Pages\Admin\News\" />
     <Folder Include="Pages\Admin\Services\" />
-    <Folder Include="Pages\Admin\Roles\" />
   </ItemGroup>
 
 </Project>

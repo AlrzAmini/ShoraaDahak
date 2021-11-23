@@ -166,7 +166,7 @@ namespace ShoraaDahak.Core.Services
             {
                 CurrentPage = pageId,
                 TotalPages = (int)Math.Ceiling((decimal)result.Count() / take),
-                Users = result.OrderByDescending(u => u.Name).Skip(skip).Take(take).ToList()
+                Users = result.OrderBy(u => u.Name).Skip(skip).Take(take).ToList()
             };
 
             return users;

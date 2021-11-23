@@ -9,25 +9,26 @@ using ShoraaDahak.Core.Consts;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Security;
 using ShoraaDahak.Core.Services.Interfaces;
+using ShoraaDahak.DataLayer.Models.User;
 
-namespace ShoraaDahak.Web.Pages.Admin.Users
+namespace ShoraaDahak.Web.Pages.Admin.Roles
 {
     [Authorize]
-    [PermissionChecker(PerIds.AdminUsers)]
+    [PermissionChecker(PerIds.AdminRoles)]
     public class IndexModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IPermissionService _permissionService;
 
-        public IndexModel(IUserService userService)
+        public IndexModel(IPermissionService permissionService)
         {
-            _userService = userService;
+            _permissionService = permissionService;
         }
 
-        public UsersForAdminViewModel UsersForAdmin { get; set; }
+        public List<Role> Roles { get; set; }
         
         public IActionResult OnGet(int pageId=1,string filterName="",string filterNCode="")
         {
-            UsersForAdmin = _userService.GetAllUsers(pageId,filterName,filterNCode);
+            Roles = _permissionService.GetAllRoles();
             return Page();
         }
     }
