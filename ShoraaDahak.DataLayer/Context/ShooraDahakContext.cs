@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShoraaDahak.DataLayer.Models.Permission;
+using ShoraaDahak.DataLayer.Models.Services;
 using ShoraaDahak.DataLayer.Models.User;
 
 namespace ShoraaDahak.DataLayer.Context
@@ -32,6 +33,12 @@ namespace ShoraaDahak.DataLayer.Context
 
         public DbSet<RolePermission> RolePermission { get; set; }
 
+
+        #endregion
+
+        #region Service
+
+        public DbSet<ServiceGroup> ServiceGroups { get; set; }
 
         #endregion
     }

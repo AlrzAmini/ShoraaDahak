@@ -107,31 +107,8 @@
                             <span class="nav-menus-wrapper-close-button">✕</span>
                             <ul class="nav-menu">
 
-                                <li class="">
-                                    <a href="#">خانه<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-                                    <ul class="nav-dropdown nav-submenu" style="right: auto;">
-                                        <li>
-                                            <a href="#">مواد غذایی<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-                                            <ul class="nav-dropdown nav-submenu" style="">
-                                                <li><a href="grocery.html">مواد غذایی 1</a></li>
-                                                <li><a href="grocery-2.html">مواد غذایی 2</a></li>
-                                                <li><a href="grocery-3.html">مواد غذایی 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">فروشگاه<span class="submenu-indicator"></span></a>
-                                            <ul class="nav-dropdown nav-submenu" style="">
-                                                <li><a href="woocommerce.html">فروشگاه 1</a></li>
-                                                <li><a href="woocommerce-2.html">فروشگاه 2</a></li>
-                                                <li><a href="beauty.html">لوازم آرایشی</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="organic.html">ارگانیک</a></li>
-                                        <li><a href="electronics.html">الکترونیکی</a></li>
-                                        <li><a href="digital.html">دیجیتالی</a></li>
-                                        <li><a href="furniture.html">مبلمان</a></li>
-                                    </ul>
-                                </li>
+                                
+                                @await Component.InvokeAsync("ServiceGroupComponent")
 
                                 <li>
                                     <a href="#">دسته بندی<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>

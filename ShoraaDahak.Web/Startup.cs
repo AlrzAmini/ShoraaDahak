@@ -86,6 +86,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<IPermissionService, PermissionService>();
 
+            services.AddScoped<IServiceService, ServiceService>();
+
 
             #endregion
         }

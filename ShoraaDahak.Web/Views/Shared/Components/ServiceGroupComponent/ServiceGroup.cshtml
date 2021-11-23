@@ -1,0 +1,22 @@
+﻿@model List<ShoraaDahak.DataLayer.Models.Services.ServiceGroup>
+<li>
+    <a href="#">خدمات انجام شده<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
+    <ul class="nav-dropdown nav-submenu" style="right: auto;">
+        @foreach (var group in Model.Where(g => g.ParrentId == null))
+        {
+            <li>
+                <a href="#">@group.GroupTitle<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
+                @if (Model.Any(g => g.ParrentId == group.ParrentId))
+                {
+                    <ul class="nav-dropdown nav-submenu">
+                        @foreach (var sub in Model.Where(g => g.ParrentId == group.GroupId))
+                        {
+                            <li><a href="grocery.html">@sub.GroupTitle</a></li>
+                        }
+                    </ul>
+                }
+
+            </li>
+        }
+    </ul>
+</li>
