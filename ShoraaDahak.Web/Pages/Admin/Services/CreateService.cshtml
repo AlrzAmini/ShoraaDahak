@@ -1,0 +1,150 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.Services.CreateServiceModel
+@{
+    ViewData["Title"] = "افزودن خدمات جدید";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">افزودن خدمات جدید</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست خدمات</a>
+    </div>
+</div>
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات خدمت
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>@Html.DisplayNameFor(model => model.Service.ServiceTitle)</label>
+                        <input type="text" asp-for="Service.ServiceTitle" class="form-control" placeholder="عنوان خدمت را وارد کنید ">
+                        <span asp-validation-for="Service.ServiceTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>گروه</label>
+                        <select class="form-control" asp-for="Service.GroupId" asp-items="@(ViewData["Groups"] as SelectList)"></select>
+                        <span asp-validation-for="Service.GroupId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>زیر گروه</label>
+                        <select class="form-control" asp-for="Service.SubGroup" asp-items="@(ViewData["SubGroups"] as SelectList)"></select>
+                        <span asp-validation-for="Service.SubGroup" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>نویسنده</label>
+                        <select class="form-control" asp-for="Service.WriterId" asp-items="@(ViewData["Teachers"] as SelectList)"></select>
+                        <span asp-validation-for="Service.WriterId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>@Html.DisplayNameFor(model => model.Service.ServiceBudget)</label>
+                        <input type="number" asp-for="Service.ServiceBudget" value="0" class="form-control">
+                        <span asp-validation-for="Service.ServiceBudget" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>تاریخ شروع</label>
+                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control sDate" >
+                        <span asp-validation-for="Service.ServiceStartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>تاریخ پایان</label>
+                        <input type="date" asp-for="Service.ServiceEndDate" class="form-control">
+                        <span asp-validation-for="Service.ServiceEndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>مدت زمان انجام</label>
+                        <input type="time" asp-for="Service.ServicePeriodTime" class="form-control">
+                        <span asp-validation-for="Service.ServicePeriodTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>سازمان های مربوطه</label>
+                        <input type="text" asp-for="Service.RelatedInstitutions" class="form-control">
+                        <p class="help-block">نام سازمان ها را با - جدا کنید</p>
+                        <span asp-validation-for="Service.RelatedInstitutions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>شرح</label>
+                        <textarea type="text" asp-for="Service.ServiceDescription" class="form-control" rows="12"></textarea>
+                        <span asp-validation-for="Service.ServiceDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>ویدیو</label>
+                        <input type="file" name="episodeFileUp">
+                        <span asp-validation-for="Service.ServiceVideoName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    جزییات
+                </div>
+                <div class="panel-body">
+                    <img id="imgCourse" class="img-fluid img-thumbnail" src="/img/UserAvatar/Avatar-min.jpg" />
+                    <div class="form-group">
+                        <label>افزودن تصویر</label>
+                        <input type="file" id="imgCourseUp" name="imgCourseUp">
+                    </div>
+                    <div class="form-group">
+                        <label>وضعیت انجام</label>
+                        <select class="form-control" asp-for="Service.StatusId" asp-items="@(ViewData["Statuses"] as SelectList)"></select>
+                        <span asp-validation-for="Service.StatusId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ثبت</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        $("#Service_GroupId").change(function () {
+            $("#Service_SubGroup").empty();
+            $.getJSON("/HomeAdmin/GetSubGroups/" + $("#Service_GroupId :selected").val(),
+                function (data) {
+                    $.each(data,
+                        function () {
+                            $("#Service_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".sDate").persianDatepicker();
+        });
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgCourseUp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Course_CourseDescription', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+}
