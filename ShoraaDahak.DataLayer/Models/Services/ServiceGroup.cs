@@ -28,6 +28,12 @@ namespace ShoraaDahak.DataLayer.Models.Services
         [ForeignKey("ParrentId")]
         public List<ServiceGroup> ServiceGroups { get; set; }
 
+        [InverseProperty("ServiceGroup")]
+        public List<Service> Services { get; set; }
+
+        [InverseProperty("Grooup")]
+        public List<Service> SubServices { get; set; }
+
         #endregion
     }
 }

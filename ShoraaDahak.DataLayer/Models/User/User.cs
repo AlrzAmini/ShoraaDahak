@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.DataLayer.Models.Services;
 
 namespace ShoraaDahak.DataLayer.Models.User
 {
@@ -100,6 +101,8 @@ namespace ShoraaDahak.DataLayer.Models.User
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }
+
+        public List<Service> Services { get; set; }
 
         #endregion
 

@@ -40,6 +40,10 @@ namespace ShoraaDahak.DataLayer.Context
 
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
 
+        public DbSet<ServiceStatus> ServiceStatus { get; set; }
+
+        public DbSet<Service> Service { get; set; }
+
         #endregion
     }
 }
