@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.DataLayer.Models.Services;
 
 namespace ShoraaDahak.Core.Services.Interfaces
@@ -23,6 +25,14 @@ namespace ShoraaDahak.Core.Services.Interfaces
         #region Service
 
         List<SelectListItem> GetWriters();
+
+        List<SelectListItem> GetStatuses();
+
+        List<ShowServicesInAdminViewModel> GetServicesInAdmin();
+
+        ServicesForAdminViewModel GetAllServices(int pageId = 1, string filterName = "");
+
+        int AddService(Service service,IFormFile imgService,IFormFile videoService);
 
         #endregion
     }

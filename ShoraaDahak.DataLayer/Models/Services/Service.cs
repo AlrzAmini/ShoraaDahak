@@ -27,7 +27,7 @@ namespace ShoraaDahak.DataLayer.Models.Services
 
         #region Service Properties
 
-        [DisplayName("عنوان خدمت")]
+        [DisplayName("عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(250, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
         public string ServiceTitle { get; set; }
@@ -46,10 +46,6 @@ namespace ShoraaDahak.DataLayer.Models.Services
         [DisplayName("آخرین بروزرسانی")]
         public DateTime? ServiceUpdateDate { get; set; }
 
-        [DisplayName("مدت زمان انجام")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public TimeSpan ServicePeriodTime { get; set; }
-
         [DisplayName("بودجه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public int ServiceBudget { get; set; }
@@ -64,7 +60,6 @@ namespace ShoraaDahak.DataLayer.Models.Services
 
         [DisplayName("تصویر")]
         [MaxLength(50)]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string ServiceImageName { get; set; }
 
 

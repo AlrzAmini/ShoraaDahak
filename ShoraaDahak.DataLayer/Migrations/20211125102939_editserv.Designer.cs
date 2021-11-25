@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211125102939_editserv")]
+    partial class editserv
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +90,7 @@ namespace ShoraaDahak.DataLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ServiceImageName")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 

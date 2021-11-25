@@ -1,4 +1,5 @@
 ﻿@page
+@using ShoraaDahak.Core.Convertors
 @model ShoraaDahak.Web.Pages.Admin.Services.IndexModel
 @{
     ViewData["Title"] = "لیست خدمات";
@@ -13,6 +14,7 @@
 <div class="row">
     <div class="col-md-12">
         <a asp-page="CreateService" class="btn btn-outline btn-success">افزودن خدمات</a>
+
     </div>
 </div>
 <br />
@@ -27,11 +29,14 @@
                 <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
                     <div class="row">
                         <form>
-                            <div class="col-md-10 col-sm-5">
-                                <input type="text" name="filterCourseTitle" class="form-control" placeholder="جستجو بر اساس عنوان دوره" />
+                            <div class="col-md-8 col-sm-5">
+                                <input type="text" name="filterServiceTitle" class="form-control" placeholder="جستجو بر اساس عنوان" />
                             </div>
-                            <div class="col-md-2 col-sm-2">
+                            <div class="col-md-3 col-sm-3">
                                 <button type="submit" class="btn btn-info form-control">بیاب</button>
+                            </div>
+                            <div class="col-md-1 col-sm-1">
+                                <a class="btn btn-outline btn-warning form-control" href="/Admin/Services">لغو</a>
                             </div>
                         </form>
                     </div>
@@ -39,35 +44,38 @@
                     <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
                         <thead>
                             <tr>
-                                <th>عنوان خدمت</th>
+                                <th>عنوان</th>
+                                <th>بودجه</th>
                                 <th>تاریخ شروع</th>
-                                <th>قیمت دوره</th>
-                                <th>تصویر</th>
                                 <th>دستورات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model.ShowCourseForAdminViewModel.Courses)
+                            @foreach (var item in Model.Services.Services)
                             {
                                 <tr>
-                                    <td>@item.CourseTitle</td>
-                                    <td>@item.CreateDate.ToShamsi()</td>
-                                    <td>@item.CoursePrice</td>
+                                    <td>@item.ServiceTitle</td>
+                                    <td>@item.ServiceBudget.ToToman()</td>
+                                    <td>@item.ServiceStartDate.ToShamsi()</td>
                                     <td>
-                                        <img src="/img/Course/thumb/@item.CourseImageName" class="img-thumbnail littleimage" />
-                                    </td>
-                                    <td>
-                                        <a asp-page="EditCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-primary">ویرایش</a>
-                                        <a asp-page="Episodes/IndexEpisode" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-info">اپیزود ها</a>
-                                        <a asp-page="DeleteCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-danger">حذف</a>
+                                        <a asp-page="EditCourse" asp-route-Id="@item.ServiceId" class="btn btn-outline btn-primary">ویرایش</a>
+                                        <a asp-page="DeleteCourse" asp-route-Id="@item.ServiceId" class="btn btn-outline btn-danger">حذف</a>
                                     </td>
                                 </tr>
-                            }*@
+                            }
                         </tbody>
                     </table>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                <ul class="pagination">
+
+                                    @for (int i = 1; i <= Model.Services.TotalPages; i++)
+                                    {
+                                        <li class="paginate_button @((i==Model.Services.CurrentPage)?"active":"")" aria-controls="dataTables-example" tabindex="0"><a href="/Admin/Services?PageId=@i">@i</a></li>
+                                    }
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -76,6 +84,34 @@
             <!-- /.table-responsive -->
         </div>
         <!-- /.panel-body -->
+
     </div>
     <!-- /.panel -->
+    <div class="col-12 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i>  آمار بخش خدمات
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item">
+                        <i class="fa fa-archive"></i> خدمات ثبت شده
+                        <span class="pull-left text-muted small">
+                            <em>@ViewData["TotalServices"] مورد</em>
+                        </span>
+                    </a>
+                    <a class="list-group-item">
+                        <i class="fa fa-money"></i> هزینه ثبت شده
+                        <span class="pull-left text-muted small">
+                            <em>@ViewData["TotalBudget"]</em>
+                        </span>
+                    </a>
+                </div>
+                <!-- /.list-group -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+
 </div>

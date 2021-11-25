@@ -22,8 +22,8 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="form-group">
-                        <label>@Html.DisplayNameFor(model => model.Service.ServiceTitle)</label>
-                        <input type="text" asp-for="Service.ServiceTitle" class="form-control" placeholder="عنوان خدمت را وارد کنید ">
+                        <label>عنوان</label>
+                        <input type="text" asp-for="Service.ServiceTitle" class="form-control" placeholder="عنوان را وارد کنید ">
                         <span asp-validation-for="Service.ServiceTitle" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -48,18 +48,13 @@
                     </div>
                     <div class="form-group">
                         <label>تاریخ شروع</label>
-                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control sDate" >
+                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control" >
                         <span asp-validation-for="Service.ServiceStartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>تاریخ پایان</label>
                         <input type="date" asp-for="Service.ServiceEndDate" class="form-control">
                         <span asp-validation-for="Service.ServiceEndDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>مدت زمان انجام</label>
-                        <input type="time" asp-for="Service.ServicePeriodTime" class="form-control">
-                        <span asp-validation-for="Service.ServicePeriodTime" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>سازمان های مربوطه</label>
@@ -72,11 +67,6 @@
                         <textarea type="text" asp-for="Service.ServiceDescription" class="form-control" rows="12"></textarea>
                         <span asp-validation-for="Service.ServiceDescription" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label>ویدیو</label>
-                        <input type="file" name="episodeFileUp">
-                        <span asp-validation-for="Service.ServiceVideoName" class="text-danger"></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -86,10 +76,17 @@
                     جزییات
                 </div>
                 <div class="panel-body">
-                    <img id="imgCourse" class="img-fluid img-thumbnail" src="/img/UserAvatar/Avatar-min.jpg" />
+                    <img id="imgService" class="img-fluid img-thumbnail" src="/img/Service/Defualt.webp" />
                     <div class="form-group">
                         <label>افزودن تصویر</label>
-                        <input type="file" id="imgCourseUp" name="imgCourseUp">
+                        <input type="file" id="imgServiceUp" name="imgServiceUp">
+                        <span asp-validation-for="Service.ServiceImageName" class="text-danger"></span>
+                    </div>
+                    <p></p>
+                    <div class="form-group">
+                        <label> افزودن ویدیو</label>
+                        <input type="file" name="videoUp" class="form-control">
+                        <span asp-validation-for="Service.ServiceVideoName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>وضعیت انجام</label>
@@ -120,31 +117,31 @@
         });
     </script>
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $(document).ready(function () {
             $(".sDate").persianDatepicker();
         });
-    </script>
+    </script>*@
 
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgCourse').attr('src', e.target.result);
+                    $('#imgService').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#imgCourseUp").change(function () {
+        $("#imgServiceUp").change(function () {
             readURL(this);
         });
     </script>
 
-    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    @*<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('Course_CourseDescription', {
             customConfig: '/js/Config.js'
         });
-    </script>
+    </script>*@
 }

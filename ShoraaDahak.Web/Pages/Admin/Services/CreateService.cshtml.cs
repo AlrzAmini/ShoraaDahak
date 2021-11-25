@@ -2,14 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ShoraaDahak.Core.Consts;
+using ShoraaDahak.Core.Security;
 using ShoraaDahak.Core.Services.Interfaces;
 using ShoraaDahak.DataLayer.Models.Services;
 
 namespace ShoraaDahak.Web.Pages.Admin.Services
 {
+    [Authorize]
+    [PermissionChecker(PerIds.AdminServices)]
     public class CreateServiceModel : PageModel
     {
         private readonly IServiceService _serviceService;
@@ -33,12 +39,22 @@ namespace ShoraaDahak.Web.Pages.Admin.Services
             var writers = _serviceService.GetWriters();
             ViewData["Teachers"] = new SelectList(writers, "Value", "Text");
 
+            var statuses = _serviceService.GetStatuses();
+            ViewData["Statuses"] = new SelectList(statuses, "Value", "Text");
+
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile imgServiceUp,IFormFile videoUp)
         {
-            return Page();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _serviceService.AddService(Service, imgServiceUp, videoUp);
+
+            return RedirectToPage("Index");
         }
     }
 }
