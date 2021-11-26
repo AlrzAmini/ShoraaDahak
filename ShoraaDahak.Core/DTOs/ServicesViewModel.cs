@@ -27,4 +27,13 @@ namespace ShoraaDahak.Core.DTOs
 
         public int TotalPages { get; set; }
     }
+
+    public class ServiceInAdminForDelete
+    {
+        public int ServiceId { get; set; }
+
+        public string Title { get; set; }
+
+        public int Budget { get; set; }
+    }
 }

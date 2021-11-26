@@ -2,15 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ShoraaDahak.Core.Consts;
+using ShoraaDahak.Core.Security;
 using ShoraaDahak.Core.Services.Interfaces;
 using ShoraaDahak.DataLayer.Models.Services;
 
 namespace ShoraaDahak.Web.Pages.Admin.Services
 {
+    [Authorize]
+    [PermissionChecker(PerIds.AdminServices)]
     public class EditServiceModel : PageModel
     {
         private readonly IServiceService _serviceService;

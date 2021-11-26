@@ -32,11 +32,15 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         ServicesForAdminViewModel GetAllServices(int pageId = 1, string filterName = "");
 
-        int AddService(Service service,IFormFile imgService,IFormFile videoService);
+        int AddService(Service service, IFormFile imgService, IFormFile videoService);
 
         Service GetServiceById(int id);
 
         void UpdateService(Service service, IFormFile imgService, IFormFile videoService);
+
+        void DeleteService(int id);
+
+        ServiceInAdminForDelete GetServiceForDelete(int id);
 
         #endregion
     }

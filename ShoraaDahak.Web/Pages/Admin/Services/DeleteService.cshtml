@@ -1,0 +1,38 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.Services.DeleteServiceModel
+@{
+    ViewData["Title"] = "حذف خدمات";
+}
+
+<h1 class="text-danger">حذف خدمات</h1>
+
+<h4>آیا از حذف این سرویس مطمعن هستید ؟</h4>
+<div>
+    <h4 class="text-black-50">@Model.Service.Title</h4>
+    <hr />
+    <div class="col-md-12 row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                اطلاعات سرویس
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <label> نام </label>
+                    <h5 class="text-primary">@Model.Service.Title</h5>
+                </div>
+                <div class="form-group">
+                    <label> بودجه </label>
+                    <h5 class="text-primary">@Model.Service.Budget</h5>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <br />
+    <form method="post">
+        <input type="hidden" asp-for="Service.ServiceId" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-page="Index">بازگشت به لیست</a>
+    </form>
+</div>

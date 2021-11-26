@@ -90,7 +90,7 @@ namespace ShoraaDahak.Core.Services
 
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb", service.ServiceImageName);
-                imgResizer.Image_resize(imgPath,thumbPath,120);
+                imgResizer.Image_resize(imgPath, thumbPath, 120);
             }
 
             if (videoService != null)
@@ -220,6 +220,57 @@ namespace ShoraaDahak.Core.Services
             _context.Service.Update(service);
             _context.SaveChanges();
 
+        }
+
+        public void DeleteService(int id)
+        {
+            Service service = GetServiceById(id);
+
+            // Delete Image & Thumb
+            if (service.ServiceImageName != null)
+            {
+                if (service.ServiceImageName != "Defualt.webp")
+                {
+                    string imgDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/image",
+                        service.ServiceImageName);
+                    if (File.Exists(imgDeletePath))
+                    {
+                        File.Delete(imgDeletePath);
+                    }
+
+                    string thumbDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb",
+                        service.ServiceImageName);
+                    if (File.Exists(thumbDeletePath))
+                    {
+                        File.Delete(thumbDeletePath);
+                    }
+                }
+            }
+
+            // Delete Video
+            if (service.ServiceVideoName != null)
+            {
+                string vidDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/video",
+                    service.ServiceVideoName);
+                if (File.Exists(vidDeletePath))
+                {
+                    File.Delete(vidDeletePath);
+                }
+            }
+
+            _context.Service.Remove(service);
+            _context.SaveChanges();
+        }
+
+        public ServiceInAdminForDelete GetServiceForDelete(int id)
+        {
+           return _context.Service.Where(s => s.ServiceId == id)
+                .Select(s => new ServiceInAdminForDelete
+                {
+                    ServiceId = s.ServiceId,
+                    Budget = s.ServiceBudget,
+                    Title = s.ServiceTitle
+                }).Single();
         }
     }
 }
