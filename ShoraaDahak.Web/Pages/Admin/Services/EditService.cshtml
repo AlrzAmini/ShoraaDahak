@@ -1,12 +1,12 @@
 ﻿@page
-@model ShoraaDahak.Web.Pages.Admin.Services.CreateServiceModel
+@model ShoraaDahak.Web.Pages.Admin.Services.EditServiceModel
 @{
-    ViewData["Title"] = "افزودن خدمات جدید";
+    ViewData["Title"] = "ویرایش خدمات";
 }
 
 <div class="row">
     <div class="col-lg-9">
-        <h1 class="page-header">افزودن خدمات جدید</h1>
+        <h1 class="page-header">ویرایش خدمات</h1>
     </div>
     <div class="col-md-3">
         <a asp-page="Index" class="btn btn-outline btn-primary">لیست خدمات</a>
@@ -14,6 +14,9 @@
 </div>
 <div class="row">
     <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Service.ServiceImageName"/>
+        <input type="hidden" asp-for="Service.ServiceId"/>
+        <input type="hidden" asp-for="Service.ServiceVideoName"/>
         <div class="col-md-7">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -43,12 +46,12 @@
                     </div>
                     <div class="form-group">
                         <label>@Html.DisplayNameFor(model => model.Service.ServiceBudget)</label>
-                        <input type="number" asp-for="Service.ServiceBudget" value="0" class="form-control">
+                        <input type="number" asp-for="Service.ServiceBudget" class="form-control">
                         <span asp-validation-for="Service.ServiceBudget" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>تاریخ شروع</label>
-                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control" >
+                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control">
                         <span asp-validation-for="Service.ServiceStartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -81,7 +84,7 @@
                         <input type="file" id="imgServiceUp" name="imgServiceUp">
                         <span asp-validation-for="Service.ServiceImageName" class="text-danger"></span>
                     </div>
-                    <img id="imgService" class="img-fluid img-thumbnail" src="/img/Service/Defualt.webp" />
+                    <img id="imgService" class="img-fluid img-thumbnail" src="/Service/image/@Model.Service.ServiceImageName"/>
                     <p></p>
                     <div class="form-group">
                         <label> افزودن ویدیو</label>
@@ -118,10 +121,10 @@
     </script>
 
     @*<script type="text/javascript">
-        $(document).ready(function () {
-            $(".sDate").persianDatepicker();
-        });
-    </script>*@
+            $(document).ready(function () {
+                $(".sDate").persianDatepicker();
+            });
+        </script>*@
 
     <script>
         function readURL(input) {

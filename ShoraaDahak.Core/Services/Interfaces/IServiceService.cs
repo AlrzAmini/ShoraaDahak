@@ -34,6 +34,10 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         int AddService(Service service,IFormFile imgService,IFormFile videoService);
 
+        Service GetServiceById(int id);
+
+        void UpdateService(Service service, IFormFile imgService, IFormFile videoService);
+
         #endregion
     }
 }

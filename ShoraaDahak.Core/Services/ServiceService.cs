@@ -150,5 +150,76 @@ namespace ShoraaDahak.Core.Services
 
             return list;
         }
+
+        public Service GetServiceById(int id)
+        {
+            return _context.Service.Find(id);
+        }
+
+        public void UpdateService(Service service, IFormFile imgService, IFormFile videoService)
+        {
+            service.ServiceUpdateDate = DateTime.Now;
+
+            #region Add And Check Image & Video
+
+            if (imgService != null && imgService.IsImage())
+            {
+                // if had image : Delete it
+                if (service.ServiceImageName != "Defualt.webp")
+                {
+                    string imgDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/image",
+                        service.ServiceImageName);
+                    if (File.Exists(imgDeletePath))
+                    {
+                        File.Delete(imgDeletePath);
+                    }
+
+                    string thumbDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb",
+                        service.ServiceImageName);
+                    if (File.Exists(thumbDeletePath))
+                    {
+                        File.Delete(thumbDeletePath);
+                    }
+                }
+                service.ServiceImageName = CodeGenerator.GenerateUniqCode() + Path.GetExtension(imgService.FileName);
+                string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/image", service.ServiceImageName);
+
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    imgService.CopyTo(stream);
+                }
+
+                ImageConvertor imgResizer = new ImageConvertor();
+                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb", service.ServiceImageName);
+                imgResizer.Image_resize(imgPath, thumbPath, 120);
+            }
+
+            if (videoService != null)
+            {
+                // if had video : Delete it
+                if (service.ServiceVideoName != null)
+                {
+                    string vidDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/video",
+                        service.ServiceVideoName);
+                    if (File.Exists(vidDeletePath))
+                    {
+                        File.Delete(vidDeletePath);
+                    }
+                }
+                service.ServiceVideoName = CodeGenerator.GenerateUniqCode() + Path.GetExtension(videoService.FileName);
+                string videoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/video", service.ServiceVideoName);
+
+                using (var stream = new FileStream(videoPath, FileMode.Create))
+                {
+                    videoService.CopyTo(stream);
+                }
+            }
+
+            #endregion
+
+            _context.Service.Update(service);
+            _context.SaveChanges();
+
+        }
     }
 }

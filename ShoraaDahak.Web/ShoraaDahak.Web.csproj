@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\News\" />
+    <Folder Include="wwwroot\MyImages\" />
     <Folder Include="wwwroot\Service\video\" />
   </ItemGroup>
 
