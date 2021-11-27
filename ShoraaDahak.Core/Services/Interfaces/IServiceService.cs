@@ -42,6 +42,8 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         ServiceInAdminForDelete GetServiceForDelete(int id);
 
+        List<ShowServiceInIndexViewModel> GetServices(int pageNum = 1, string filterServiceName = "", string orderBy = "sDate", List<int> selectedGroups = null, int take = 0);
+
         #endregion
     }
 }

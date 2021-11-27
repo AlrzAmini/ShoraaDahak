@@ -1,0 +1,26 @@
+﻿@model ShoraaDahak.Core.DTOs.ShowServiceInIndexViewModel
+<!-- Single Item -->
+<div class="col-lg-4 col-md-4 col-sm-6">
+    <div class="woo_product_grid">
+        <span class="woo_pr_tag new">نویسنده : @Model.Writer</span>
+        <div class="woo_product_thumb">
+            <img src="/Service/thumb/@Model.ImageName" class="img-fluid rounded" alt="@Model.Title" />
+        </div>
+        <div class="woo_product_caption center">
+            <div class="woo_rate">
+
+            </div>
+            <div class="woo_title mt-3">
+                <h4 class="woo_pro_title"><a href="detail-1.html">@Model.Title</a></h4>
+            </div>
+            @*<div class="woo_price">
+                    <h6>7200 تومان<span class="less_price">11200 تومان</span></h6>
+                </div>*@
+        </div>
+        <div class="woo_product_cart hover">
+            <ul>
+                <li><a href="wishlist.html" class="woo_cart_btn btn_save"><i class="ti-eye"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

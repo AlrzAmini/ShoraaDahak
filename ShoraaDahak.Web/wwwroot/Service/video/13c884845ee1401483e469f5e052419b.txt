@@ -1,0 +1,16 @@
+Visual Studio 2019 (C++/C Sharp)
+Function
+Structure
+Class
+Object Oriented
+Abstraction
+Encapsulation
+Refactor
+Inheritance
+Interface 
+String 
+Array, list and Dictionary
+File
+DLL and User Control
+Polymorphism
+Static Variable

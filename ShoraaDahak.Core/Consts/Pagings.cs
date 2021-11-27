@@ -9,5 +9,7 @@ namespace ShoraaDahak.Core.Consts
     public class Pagings
     {
         public const int TakeUserInAdmin = 10;
+
+        public const int TakeServicesForShowInIndex = 9;
     }
 }

@@ -90,7 +90,7 @@ namespace ShoraaDahak.Core.Services
 
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb", service.ServiceImageName);
-                imgResizer.Image_resize(imgPath, thumbPath, 120);
+                imgResizer.Image_resize(imgPath, thumbPath, 400);
             }
 
             if (videoService != null)
@@ -145,7 +145,7 @@ namespace ShoraaDahak.Core.Services
             {
                 CurrentPage = pageId,
                 TotalPages = (int)Math.Ceiling((decimal)result.Count() / take),
-                Services = result.OrderBy(u => u.ServiceStartDate).Skip(skip).Take(take).ToList()
+                Services = result.OrderBy(u => u.ServiceTitle).Skip(skip).Take(take).ToList()
             };
 
             return list;
@@ -191,7 +191,7 @@ namespace ShoraaDahak.Core.Services
 
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Service/thumb", service.ServiceImageName);
-                imgResizer.Image_resize(imgPath, thumbPath, 120);
+                imgResizer.Image_resize(imgPath, thumbPath, 400);
             }
 
             if (videoService != null)
@@ -264,13 +264,71 @@ namespace ShoraaDahak.Core.Services
 
         public ServiceInAdminForDelete GetServiceForDelete(int id)
         {
-           return _context.Service.Where(s => s.ServiceId == id)
-                .Select(s => new ServiceInAdminForDelete
+            return _context.Service.Where(s => s.ServiceId == id)
+                 .Select(s => new ServiceInAdminForDelete
+                 {
+                     ServiceId = s.ServiceId,
+                     Budget = s.ServiceBudget,
+                     Title = s.ServiceTitle
+                 }).Single();
+        }
+
+        public List<ShowServiceInIndexViewModel> GetServices(int pageNum = 1, string filterServiceName = "",
+            string orderBy = "sTitle", List<int> selectedGroups = null, int take = 0)
+        {
+            IQueryable<Service> result = _context.Service;
+
+            if (take == 0)
+            {
+                take = Pagings.TakeServicesForShowInIndex;
+            }
+
+            if (!string.IsNullOrEmpty(filterServiceName))
+            {
+                result = result.Where(s => s.ServiceTitle.Contains(filterServiceName));
+            }
+
+            switch (orderBy)
+            {
+                case "sTitle":
+                    {
+                        result = result.OrderBy(s => s.ServiceTitle);
+
+                        break;
+                    }
+                case "sDate":
+                    {
+                        result = result.OrderBy(s => s.ServiceStartDate);
+
+                        break;
+                    }
+                case "upDate":
+                    {
+                        result = result.OrderBy(s => s.ServiceUpdateDate);
+
+                        break;
+                    }
+            }
+
+            if (selectedGroups != null && selectedGroups.Any())
+            {
+                foreach (int groupId in selectedGroups)
                 {
+                    result = result.Where(s => s.GroupId == groupId || s.SubGroup == groupId);
+                }
+            }
+
+            //(int)Math.Ceiling((decimal)result.Count() / take)
+            int skip = (pageNum - 1) * take;
+
+            return result.Include(s => s.User)
+                .Select(s => new ShowServiceInIndexViewModel()
+                {
+                    Title = s.ServiceTitle,
                     ServiceId = s.ServiceId,
-                    Budget = s.ServiceBudget,
-                    Title = s.ServiceTitle
-                }).Single();
+                    ImageName = s.ServiceImageName,
+                    Writer = s.User.Name
+                }).Skip(skip).Take(take).ToList();
         }
     }
 }

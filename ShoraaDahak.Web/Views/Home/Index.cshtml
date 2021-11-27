@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ShoraaDahak.Core.DTOs.ShowServiceInIndexViewModel>
 @{
     ViewData["Title"] = "خانه";
 }
@@ -8,7 +8,39 @@
 
 <partial name="_Subjects" />
 
-<partial name="_Services" />
+<!-- services -->
+<section class="cen-mid">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="sec-heading center">
+                    <span class="theme-cl"> دهک و دولت آباد </span>
+                    <h2 class="grocery_title">خدمات انجام شده</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+                <div class="multi-tab">
+
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <partial name="_BoxService" model="item"/>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
 
 <partial name="_News" />
 

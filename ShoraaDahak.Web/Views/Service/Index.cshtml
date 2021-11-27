@@ -1,0 +1,169 @@
+﻿@using ShoraaDahak.DataLayer.Models.Services
+@model List<ShoraaDahak.Core.DTOs.ShowServiceInIndexViewModel>
+@{
+    ViewData["Title"] = "خدمات";
+}
+
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">خدمات</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="ServForm" action="/Service" method="get">
+    <input type="hidden" name="pageNum" id="pageNum" value="@ViewBag.pageNum.ToString()" />
+    <section>
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Single Product -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="search-sidebar sm-sidebar" id="filter_search" style="right: 0;">
+                        <div class="search-sidebar-body">
+
+                            <!-- Single Option -->
+                            <div class="single_search_boxed">
+                                <div class="widget-boxed-header">
+                                    <h4 class="mr-4 mt-4">دسته بندی ها</h4>
+                                </div>
+                                <div class="widget-boxed-body">
+                                    <div class="side-list no-border">
+                                        <div class="filter-card" id="shop-categories">
+
+                                            <!-- Single Filter Card -->
+                                            @{
+                                                List<ServiceGroup> serviceGroups = ViewBag.ServicesGroups as List<ServiceGroup>;
+                                                List<int> selectedGroups = ViewBag.selectedGroups as List<int>;
+                                                string orderBy = ViewBag.orderBy as string;
+                                            }
+                                            <div class="single_filter_card">
+                                                <div class="card-body">
+                                                    <div class="inner_widget_link">
+                                                        <ul>
+                                                            @foreach (var item in serviceGroups.Where(g => g.ParrentId == null))
+                                                            {
+                                                                <li>
+                                                                    <input onchange="changeGroup()" type="checkbox" @((selectedGroups.Any(g => g == item.GroupId) ? "checked" : "")) name="selectedGroups" id="ctg-1" value="@item.GroupId" />
+                                                                    <span>@item.GroupTitle</span>
+                                                                    @if (serviceGroups.Any(g => g.ParrentId == item.GroupId))
+                                                                    {
+                                                                        <ul>
+                                                                            @foreach (var group in serviceGroups.Where(g => g.ParrentId == item.GroupId))
+                                                                            {
+                                                                                <li class="mr-3">
+                                                                                    <input onchange="changeGroup()" type="checkbox" @((selectedGroups.Any(g => g == group.GroupId) ? "checked" : "")) name="selectedGroups" id="ctg-2" value="@group.GroupId" />
+                                                                                    <span>@group.GroupTitle</span>
+                                                                                </li>
+                                                                            }
+                                                                        </ul>
+                                                                    }
+                                                                    <hr />
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-12">
+                    <!-- Shorter Toolbar -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="toolbar toolbar-products">
+                                <div class="toolbar-sorter sorter">
+                                    <label class="sorter-label" for="sorter">مرتب سازی</label>
+                                    <select id="sorter" name="orderBy" onchange="changeSort()" data-role="sorter" class="sorter-options">
+                                        <option value="sTitle">عنوان</option>
+                                        <option value="sDate">تاریخ شروع</option>
+                                        <option value="upDate">جدید ترین</option>
+                                        @if (orderBy == "sTitle")
+                                        {
+                                            <option selected="selected" value="sTitle">عنوان</option>
+                                        }
+                                        @if (orderBy == "sDate")
+                                        {
+                                            <option selected="selected" value="sDate">تاریخ شروع</option>
+                                        }
+                                        @if (orderBy == "upDate")
+                                        {
+                                            <option selected="selected" value="upDate">جدید ترین</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- row -->
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <partial name="_BoxService2" model="item" />
+                        }
+                    </div>
+                    <!-- row -->
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item right">
+
+                                    </li>
+
+                                    @for (int i = 1; i <= ViewBag.totalPage; i++)
+                                    {
+                                        <li class="page-item"><a class="page-link" onclick="changePage(@i)" href="#">@i</a></li>
+                                    }
+                                    <li class="page-item left">
+
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</form>
+@section Scripts{
+
+    <script>
+        function changeGroup() {
+            $("#ServForm").submit();
+        }
+        function changeSort() {
+            $("#ServForm").submit();
+        }
+
+        function changePage(pageNum) {
+            $("#pageNum").val(pageNum);
+            $("#ServForm").submit();
+        }
+    </script>
+
+}

@@ -36,4 +36,15 @@ namespace ShoraaDahak.Core.DTOs
 
         public int Budget { get; set; }
     }
+
+    public class ShowServiceInIndexViewModel
+    {
+        public int ServiceId { get; set; }
+
+        public string Title { get; set; }
+
+        public string Writer { get; set; }
+
+        public string ImageName { get; set; }
+    }
 }

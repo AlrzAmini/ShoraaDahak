@@ -9,14 +9,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using ShoraaDahak.Core.Services.Interfaces;
 
 namespace ShoraaDahak.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IServiceService _serviceService;
+
+        public HomeController(IServiceService serviceService)
+        {
+            _serviceService = serviceService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(_serviceService.GetServices());
         }
 
         [Route("/Error404")]
