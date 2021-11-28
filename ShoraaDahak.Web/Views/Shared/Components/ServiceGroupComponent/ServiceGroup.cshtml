@@ -1,7 +1,7 @@
 ﻿@model List<ShoraaDahak.DataLayer.Models.Services.ServiceGroup>
 <li>
     <a href="/Service">خدمات انجام شده<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-    <ul class="nav-dropdown nav-submenu" style="right: auto;">
+    <ul class="nav-dropdown nav-submenu" id="rautu">
         @foreach (var group in Model.Where(g => g.ParrentId == null))
         {
             <li>

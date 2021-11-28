@@ -7918,6 +7918,12 @@ ul.footer_social_links li a {
 .foot-news-first {
     padding-right: 2rem;
 }
+#trpnone {
+    transition-property: none;
+}
+#rautu {
+    right: auto;
+}
 .before-footer .facts_icon {
     background: transparent !important;
 }
