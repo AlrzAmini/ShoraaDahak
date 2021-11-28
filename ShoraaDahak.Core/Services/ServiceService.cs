@@ -285,7 +285,7 @@ namespace ShoraaDahak.Core.Services
 
             if (!string.IsNullOrEmpty(filterServiceName))
             {
-                result = result.Where(s => s.ServiceTitle.Contains(filterServiceName));
+                result = result.Where(s => s.ServiceTitle.Contains(filterServiceName) || s.RelatedInstitutions.Contains(filterServiceName));
             }
 
             switch (orderBy)
@@ -329,6 +329,15 @@ namespace ShoraaDahak.Core.Services
                     ImageName = s.ServiceImageName,
                     Writer = s.User.Name
                 }).Skip(skip).Take(take).ToList();
+        }
+
+        public Service GetCourseForShow(int id)
+        {
+            return _context.Service
+                .Include(s=>s.User)
+                .Include(s=>s.ServiceStatus)
+                .Include(s=>s.ServiceGroup)
+                .FirstOrDefault(s => s.ServiceId == id);
         }
     }
 }

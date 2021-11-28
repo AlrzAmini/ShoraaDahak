@@ -1,0 +1,164 @@
+﻿@using ShoraaDahak.Core.Convertors
+@model ShoraaDahak.DataLayer.Models.Services.Service
+@{
+    ViewData["Title"] = Model.ServiceTitle;
+}
+
+<div class="breadcrumbs_wrap dark">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/Service">خدمات</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@Model.ServiceTitle</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-12 col-md-12 sp-wrap sp-non-touch border rounded" style="display: inline-block;">
+                    <div class="col-12">
+                        <img class="img-fluid mt-4 mb-4" src="/Service/image/@Model.ServiceImageName" alt="@Model.ServiceTitle">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="woo_pr_detail card-body border rounded mb-5">
+                    <div class="woo_cats_wrps">
+                        <a href="#" class="woo_pr_cats">خدمات انجام شده</a>
+                        <span class="woo_pr_trending">نویسنده : @Model.User.Name</span>
+                    </div>
+                    <h2 class="woo_pr_title">@Model.ServiceTitle</h2>
+                    <div class="woo_pr_reviews">
+                        <div class="woo_pr_total_reviews">
+                            <a href="#">(124 نظرات)</a>
+                        </div>
+                    </div>
+
+                    <div class="woo_pr_price">
+
+                    </div>
+
+                    <!-- Short Info -->
+                    <div class="pr_info_prefix grocery_style mb-3">
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                            <div class="sku_preflix_first">
+                                <strong>تاریخ شروع:</strong>
+                            </div>
+                            <div class="sku_preflix_last">
+                                @Model.ServiceStartDate.ToShamsi()
+                            </div>
+                        </div>
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                            <div class="sku_preflix_first">
+                                <strong> وضعیت : </strong>
+                            </div>
+                            <div class="sku_preflix_last">
+                                <span class="text-success">@Model.ServiceStatus.StatusTitle</span>
+                            </div>
+                        </div>
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                            <div class="sku_preflix_first">
+                                <strong>تاریخ پایان :</strong>
+                            </div>
+                            <div class="sku_preflix_last">
+                                @Model.ServiceEndDate?.ToShamsi()
+                            </div>
+                        </div>
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                            <div class="sku_preflix_first">
+                                <strong> سازمان های مربوطه : </strong>
+                            </div>
+                            <div class="sku_preflix_last">
+                                @if (Model.RelatedInstitutions != null)
+                                {
+                                    @foreach (var item in Model.RelatedInstitutions.Split("-",StringSplitOptions.RemoveEmptyEntries))
+                                    {
+                                        <a class="btn btn-outline-info btn-sm" href="/Service?filterServiceName=@item"> @item </a>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                            <div class="sku_preflix_first">
+                                <strong> بروزرسانی : </strong>
+                            </div>
+                            <div class="sku_preflix_last">
+                                @Model.ServiceUpdateDate?.ToShamsi()
+                            </div>
+                        </div>
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                        </div>
+
+
+
+
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                        </div>
+
+
+
+                        <!-- First -->
+                        <div class="cart_sku_preflix">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="woo_btn_action card-body border rounded mt-5">
+                    <div class="col-12 col-lg-auto">
+                        <button type="submit" class="btn btn-block btn-dark mb-2">بحث مردمی <i class="ti-user mr-2"></i></button>
+                    </div>
+                    <div class="col-12 col-lg-auto">
+                        <button class="btn btn-gray btn-block mb-2" data-toggle="button">مورد علاقه <i class="ti-heart mr-2"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Product Description -->
+        <div class="row mt-5">
+            <div class="col-lg-12 col-md-12">
+                <div class="custom-tab style-1">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="description-tab" data-toggle="tab" role="tab" aria-controls="description" aria-selected="true" aria-expanded="true">شرح</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab" aria-expanded="true">
+                            @Html.Raw(Model.ServiceDescription)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

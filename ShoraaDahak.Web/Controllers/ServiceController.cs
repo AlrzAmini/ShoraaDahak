@@ -28,5 +28,19 @@ namespace ShoraaDahak.Web.Controllers
             ViewBag.totalPage = totalPage;
             return View(_serviceService.GetServices(pageNum,filterServiceName,orderBy,selectedGroups,9));
         }
+
+
+        [Route("ShowService/{id}")]
+        public IActionResult ShowService(int id)
+        {
+            var service = _serviceService.GetCourseForShow(id);
+
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            return View(service);
+        }
     }
 }
