@@ -29,7 +29,7 @@ namespace ShoraaDahak.Core.Services
         }
         public List<ServiceGroup> GetAllServicesGroups()
         {
-            return _context.ServiceGroups.ToList();
+            return _context.ServiceGroups.Include(g=>g.ServiceGroups).ToList();
         }
 
         public List<SelectListItem> GetGroupForManageServices()
@@ -338,6 +338,29 @@ namespace ShoraaDahak.Core.Services
                 .Include(s=>s.ServiceStatus)
                 .Include(s=>s.ServiceGroup)
                 .FirstOrDefault(s => s.ServiceId == id);
+        }
+
+        public void AddServiceGroup(ServiceGroup serviceGroup)
+        {
+            _context.ServiceGroups.Add(serviceGroup);
+            _context.SaveChanges();
+        }
+
+        public void UpdateServiceGroup(ServiceGroup serviceGroup)
+        {
+            _context.ServiceGroups.Update(serviceGroup);
+            _context.SaveChanges();
+        }
+
+        public ServiceGroup GetAllServicesGroupById(int id)
+        {
+            return _context.ServiceGroups.Find(id);
+        }
+
+        public void DeleteServiceGroup(ServiceGroup serviceGroup)
+        {
+            _context.ServiceGroups.Remove(serviceGroup);
+            _context.SaveChanges();
         }
     }
 }

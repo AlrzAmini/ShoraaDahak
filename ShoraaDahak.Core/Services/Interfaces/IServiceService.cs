@@ -20,6 +20,14 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         List<SelectListItem> GetSubGroupForManageServices(int groupId);
 
+        void AddServiceGroup(ServiceGroup serviceGroup);
+
+        void UpdateServiceGroup(ServiceGroup serviceGroup);
+
+        void DeleteServiceGroup(ServiceGroup serviceGroup);
+
+        ServiceGroup GetAllServicesGroupById(int id);
+
         #endregion
 
         #region Service

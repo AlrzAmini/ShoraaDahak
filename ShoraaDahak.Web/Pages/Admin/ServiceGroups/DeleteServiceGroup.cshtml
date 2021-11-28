@@ -1,0 +1,46 @@
+﻿@page "{id}"
+@model ShoraaDahak.Web.Pages.Admin.ServiceGroups.DeleteServiceGroupModel
+@{
+    ViewData["Title"] = "حذف گروه";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-header">حذف گروه</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست گروه ها</a>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-warning col-12 col-md-7">
+        @ViewData["Error"]
+    </div>
+}
+<div class="row">
+    <form method="post">
+        <input type="hidden" asp-for="ServiceGroup.ParrentId" />
+        <input type="hidden" asp-for="ServiceGroup.GroupId" />
+        <input type="hidden" asp-for="ServiceGroup.GroupTitle" />
+        <div class="col-12 col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات گروه
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان گروه</label>
+                        <h4 class="text-danger">@Model.ServiceGroup.GroupTitle</h4>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-12 col-md-7">
+            <button type="submit" class="btn btn-danger btn-lg btn-block">حذف گروه</button>
+        </div>
+    </form>
+</div>
