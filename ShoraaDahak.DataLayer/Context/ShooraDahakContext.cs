@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ShoraaDahak.DataLayer.Models.Discussion;
 using ShoraaDahak.DataLayer.Models.Permission;
 using ShoraaDahak.DataLayer.Models.Services;
 using ShoraaDahak.DataLayer.Models.User;
@@ -45,5 +46,21 @@ namespace ShoraaDahak.DataLayer.Context
         public DbSet<Service> Service { get; set; }
 
         #endregion
+
+        #region Discussion
+
+        public DbSet<Discussion> Discussions { get; set; }
+
+        public DbSet<DiscussionImpLevel> DiscussionImpLevels { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
+
+        #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

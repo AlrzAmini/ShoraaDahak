@@ -104,6 +104,9 @@ namespace ShoraaDahak.DataLayer.Models.User
 
         public List<Service> Services { get; set; }
 
+        public List<Discussion.Discussion> Discussions { get; set; }
+
+
         #endregion
 
     }

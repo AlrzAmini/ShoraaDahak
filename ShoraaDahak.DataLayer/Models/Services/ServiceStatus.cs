@@ -13,7 +13,7 @@ namespace ShoraaDahak.DataLayer.Models.Services
         [Key]
         public int StatusId { get; set; }
 
-        [DisplayName("")]
+        [DisplayName("وضعیت")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(150, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
         public string StatusTitle { get; set; }

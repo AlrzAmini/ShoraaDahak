@@ -81,6 +81,8 @@ namespace ShoraaDahak.DataLayer.Models.Services
         [ForeignKey("StatusId")]
         public ServiceStatus ServiceStatus { get; set; }
 
+        public List<Discussion.Discussion> Discussions { get; set; }
+
 
         #endregion
 
