@@ -51,6 +51,13 @@ namespace ShoraaDahak.Core.DTOs
 
         #endregion
 
+        #region Is Confirmed By Admin
+
+        [DisplayName("تایید هویت")]
+        public bool IsConfirmedByAdmin { get; set; }
+
+        #endregion
+
         #region Email
 
         [DisplayName("ایمیل")]
@@ -115,6 +122,13 @@ namespace ShoraaDahak.Core.DTOs
 
         [DisplayName("تاریخ تولد")]
         public DateTime BirthDate { get; set; }
+
+        #endregion
+
+        #region Is Confirmed By Admin
+
+        [DisplayName("تایید هویت")]
+        public bool IsConfirmedByAdmin { get; set; }
 
         #endregion
 

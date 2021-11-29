@@ -76,6 +76,10 @@
                         <input type="text" asp-for="CreateUser.Password" class="form-control" placeholder="کلمه عبور را وارد کنید ">
                         <span asp-validation-for="CreateUser.Password" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-12 col-md-6">
+                        <label>تایید هویت</label>
+                        <input type="checkbox" asp-for="CreateUser.IsConfirmedByAdmin">
+                    </div>
                 </div>
                 <!-- /.panel-body -->
             </div>

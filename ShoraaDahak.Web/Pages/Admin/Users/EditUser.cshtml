@@ -72,11 +72,14 @@
                         <input type="date" asp-for="EditUser.BirthDate" class="form-control">
                         <span asp-validation-for="EditUser.BirthDate" class="text-danger"></span>
                     </div>
-
                     <div class="form-group col-12 col-md-6">
                         <label>کلمه عبور</label>
                         <input type="text" asp-for="EditUser.Password" class="form-control" placeholder="کلمه عبور را وارد کنید ">
                         <span asp-validation-for="EditUser.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-12 col-md-6">
+                        <label>تایید هویت</label>
+                        <input type="checkbox" asp-for="EditUser.IsConfirmedByAdmin">
                     </div>
                 </div>
                 <!-- /.panel-body -->

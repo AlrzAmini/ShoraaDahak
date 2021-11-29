@@ -98,6 +98,9 @@ namespace ShoraaDahak.DataLayer.Models.User
 
         #endregion
 
+        [DisplayName("وضعیت تایید")]
+        public bool IsConfirmedByAdmin { get; set; }
+
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }

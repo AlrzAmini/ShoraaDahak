@@ -132,9 +132,15 @@
                 </div>
                 <div class="woo_btn_action card-body border rounded mt-5">
                     <div class="col-12 col-md-12">
-                        <a href="#" class="btn btn-block btn-dark mb-2">بحث مردمی <i class="ti-user mr-2"></i></a>
+                        <a href="/Discussion/CreateDiscussion/@Model.ServiceId" class="btn btn-block btn-dark mb-2">بحث مردمی <i class="ti-user mr-2"></i></a>
                     </div>
                 </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="alert alert-primary mt-2">
+                        برای دسترسی به بخش بحث مردمی باید <a href="/Login">وارد</a> حساب کاربری خود شوید.
+                    </div>
+                }
             </div>
 
         </div>

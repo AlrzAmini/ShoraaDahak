@@ -1,0 +1,203 @@
+﻿@using ShoraaDahak.Core.Convertors
+@model ShoraaDahak.Core.DTOs.ShowDiscussionViewModel
+@{
+    ViewData["Title"] = Model.Discussion.DiscussionTitle;
+}
+
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">بحث مردمی</li>
+                            <li class="breadcrumb-item active" aria-current="page">@Model.Discussion.DiscussionTitle</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+
+                <div class="card-body bg-white mb-4 border rounded">
+                    <div class="row">
+                        <div class="col-6 col-lg-3">
+                            <!-- Heading -->
+                            <h6 class="text-muted mb-1">عنوان بحث:</h6>
+                            <!-- Text -->
+                            <p class="mb-lg-0 font-size-sm font-weight-bold">@Model.Discussion.DiscussionTitle</p>
+                        </div>
+
+                        <div class="col-6 col-lg-3">
+                            <!-- Heading -->
+                            <h6 class="text-muted mb-1">زمان ارسال:</h6>
+                            <!-- Text -->
+                            <p class="mb-lg-0 font-size-sm font-weight-bold">
+                                <span>@Model.Discussion.DiscussionCreateDate.ToShamsi()</span>
+                            </p>
+                        </div>
+
+                        <div class="col-6 col-lg-3">
+                            <!-- Heading -->
+                            <h6 class="text-muted mb-1">میزان اهمیت:</h6>
+                            <!-- Text -->
+
+                            @if (Model.Discussion.ImpLevelId == 1)
+                            {
+                                <p class="mb-0 font-size-sm font-weight-bold text-primary">
+                                    @Model.Discussion.DiscussionImpLevel.ImpLevelTitle
+                                </p>
+                            }
+                            @if (Model.Discussion.ImpLevelId == 2)
+                            {
+                                <p class="mb-0 font-size-sm font-weight-bold text-info">
+                                    @Model.Discussion.DiscussionImpLevel.ImpLevelTitle
+                                </p>
+                            }
+                            @if (Model.Discussion.ImpLevelId == 3)
+                            {
+                                <p class="mb-0 font-size-sm font-weight-bold text-danger">
+                                    @Model.Discussion.DiscussionImpLevel.ImpLevelTitle
+                                </p>
+                            }
+
+                        </div>
+
+                        <div class="col-6 col-lg-3">
+                            <!-- Heading -->
+                            <h6 class="text-muted mb-1">تعداد پاسخ ها</h6>
+                            <!-- Text -->
+                            <p class="mb-0 font-size-sm font-weight-bold">0</p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="card style-2 mb-4 border-info rounded">
+                    <div class="card-header">
+                        <h4 class="mb-0">مطرح شده توسط</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="item-groups">
+
+                            <!-- Single Items -->
+                            <li>
+                                <div class="row align-items-center">
+                                    <div class="col-4 col-md-3 col-xl-2 border rounded p-3 m-2">
+                                        <a href="#"><img src="/img/Avatar.png" alt="Avatar" class="img-fluid"></a>
+                                    </div>
+
+                                    <div class="col">
+                                        <!-- Title -->
+                                        <p class="mb-2 font-size-sm font-weight-bold border rounded p-3 m-2">
+                                            <a class="text-body">@Model.Discussion.User.Name</a> <br>
+
+                                            @if (Model.Discussion.User.IsConfirmedByAdmin)
+                                            {
+                                                <span class="theme-cl">کاربر تایید شده</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="theme-cl text-danger">کاربر تایید نشده</span>
+                                            }
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Total Items -->
+                <div class="card style-2 mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">شرح</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>@Html.Raw(Model.Discussion.DiscussionBody)</p>
+                    </div>
+                </div>
+
+                <!-- Shipping & Billing -->
+                <div class="card style-2">
+                    <div class="card-header">
+                        <h4 class="mb-0">جزئیات ارسال و صورتحساب</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <!-- Heading -->
+                                <p class="mb-2 font-weight-bold">
+                                    آدرس قبض:
+                                </p>
+
+                                <p class="mb-7 mb-md-0">
+                                    ایران ، تهران ، <br>
+                                    زعفرانیه ، <br>
+                                    خیابان هستی ، <br>
+                                    ساختمان مهر, <br>
+                                    پلاک 856
+                                </p>
+
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <!-- Heading -->
+                                <p class="mb-2 font-weight-bold">
+                                    آدرس ارسال:
+                                </p>
+
+                                <p class="mb-7 mb-md-0">
+                                    ایران ، تهران ، <br>
+                                    زعفرانیه ، <br>
+                                    خیابان هستی ، <br>
+                                    ساختمان مهر, <br>
+                                    پلاک 856
+                                </p>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+
+                                <!-- Heading -->
+                                <p class="mb-2 font-weight-bold">
+                                    روش ارسال:
+                                </p>
+
+                                <p class="mb-4 text-gray-500">
+                                    ارسال استاندارد <br>
+                                    (5 - 7 روز)
+                                </p>
+
+                                <!-- Heading -->
+                                <p class="mb-2 font-weight-bold">
+                                    روش پرداخت:
+                                </p>
+
+                                <p class="mb-0">
+                                    کارت بانکی
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+

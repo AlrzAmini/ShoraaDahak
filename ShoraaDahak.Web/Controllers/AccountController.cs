@@ -69,7 +69,8 @@ namespace ShoraaDahak.Web.Controllers
                 Password = PasswordHasher.EncodePasswordMd5(register.Password),
                 RegisterDate = DateTime.Now,
                 ActivationCode = CodeGenerator.GenerateUniqCode(),
-                IsActive = false
+                IsActive = false,
+                IsConfirmedByAdmin = false
             };
             _userService.AddUser(user);
 

@@ -88,6 +88,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<IServiceService, ServiceService>();
 
+            services.AddScoped<IDiscussionService, DiscussionService>();
+
 
             #endregion
         }

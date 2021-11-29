@@ -28,6 +28,7 @@ namespace ShoraaDahak.Web.Pages.Admin.Users
 
         [BindProperty]
         public EditUserViewModel EditUser { get; set; }
+
         [BindProperty]
         public List<Role> Roles { get; set; }
 

@@ -200,6 +200,7 @@ namespace ShoraaDahak.Core.Services
                 NCode = u.NCode,
                 Name = u.Name,
                 PhoneNumber = u.PhoneNumber,
+                IsConfirmedByAdmin = u.IsConfirmedByAdmin,
                 UserRoles = u.UserRoles.Select(r => r.RoleId).ToList()
             }).Single();
         }
@@ -215,6 +216,7 @@ namespace ShoraaDahak.Core.Services
 
             user.BirthDate = editUser.BirthDate;
             user.NCode = editUser.NCode;
+            user.IsConfirmedByAdmin = editUser.IsConfirmedByAdmin;
             if (!string.IsNullOrEmpty(editUser.Password))
             {
                 user.Password = PasswordHasher.EncodePasswordMd5(editUser.Password);
