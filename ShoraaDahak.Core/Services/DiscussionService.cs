@@ -21,6 +21,12 @@ namespace ShoraaDahak.Core.Services
             _context = context;
         }
 
+        public void AddAnswer(Answer answer)
+        {
+            _context.Answers.Add(answer);
+            _context.SaveChanges();
+        }
+
         public int AddDiscussion(Discussion discussion)
         {
             discussion.DiscussionCreateDate = DateTime.Now;
@@ -29,6 +35,16 @@ namespace ShoraaDahak.Core.Services
             _context.SaveChanges();
 
             return discussion.DiscussionId;
+        }
+
+        public List<Discussion> GetDiscussionsByServiceId(int serviceId)
+        {
+            return _context.Discussions.Where(d => d.ServiceId == serviceId)
+                .Include(d=>d.User)
+                .Include(d=>d.Answers)
+                .Include(d=>d.DiscussionImpLevel)
+                .Include(d=>d.Service)
+                .ToList();
         }
 
         public List<SelectListItem> GetImpLevels()
@@ -45,9 +61,9 @@ namespace ShoraaDahak.Core.Services
         {
             var discussion = new ShowDiscussionViewModel()
             {
-                Discussion = _context.Discussions.Include(d=>d.DiscussionImpLevel).Include(d => d.User)
+                Discussion = _context.Discussions.Include(d => d.DiscussionImpLevel).Include(d => d.Answers).Include(d => d.User)
                     .FirstOrDefault(d => d.DiscussionId == discussionId),
-                Answers = _context.Answers.Where(a=>a.DiscussionId == discussionId).ToList()
+                Answers = _context.Answers.Where(a => a.DiscussionId == discussionId).Include(a => a.User).ToList()
             };
 
             return discussion;

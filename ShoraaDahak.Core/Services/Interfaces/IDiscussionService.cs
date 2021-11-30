@@ -17,13 +17,15 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         List<SelectListItem> GetImpLevels();
 
-        ShowDiscussionViewModel ShowDiscussion(int discussionId); 
+        ShowDiscussionViewModel ShowDiscussion(int discussionId);
+
+        List<Discussion> GetDiscussionsByServiceId(int serviceId);
 
         #endregion
 
         #region Answers
 
-
+        void AddAnswer(Answer answer);
 
         #endregion
     }

@@ -2,6 +2,7 @@
 @model ShoraaDahak.Core.DTOs.ShowDiscussionViewModel
 @{
     ViewData["Title"] = Model.Discussion.DiscussionTitle;
+    bool isConf = Model.Discussion.User.IsConfirmedByAdmin;
 }
 
 <div class="breadcrumbs_wrap dark mb-1">
@@ -26,7 +27,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12 p-2 border-info">
 
                 <div class="card-body bg-white mb-4 border rounded">
                     <div class="row">
@@ -74,17 +75,15 @@
 
                         <div class="col-6 col-lg-3">
                             <!-- Heading -->
-                            <h6 class="text-muted mb-1">تعداد پاسخ ها</h6>
+                            <h6 class="text-muted mb-1">تعداد پاسخ ها:</h6>
                             <!-- Text -->
-                            <p class="mb-0 font-size-sm font-weight-bold">0</p>
+                            <p class="mb-0 font-size-sm font-weight-bold">@Model.Discussion.Answers.Count</p>
                         </div>
-
-
                     </div>
                 </div>
 
                 <!-- Order Items -->
-                <div class="card style-2 mb-4 border-info rounded">
+                <div class="card style-2 mb-4 @((isConf)?"border-info":"border-danger")  rounded">
                     <div class="card-header">
                         <h4 class="mb-0">مطرح شده توسط</h4>
                     </div>
@@ -97,19 +96,18 @@
                                     <div class="col-4 col-md-3 col-xl-2 border rounded p-3 m-2">
                                         <a href="#"><img src="/img/Avatar.png" alt="Avatar" class="img-fluid"></a>
                                     </div>
-
                                     <div class="col">
                                         <!-- Title -->
                                         <p class="mb-2 font-size-sm font-weight-bold border rounded p-3 m-2">
                                             <a class="text-body">@Model.Discussion.User.Name</a> <br>
 
-                                            @if (Model.Discussion.User.IsConfirmedByAdmin)
+                                            @if (isConf)
                                             {
-                                                <span class="theme-cl">کاربر تایید شده</span>
+                                                <span class="theme-cl">کاربر معتبر</span>
                                             }
                                             else
                                             {
-                                                <span class="theme-cl text-danger">کاربر تایید نشده</span>
+                                                <span class="theme-cl text-danger">کاربر نا معتبر</span>
                                             }
                                         </p>
 
@@ -120,9 +118,8 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- Total Items -->
-                <div class="card style-2 mb-4">
+                <div class="card style-2 mb-5">
                     <div class="card-header">
                         <h4 class="mb-0">شرح</h4>
                     </div>
@@ -130,74 +127,92 @@
                         <p>@Html.Raw(Model.Discussion.DiscussionBody)</p>
                     </div>
                 </div>
+                <hr class="text-primary" />
+            </div>
 
+            <div class="col-lg-12 col-md-12">
+                <!-- Total Items -->
+                <form asp-action="CreateAnswer">
+                    <input type="hidden" name="id" value="@Model.Discussion.DiscussionId"/>
+                    <div class="card style-2 mb-4 border-success">
+                        <div class="card-header">
+                            <h4 class="mb-0">افزودن پاسخ برای @Model.Discussion.DiscussionTitle</h4>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="txtAns" name="answerBody" class="form-control col-12 col-md-12" rows="12"></textarea>
+                        </div>
+                        <div class="col-12 col-md-12 m-1 mb-3">
+                            <button type="submit" class="btn btn-success btn-black">افزودن پاسخ</button>
+                        </div>
+                    </div>
+                </form>
                 <!-- Shipping & Billing -->
-                <div class="card style-2">
+                <div class="card style-2 border-success">
                     <div class="card-header">
-                        <h4 class="mb-0">جزئیات ارسال و صورتحساب</h4>
+                        <h4 class="mb-0">پاسخ های @Model.Discussion.DiscussionTitle</h4>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-md-4">
-                                <!-- Heading -->
-                                <p class="mb-2 font-weight-bold">
-                                    آدرس قبض:
-                                </p>
-
-                                <p class="mb-7 mb-md-0">
-                                    ایران ، تهران ، <br>
-                                    زعفرانیه ، <br>
-                                    خیابان هستی ، <br>
-                                    ساختمان مهر, <br>
-                                    پلاک 856
-                                </p>
-
-                            </div>
-
-                            <div class="col-12 col-md-4">
-                                <!-- Heading -->
-                                <p class="mb-2 font-weight-bold">
-                                    آدرس ارسال:
-                                </p>
-
-                                <p class="mb-7 mb-md-0">
-                                    ایران ، تهران ، <br>
-                                    زعفرانیه ، <br>
-                                    خیابان هستی ، <br>
-                                    ساختمان مهر, <br>
-                                    پلاک 856
-                                </p>
-                            </div>
-
-                            <div class="col-12 col-md-4">
-
-                                <!-- Heading -->
-                                <p class="mb-2 font-weight-bold">
-                                    روش ارسال:
-                                </p>
-
-                                <p class="mb-4 text-gray-500">
-                                    ارسال استاندارد <br>
-                                    (5 - 7 روز)
-                                </p>
-
-                                <!-- Heading -->
-                                <p class="mb-2 font-weight-bold">
-                                    روش پرداخت:
-                                </p>
-
-                                <p class="mb-0">
-                                    کارت بانکی
-                                </p>
-
-                            </div>
+                        <div class="row p-3">
+                            @foreach (var answer in Model.Answers)
+                            {
+                                <div class="col-12 col-md-12 border border-info rounded p-5 mb-2">
+                                    <div class="row align-items-center">
+                                        <ul class="review-list col-12 col-md-12">
+                                            <li>
+                                                <div class="reviews-box">
+                                                    <div class="review-body">
+                                                        <div class="review-avatar border">
+                                                            <img alt="" src="/img/Avatar.png" class="avatar avatar-140 photo">
+                                                            <div class="text-center">
+                                                                @if (answer.User.IsConfirmedByAdmin)
+                                                                {
+                                                                    <p class="text-success">معتبر</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p class="text-danger">نا معتبر</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-content">
+                                                            <div class="review-info col-12 col-md-12">
+                                                                <div class="review-comment col-12 col-md-10">
+                                                                    <div class="review-author">
+                                                                        @answer.User.Name
+                                                                    </div>
+                                                                </div>
+                                                                <div class="review-comment-date col-12 col-md-2">
+                                                                    <div class="review-date">
+                                                                        <span class="">@answer.CreateDate.ToShamsi()</span>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                            </div>
+                                                            <div class="col-12 col-md-12 text-right">
+                                                                <p>@Html.Raw(answer.AnswerBody)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </section>
+@section Scripts
+{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('txtAns', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+}
 

@@ -1,0 +1,78 @@
+﻿@model List<ShoraaDahak.DataLayer.Models.Discussion.Discussion>
+@{
+    ViewData["Title"] = "لیست بحث ها";
+}
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">بحث مردمی</li>
+                            <li class="breadcrumb-item active" aria-current="page">لیست بحث ها</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 border border-primary p-4 rounded">
+                <div class="mb-5">
+                @if (Model.Select(d => d.Service.ServiceTitle).FirstOrDefault().ToString() != null)
+                {
+                    <h2 class="text-success text-center">لیست بحث های مطرح شده در @Model.Select(d => d.Service.ServiceTitle).FirstOrDefault().ToString()</h2>
+                }
+                else
+                {
+                    <h2 class="text-success text-center">لیست بحث های مطرح شده </h2>
+                }
+                </div>
+                <div class="border border-warning m-2 p-3 rounded">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-3 text-center">
+                            عنوان
+                        </div>
+                        <div class="col-md-3 text-center">
+                            میزان اهمیت
+                        </div>
+                        <div class="col-md-3 text-center">
+                            ثبت شده توسط
+                        </div>
+                        <div class="col-md-3 text-center">
+                            تعداد پاسخ ها
+                        </div>
+                    </div>
+                </div>
+                @foreach (var discussion in Model)
+                {
+                    <div class="border border-info m-2 p-3 rounded">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-3 text-center">
+                                <a class="bg--instagram p-2 rounded" href="/Discussion/ShowDiscussion/@discussion.DiscussionId">
+                                    @discussion.DiscussionTitle
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                @discussion.DiscussionImpLevel.ImpLevelTitle
+                            </div>
+                            <div class="col-md-3 text-center">
+                                @discussion.User.Name
+                            </div>
+                            <div class="col-md-3 text-center">
+                                @discussion.Answers.Count
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+

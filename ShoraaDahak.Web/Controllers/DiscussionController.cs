@@ -61,9 +61,40 @@ namespace ShoraaDahak.Web.Controllers
 
         #region Show Discussion
 
+        [Authorize]
         public IActionResult ShowDiscussion(int id) // id = Discussion Id
         {
             return View(_discussionService.ShowDiscussion(id));
+        }
+
+        #endregion
+
+        #region Show Discussion list
+
+        [Authorize]
+        public IActionResult ShowDiscussionList(int id) // id = Service Id
+        {
+            return View(_discussionService.GetDiscussionsByServiceId(id));
+        }
+
+        #endregion
+
+        #region Create Answer
+
+        public IActionResult CreateAnswer(int id,string answerBody) // id = discussion id
+        {
+            if (!string.IsNullOrEmpty(answerBody))
+            {
+                Answer answer = new Answer()
+                {
+                    AnswerBody = answerBody,
+                    UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString()),
+                    DiscussionId = id,
+                    CreateDate = DateTime.Now
+                };
+                _discussionService.AddAnswer(answer);
+            }
+            return RedirectToAction("ShowDiscussion",new{id=id});
         }
 
         #endregion
