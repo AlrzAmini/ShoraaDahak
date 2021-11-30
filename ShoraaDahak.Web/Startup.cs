@@ -90,6 +90,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<IDiscussionService, DiscussionService>();
 
+            services.AddScoped<ILetterService, LetterService>();
+
 
             #endregion
         }

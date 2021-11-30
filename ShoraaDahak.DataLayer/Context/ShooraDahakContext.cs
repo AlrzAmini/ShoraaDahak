@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShoraaDahak.DataLayer.Models.Discussion;
+using ShoraaDahak.DataLayer.Models.Letter;
 using ShoraaDahak.DataLayer.Models.Permission;
 using ShoraaDahak.DataLayer.Models.Services;
 using ShoraaDahak.DataLayer.Models.User;
@@ -54,6 +55,14 @@ namespace ShoraaDahak.DataLayer.Context
         public DbSet<DiscussionImpLevel> DiscussionImpLevels { get; set; }
 
         public DbSet<Answer> Answers { get; set; }
+
+        #endregion
+
+        #region Letter
+
+        public DbSet<Letter> Letters { get; set; }
+
+        public DbSet<LetterTo> LetterTos { get; set; }
 
         #endregion
 
