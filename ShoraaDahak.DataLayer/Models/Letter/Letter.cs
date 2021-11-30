@@ -19,7 +19,8 @@ namespace ShoraaDahak.DataLayer.Models.Letter
         [Required]
         public int LetterToId { get; set; }
 
-        public int? UserId { get; set; }
+        [Required]
+        public int SenderId { get; set; }
 
         [DisplayName("موضوع نامه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
@@ -45,7 +46,7 @@ namespace ShoraaDahak.DataLayer.Models.Letter
         [ForeignKey("LetterToId")]
         public LetterTo LetterTo { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey("SenderId")]
         public User.User User { get; set; }
 
         #endregion

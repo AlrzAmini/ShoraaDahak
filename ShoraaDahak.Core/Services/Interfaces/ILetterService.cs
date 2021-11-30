@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoraaDahak.DataLayer.Models.Letter;
 
 namespace ShoraaDahak.Core.Services.Interfaces
@@ -20,6 +22,15 @@ namespace ShoraaDahak.Core.Services.Interfaces
         void UpdateLetterTo(LetterTo letterTo);
 
         void DeleteLetterTo(LetterTo letterTo);
+
+        List<SelectListItem> GetLetterTosForSendLetter();
+
+        #endregion
+
+        #region letter
+
+        void AddLetter(Letter letter,IFormFile letterFileUp);
+
 
         #endregion
     }

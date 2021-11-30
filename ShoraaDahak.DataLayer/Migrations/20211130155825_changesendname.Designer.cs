@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211130155825_changesendname")]
+    partial class changesendname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,14 +135,19 @@ namespace ShoraaDahak.DataLayer.Migrations
                     b.Property<int>("LetterToId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SenderId")
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("LetterId");
 
                     b.HasIndex("LetterToId");
 
-                    b.HasIndex("SenderId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Letters");
                 });
@@ -454,7 +461,7 @@ namespace ShoraaDahak.DataLayer.Migrations
 
                     b.HasOne("ShoraaDahak.DataLayer.Models.User.User", "User")
                         .WithMany()
-                        .HasForeignKey("SenderId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

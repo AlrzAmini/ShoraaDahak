@@ -1,0 +1,31 @@
+﻿@model ShoraaDahak.DataLayer.Models.Letter.Letter
+@{
+    ViewData["Title"] = "ارسال موفق";
+}
+<div class="breadcrumbs_wrap dark mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ارسال موفق</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row align-items-center justify-content-center mb-5">
+    <div class="col-md-8 col-sm-8 col-lg-8 alert alert-success m-4">
+        <h2 class="mb-1">@User.Identity.Name : </h2>
+        <p>نامه شما با موضوع @Model.LetterTitle با موفقیت ارسال شد.</p>
+    </div>
+</div>
+<div class="row align-items-center justify-content-center mb-5">
+    <div class="col-md-8 col-sm-8 col-lg-8 m-4 text-center">
+        <a href="/" class="btn btn-success">بازگشت به خانه</a>
+    </div>
+</div>

@@ -20,12 +20,6 @@ namespace ShoraaDahak.Web.Controllers
             _discussionService = discussionService;
         }
 
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         #region Create Discussion
 
         [Authorize] 

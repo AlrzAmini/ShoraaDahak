@@ -1,7 +1,6 @@
-﻿@model ShoraaDahak.DataLayer.Models.Discussion.Discussion
-
+﻿@model ShoraaDahak.DataLayer.Models.Letter.Letter
 @{
-    ViewData["Title"] = "ایجاد بحث جدید";
+    ViewData["Title"] = "ارسال نامه";
 }
 
 <div class="breadcrumbs_wrap dark mb-1">
@@ -12,8 +11,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">بحث مردمی</li>
-                            <li class="breadcrumb-item active" aria-current="page">ایجاد بحث جدید</li>
+                            <li class="breadcrumb-item active" aria-current="page">ارسال نامه</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,39 +24,48 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="login_signup">
-                    <h3 class="login_sec_title">ایجاد بحث جدید</h3>
-                    <form asp-action="CreateDiscussion">
-                        <input type="hidden" asp-for="ServiceId" />
+                    <h3 class="login_sec_title">ارسال نامه</h3>
+                    <form asp-action="SendLetter" enctype="multipart/form-data">
                         <div class="row">
-
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>موضوع</label>
-                                    <input type="text" asp-for="DiscussionTitle" class="form-control">
-                                    <span asp-validation-for="DiscussionTitle" class="text-danger"></span>
+                                    <input type="text" asp-for="LetterTitle" class="form-control">
+                                    <span asp-validation-for="LetterTitle" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>میزان اهمیت</label>
-                                    <select asp-for="ImpLevelId" class="form-control" asp-items="ViewBag.ImpLevels"></select>
-                                    <span asp-validation-for="ImpLevelId" class="text-danger"></span>
+                                    <label>از</label>
+                                    <input type="text" disabled="disabled" value="@User.Identity.Name" class="form-control">
                                 </div>
                             </div>
-
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>به</label>
+                                    <select asp-for="LetterToId" class="form-control" asp-items="ViewBag.LetterTos"></select>
+                                    <span asp-validation-for="LetterToId" class="text-danger"></span>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>متن</label>
-                                    <textarea type="text" asp-for="DiscussionBody" class="form-control" rows="12"></textarea>
-                                    <span asp-validation-for="DiscussionBody" class="text-danger"></span>
+                                    <textarea type="text" asp-for="LetterBody" class="form-control" rows="12"></textarea>
+                                    <span asp-validation-for="LetterBody" class="text-danger"></span>
                                 </div>
                             </div>
-
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>فایل ضمیمه ای دارید ؟ اینجا وارد کنید</label>
+                                    <br />
+                                    <input type="file" name="letterFileUp">
+                                    <span asp-validation-for="LetterFileName" class="text-danger"></span>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="login_flex_2">
                                     <div class="form-group mb-0">
-                                        <button type="submit" class="btn btn-md btn-theme">ثبت</button>
+                                        <button type="submit" class="btn btn-md btn-theme">ارسال</button>
                                     </div>
                                 </div>
                                 <div class="login_flex">
@@ -75,15 +82,12 @@
         </div>
     </div>
 </section>
-<div>
-    <a asp-action="ShowDiscussionList">بازگشت</a>
-</div>
 
 @section Scripts
 {
     <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('DiscussionBody', {
+        CKEDITOR.replace('LetterBody', {
             customConfig: '/js/Config.js'
         });
     </script>
