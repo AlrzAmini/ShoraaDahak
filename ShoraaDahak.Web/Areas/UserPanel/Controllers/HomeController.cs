@@ -15,10 +15,12 @@ namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ILetterService _letterService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, ILetterService letterService)
         {
             _userService = userService;
+            _letterService = letterService;
         }
 
         public IActionResult Index()
@@ -88,6 +90,29 @@ namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
             ViewBag.IsSuccess = true;
 
             return View();
+        }
+
+        #endregion
+
+        #region Letters
+
+        [Authorize]
+        [Route("UserPanel/Letters")]
+        public IActionResult Letters()
+        {
+            return View(_letterService.GetLettersForSender(int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))));
+        }
+
+        #endregion
+
+        #region letter Answer
+
+        [Authorize]
+        [Route("UserPanel/LetterAnswers")]
+        public IActionResult LetterAnswers()
+        {
+            int recieverId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return View(_letterService.GetLetterAnswersForLetterSender(recieverId));
         }
 
         #endregion

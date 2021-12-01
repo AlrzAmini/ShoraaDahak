@@ -1,8 +1,10 @@
-﻿@model List<ShoraaDahak.DataLayer.Models.Discussion.Discussion>
+﻿@using ShoraaDahak.Core.Convertors
+@model List<ShoraaDahak.DataLayer.Models.Letter.Letter>
 @{
-    ViewData["Title"] = "لیست بحث ها";
+    ViewData["Title"] = "نامه های من";
 }
-<div class="breadcrumbs_wrap dark mb-1">
+
+<div class="breadcrumbs_wrap dark">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -10,8 +12,8 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">بحث مردمی</li>
-                            <li class="breadcrumb-item active" aria-current="page">لیست بحث ها</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="/UserPanel">پنل کاربری</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">نامه ها </li>
                         </ol>
                     </nav>
                 </div>
@@ -19,46 +21,49 @@
         </div>
     </div>
 </div>
-<section>
+<section class="gray">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <partial name="_PanelSideBar" />
+            <div class="col-lg-8 col-md-9">
                 @if (Model.Count != 0)
                 {
                     <div class="card style-2">
                         <div class="card-header">
-                            @if (Model.Select(d => d.Service.ServiceTitle).FirstOrDefault().ToString() != null)
-                            {
-                                <h4 class="text-success text-center">لیست بحث های مطرح شده در @Model.Select(d => d.Service.ServiceTitle).FirstOrDefault().ToString()</h4>
-                            }
-                            else
-                            {
-                                <h4 class="text-success text-center">لیست بحث های مطرح شده </h4>
-                            }
+                            <h4 class="mb-0">نامه های ثبت شده</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">عنوان</th>
-                                            <th scope="col">میزان اهمیت</th>
-                                            <th scope="col">ثبت شده توسط</th>
-                                            <th scope="col">تعداد پاسخ ها</th>
+                                            <th scope="col">موضوع</th>
+                                            <th scope="col">فرستنده</th>
+                                            <th scope="col">دریافت کننده</th>
+                                            <th scope="col">تاریخ ارسال</th>
+                                            <th scope="col">وضعیت</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var discussion in Model)
+                                        @foreach (var letter in Model)
                                         {
                                             <tr>
                                                 <th scope="row">
-                                                    <a class="btn btn-info btn-block" href="/Discussion/ShowDiscussion/@discussion.DiscussionId">
-                                                        @discussion.DiscussionTitle
-                                                    </a>
+                                                    @letter.LetterTitle
                                                 </th>
-                                                <td> @discussion.DiscussionImpLevel.ImpLevelTitle</td>
-                                                <td>@discussion.User.Name</td>
-                                                <td> @discussion.Answers.Count</td>
+                                                <td>@letter.User.Name</td>
+                                                <td>@letter.LetterTo.LetterToTitle</td>
+                                                <td>@letter.LetterSendDate.ToShamsi()</td>
+                                                <td>
+                                                    @if (letter.IsRead)
+                                                    {
+                                                        <p class="text-success">خوانده شده</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">خوانده نشده</p>
+                                                    }
+                                                </td>
                                             </tr>
                                         }
                                     </tbody>
@@ -81,5 +86,4 @@
         </div>
     </div>
 </section>
-
 

@@ -64,6 +64,8 @@ namespace ShoraaDahak.DataLayer.Context
 
         public DbSet<LetterTo> LetterTos { get; set; }
 
+        public DbSet<LetterAnswer> LetterAnswers { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

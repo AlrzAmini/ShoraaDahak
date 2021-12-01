@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211201145044_changeanslett")]
+    partial class changeanslett
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,14 +164,14 @@ namespace ShoraaDahak.DataLayer.Migrations
                     b.Property<int>("LetterId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SenderId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("LetterAnswerId");
 
                     b.HasIndex("LetterId");
 
-                    b.HasIndex("SenderId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("LetterAnswers");
                 });
@@ -495,14 +497,14 @@ namespace ShoraaDahak.DataLayer.Migrations
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Letter.LetterAnswer", b =>
                 {
                     b.HasOne("ShoraaDahak.DataLayer.Models.Letter.Letter", "Letter")
-                        .WithMany("LetterAnswers")
+                        .WithMany()
                         .HasForeignKey("LetterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ShoraaDahak.DataLayer.Models.User.User", "User")
                         .WithMany()
-                        .HasForeignKey("SenderId");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Letter");
 
@@ -602,11 +604,6 @@ namespace ShoraaDahak.DataLayer.Migrations
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Discussion.DiscussionImpLevel", b =>
                 {
                     b.Navigation("Discussions");
-                });
-
-            modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Letter.Letter", b =>
-                {
-                    b.Navigation("LetterAnswers");
                 });
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Letter.LetterTo", b =>

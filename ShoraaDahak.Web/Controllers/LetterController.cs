@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -43,6 +44,11 @@ namespace ShoraaDahak.Web.Controllers
             }
 
             letter.SenderId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+
+            var sanitizer = new HtmlSanitizer();
+            var sanitizedBody = sanitizer.Sanitize(letter.LetterBody);
+            letter.LetterBody = sanitizedBody;
+
             _letterService.AddLetter(letter, letterFileUp);
 
             return View("SendSuccess", letter);
@@ -50,9 +56,5 @@ namespace ShoraaDahak.Web.Controllers
 
         #endregion
 
-        #region Success Send
-
-
-        #endregion
     }
 }

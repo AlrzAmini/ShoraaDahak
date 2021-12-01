@@ -38,7 +38,16 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         FilteredLisLettersInAdmin GetLettersByFilterForAdmin(int pageNum=1,string filterTitle="",string filterSenderName = "");
 
-        //void IsLetterReaded();
+        List<Letter> GetLettersForSender(int senderId);
+
+
+        #endregion
+
+        #region Answer
+
+        void AddLetterAnswer(LetterAnswer letterAnswer);
+
+        List<LetterAnswer> GetLetterAnswersForLetterSender(int recieverId);
 
 
         #endregion

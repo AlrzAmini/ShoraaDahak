@@ -65,6 +65,7 @@
                                 </td>
                                 <td>
                                     <a asp-page="ShowLetter" asp-route-Id="@item.LetterId" class="btn btn-outline btn-info btn-sm">مشاهده</a>
+                                    <a asp-page="SendAnswerToLetter" asp-route-Id="@item.LetterId" class="btn btn-outline btn-success btn-sm">جواب دادن</a>
                                 </td>
                             </tr>
                         }
@@ -91,7 +92,7 @@
 <div class="col-12 col-md-3">
     <div class="panel panel-success">
         <div class="panel-heading">
-            <i class="fa fa-bell fa-fw"></i>  آمار بخش خدمات
+            <i class="fa fa-bell fa-fw"></i>  آمار بخش نامه ها
         </div>
         <div class="panel-body">
             <div class="list-group">

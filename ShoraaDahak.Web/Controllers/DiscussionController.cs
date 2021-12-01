@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoraaDahak.Core.Services.Interfaces;
@@ -46,6 +47,9 @@ namespace ShoraaDahak.Web.Controllers
             }
 
             discussion.UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+            var sanitizer = new HtmlSanitizer();
+            var sanitizedBody = sanitizer.Sanitize(discussion.DiscussionBody);
+            discussion.DiscussionBody = sanitizedBody;
             int disId = _discussionService.AddDiscussion(discussion);
 
             return Redirect("/Discussion/ShowDiscussion/"+disId);
@@ -79,6 +83,9 @@ namespace ShoraaDahak.Web.Controllers
         {
             if (!string.IsNullOrEmpty(answerBody))
             {
+                var sanitizer = new HtmlSanitizer();
+                answerBody = sanitizer.Sanitize(answerBody);
+
                 Answer answer = new Answer()
                 {
                     AnswerBody = answerBody,
@@ -86,8 +93,10 @@ namespace ShoraaDahak.Web.Controllers
                     DiscussionId = id,
                     CreateDate = DateTime.Now
                 };
+
                 _discussionService.AddAnswer(answer);
             }
+
             return RedirectToAction("ShowDiscussion",new{id=id});
         }
 

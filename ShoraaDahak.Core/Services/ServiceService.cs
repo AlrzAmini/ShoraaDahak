@@ -337,6 +337,7 @@ namespace ShoraaDahak.Core.Services
                 .Include(s=>s.User)
                 .Include(s=>s.ServiceStatus)
                 .Include(s=>s.ServiceGroup)
+                .Include(s=>s.Discussions)
                 .FirstOrDefault(s => s.ServiceId == id);
         }
 

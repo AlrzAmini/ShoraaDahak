@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="woo_pr_detail card-body border rounded mb-5">
                     <div class="woo_cats_wrps">
@@ -42,18 +41,12 @@
                     <h2 class="woo_pr_title">@Model.ServiceTitle</h2>
                     <div class="woo_pr_reviews">
                         <div class="woo_pr_total_reviews">
-                            <a href="#">(124 نظرات)</a>
+                            <a href="#">(@Model.Discussions.Count نظرات)</a>
                         </div>
                     </div>
-
                     <div class="woo_pr_price">
-
                     </div>
-
-                    <!-- Short Info -->
                     <div class="pr_info_prefix grocery_style mb-3">
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
                                 <strong>تاریخ شروع:</strong>
@@ -62,8 +55,6 @@
                                 @Model.ServiceStartDate.ToShamsi()
                             </div>
                         </div>
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
                                 <strong> وضعیت : </strong>
@@ -72,8 +63,6 @@
                                 <span class="text-success">@Model.ServiceStatus.StatusTitle</span>
                             </div>
                         </div>
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
                                 <strong>تاریخ پایان :</strong>
@@ -82,8 +71,6 @@
                                 @Model.ServiceEndDate?.ToShamsi()
                             </div>
                         </div>
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
                                 <strong> سازمان های مربوطه : </strong>
@@ -91,15 +78,13 @@
                             <div class="sku_preflix_last">
                                 @if (Model.RelatedInstitutions != null)
                                 {
-                                    @foreach (var item in Model.RelatedInstitutions.Split("-",StringSplitOptions.RemoveEmptyEntries))
+                                    @foreach (var item in Model.RelatedInstitutions.Split("-", StringSplitOptions.RemoveEmptyEntries))
                                     {
                                         <a class="btn btn-outline-info btn-sm" href="/Service?filterServiceName=@item"> @item </a>
                                     }
                                 }
                             </div>
                         </div>
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
                                 <strong> بروزرسانی : </strong>
@@ -108,31 +93,18 @@
                                 @Model.ServiceUpdateDate?.ToShamsi()
                             </div>
                         </div>
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                         </div>
-
-
-
-
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                         </div>
-
-
-
-                        <!-- First -->
                         <div class="cart_sku_preflix">
                         </div>
-
                     </div>
-
                 </div>
                 <div class="woo_btn_action card-body border rounded mt-5">
                     <div class="col-12 col-md-12">
-                        <a href="/Discussion/ShowDiscussionList/@Model.ServiceId" class="btn btn-block btn-dark mb-2">بحث مردمی <i class="ti-user mr-2"></i></a>
+                        <a href="/Discussion/ShowDiscussionList/@Model.ServiceId" class="btn btn-block btn-info mb-2">بحث مردمی <i class="ti-user mr-2"></i></a>
+                        <a href="/Discussion/CreateDiscussion/@Model.ServiceId" class="btn btn-block btn-primary mb-2">افزودن بحث <i class="ti-plus mr-2"></i></a>
                     </div>
                 </div>
                 @if (!User.Identity.IsAuthenticated)
@@ -142,10 +114,7 @@
                     </div>
                 }
             </div>
-
         </div>
-
-        <!-- Product Description -->
         <div class="row mt-5">
             <div class="col-lg-12 col-md-12">
                 <div class="custom-tab style-1">

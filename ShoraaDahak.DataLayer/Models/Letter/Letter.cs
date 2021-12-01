@@ -49,6 +49,8 @@ namespace ShoraaDahak.DataLayer.Models.Letter
         [ForeignKey("SenderId")]
         public User.User User { get; set; }
 
+        public List<LetterAnswer> LetterAnswers { get; set; }
+
         #endregion
     }
 }

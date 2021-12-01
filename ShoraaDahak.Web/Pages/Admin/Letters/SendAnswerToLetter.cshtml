@@ -1,0 +1,46 @@
+﻿@page "{Id}"
+@model ShoraaDahak.Web.Pages.Admin.Letters.SendAnswerToLetterModel
+@{
+    ViewData["Title"] = "افزودن جواب جدید";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">افزودن جواب </h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">بازگشت به لیست پیام ها</a>
+    </div>
+</div>
+
+<div class="row">
+    <form method="post">
+        <input type="hidden" asp-for="LetterAnswer.LetterId" />
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    متن جواب
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>متن جواب :</label>
+                        <textarea class="form-control" asp-for="LetterAnswer.LetterAnswerBody"></textarea>
+                        <span asp-validation-for="LetterAnswer.LetterAnswerBody" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-lg btn-block">ثبت </button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('LetterAnswer_LetterAnswerBody', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+
+}

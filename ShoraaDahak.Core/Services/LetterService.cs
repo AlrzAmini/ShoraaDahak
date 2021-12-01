@@ -48,6 +48,13 @@ namespace ShoraaDahak.Core.Services
             _context.SaveChanges();
         }
 
+        public void AddLetterAnswer(LetterAnswer letterAnswer)
+        {
+            letterAnswer.CreateDate = DateTime.Now;
+            _context.LetterAnswers.Add(letterAnswer);
+            _context.SaveChanges();
+        }
+
         public void AddLetterTo(LetterTo letterTo)
         {
             _context.LetterTos.Add(letterTo);
@@ -65,9 +72,18 @@ namespace ShoraaDahak.Core.Services
             return _context.LetterTos.ToList();
         }
 
+        public List<LetterAnswer> GetLetterAnswersForLetterSender(int recieverId)
+        {
+            return _context.LetterAnswers
+                .Include(a=>a.User)
+                .Include(a => a.Letter)
+                .ThenInclude(l => l.User)
+                .Where(a => a.Letter.SenderId == recieverId).ToList();
+        }
+
         public Letter GetLetterById(int letterId)
         {
-            return _context.Letters.Include(l=>l.LetterTo).Include(l=>l.User).SingleOrDefault(l => l.LetterId == letterId);
+            return _context.Letters.Include(l => l.LetterTo).Include(l => l.User).SingleOrDefault(l => l.LetterId == letterId);
         }
 
         public FilteredLisLettersInAdmin GetLettersByFilterForAdmin(int pageNum = 1, string filterTitle = "", string filterSenderName = "")
@@ -97,12 +113,20 @@ namespace ShoraaDahak.Core.Services
 
             FilteredLisLettersInAdmin list = new FilteredLisLettersInAdmin()
             {
-                Letters = result.OrderByDescending(l=>l.IsRead).Skip(skip).Take(take).ToList(),
+                Letters = result.OrderByDescending(l => l.IsRead).Skip(skip).Take(take).ToList(),
                 CurrentPage = pageNum,
                 TotalPages = (int)Math.Ceiling((decimal)result.Count() / take)
             };
 
             return list;
+        }
+
+        public List<Letter> GetLettersForSender(int senderId)
+        {
+            return _context.Letters
+                .Include(l=>l.User)
+                .Include(l=>l.LetterTo)
+                .Where(l => l.SenderId == senderId).ToList();
         }
 
         public LetterTo GetLetterToById(int id)
@@ -118,11 +142,6 @@ namespace ShoraaDahak.Core.Services
                     Value = s.LetterToId.ToString(),
                     Text = s.LetterToTitle
                 }).ToList();
-        }
-
-        public void IsLetterReaded()
-        {
-            throw new NotImplementedException();
         }
 
         public void UpdateLetter(Letter letter)
