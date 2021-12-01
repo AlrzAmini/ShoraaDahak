@@ -11,5 +11,7 @@ namespace ShoraaDahak.Core.Consts
         public const int TakeUserInAdmin = 10;
 
         public const int TakeServicesForShowInIndex = 9;
+
+        public const int TakeLetterInIndexAdmin = 10;
     }
 }

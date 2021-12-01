@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.DataLayer.Models.Letter;
 
 namespace ShoraaDahak.Core.Services.Interfaces
@@ -30,6 +31,14 @@ namespace ShoraaDahak.Core.Services.Interfaces
         #region letter
 
         void AddLetter(Letter letter,IFormFile letterFileUp);
+
+        Letter GetLetterById(int letterId);
+
+        void UpdateLetter(Letter letter);
+
+        FilteredLisLettersInAdmin GetLettersByFilterForAdmin(int pageNum=1,string filterTitle="",string filterSenderName = "");
+
+        //void IsLetterReaded();
 
 
         #endregion

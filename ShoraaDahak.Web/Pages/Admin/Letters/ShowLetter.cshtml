@@ -1,0 +1,83 @@
+﻿@page
+@using ShoraaDahak.Core.Convertors
+@model ShoraaDahak.Web.Pages.Admin.Letters.ShowLetterModel
+@{
+    ViewData["Title"] = "مشاهده نامه";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">مشاهده نامه</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست نامه ها</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات نامه
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>موضوع</label>
+                        <h4 class="text-success">@Model.Letter.LetterTitle</h4>
+                    </div>
+                    <div class="form-group col-12 col-md-6">
+                        <label>از :</label>
+                        <h4 class="text-info">@Model.Letter.User.Name</h4>
+                    </div>
+                    <div class="form-group col-12 col-md-6">
+                        <label>به :</label>
+                       <h4 class="text-info">@Model.Letter.LetterTo.LetterToTitle</h4>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="badge">
+                            <label>تاریخ ارسال</label>
+                            <p>@Model.Letter.LetterSendDate.ToShamsi()</p>
+                        </div>
+                    </div>
+                    <div class="form-group border ">
+                        <label>متن نامه :</label>
+                        <div class="card-body">
+                            @Html.Raw(Model.Letter.LetterBody)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    جزییات
+                </div>
+                <div class="panel-body">
+                    @if (Model.Letter.LetterFileName != null)
+                    {
+                        <div class="form-group">
+                            <label>تصویر ضمیمه</label>
+                        </div>
+                        <img id="imgService" class="img-fluid img-thumbnail mb-2" src="/Letter/@Model.Letter.LetterFileName"/>
+                    }
+                    <form method="post">
+                        <input type="hidden" asp-for="Letter.LetterTitle"/>
+                        <input type="hidden" asp-for="Letter.SenderId"/>
+                        <input type="hidden" asp-for="Letter.LetterToId"/>
+                        <input type="hidden" asp-for="Letter.LetterBody"/>
+                        <input type="hidden" asp-for="Letter.LetterSendDate"/>
+                        <input type="hidden" asp-for="Letter.LetterFileName"/>
+                        <input type="hidden" asp-for="Letter.LetterId"/>
+                        <div class="form-group">
+                            <label>خوانده شد ؟</label>
+                            <input type="checkbox" asp-for="Letter.IsRead"/>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success btn-block">ثبت</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
