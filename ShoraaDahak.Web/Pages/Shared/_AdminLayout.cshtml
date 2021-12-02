@@ -65,7 +65,6 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> مدیریت <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-
                                 @if (_permissionService.CheckPermission(PerIds.AdminUsers, User.FindFirstValue(ClaimTypes.Email)))
                                 {
                                     <li>
@@ -92,63 +91,46 @@
                                         </ul>
                                     </li>
                                 }
-                                <li>
-                                    <a href="/Admin">بخش نامه ها<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="/Admin/LetterTos"> مقصد های نامه ها</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Admin/Letters">نامه ها</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="/Admin/News">اخبار</a>
-                                </li>
+                                @if (_permissionService.CheckPermission(PerIds.AdminLetters, User.FindFirstValue(ClaimTypes.Email)))
+                                {
+                                    <li>
+                                        <a href="/Admin">بخش نامه ها<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="/Admin/LetterTos"> مقصد های نامه ها</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Admin/Letters">نامه ها</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.AdminLetters, User.FindFirstValue(ClaimTypes.Email)))
+                                {
+                                    <li>
+                                        <a href="/Admin/Quotes">نقل قول ها</a>
+                                    </li>
+                                }
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
-                    <!-- /#side-menu -->
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
 
         <div id="page-wrapper">
             @RenderBody()
         </div>
-        <!-- /#page-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
-    <!-- Core Scripts - Include with every page -->
     <script src="/AdminPanel/js/jquery-1.10.2.js"></script>
     <script src="/AdminPanel/js/bootstrap.min.js"></script>
     <script src="/AdminPanel/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
     <script src="/AdminPanel/js/plugins/morris/raphael-2.1.0.min.js"></script>
     <script src="/AdminPanel/js/plugins/morris/morris.js"></script>
-
-    <!-- SB Admin Scripts - Include with every page -->
     <script src="/AdminPanel/js/sb-admin.js"></script>
-
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="/AdminPanel/js/demo/dashboard-demo.js"></script>
-
     <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
-
     <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
-
-
-
-
-
     @RenderSection("Scripts", false)
-
 </body>
-
 </html>

@@ -117,6 +117,9 @@ html body .mdi:before,
 html body .mdi-set {
     line-height: initial;
 }
+#news {
+    background: #eff8e7 url(/img/gro-trans.png) no-repeat;
+}
 section {
     padding: 80px 0;
     position: relative;

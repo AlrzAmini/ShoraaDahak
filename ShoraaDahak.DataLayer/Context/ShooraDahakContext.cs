@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using ShoraaDahak.DataLayer.Models.Discussion;
 using ShoraaDahak.DataLayer.Models.Letter;
 using ShoraaDahak.DataLayer.Models.Permission;
+using ShoraaDahak.DataLayer.Models.quote;
 using ShoraaDahak.DataLayer.Models.Services;
 using ShoraaDahak.DataLayer.Models.User;
 
@@ -65,6 +66,12 @@ namespace ShoraaDahak.DataLayer.Context
         public DbSet<LetterTo> LetterTos { get; set; }
 
         public DbSet<LetterAnswer> LetterAnswers { get; set; }
+
+        #endregion
+
+        #region Quote
+
+        public DbSet<Quote> Quotes { get; set; }
 
         #endregion
 

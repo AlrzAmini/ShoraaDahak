@@ -2,16 +2,10 @@
 @{
     ViewData["Title"] = "خانه";
 }
-
-
 <partial name="_Banner" />
-
 <partial name="_Subjects" />
-
-<!-- services -->
 <section class="cen-mid">
     <div class="container">
-
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="sec-heading center">
@@ -20,15 +14,12 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
-
             <div class="col-lg-12 col-md-12">
                 <div class="multi-tab">
 
                 </div>
             </div>
-
             <div class="col-lg-12 col-md-12">
                 <div class="row">
                     @foreach (var item in Model)
@@ -41,9 +32,7 @@
     </div>
 </section>
 <div class="clearfix"></div>
-
-<partial name="_News" />
-
+<partial name="_Quote"/>
 <section>
     <div class="container">
 
@@ -60,6 +49,5 @@
     </div>
 </section>
 <div class="clearfix"></div>
-
 <partial name="_Blogs" />
 

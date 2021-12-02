@@ -1,0 +1,85 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.Quotes.CreateQuoteModel
+@{
+    ViewData["Title"] = "افزودن نقل قول جدید";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">افزودن نقل قول جدید</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست نقل قول ها</a>
+    </div>
+</div>
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات نقل قول
+                </div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <label>نام گوینده</label>
+                        <input type="text" asp-for="Quote.QuoteBy" class="form-control" placeholder="نام گوینده را وارد کنید ">
+                        <span asp-validation-for="Quote.QuoteBy" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>شغل گوینده</label>
+                        <input type="text" asp-for="Quote.QuoterJob" class="form-control" placeholder="شغل گوینده را وارد کنید ">
+                        <span asp-validation-for="Quote.QuoterJob" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>نقل قول</label>
+                        <textarea type="text" asp-for="Quote.QuoteBody" class="form-control" rows="12"></textarea>
+                        <span asp-validation-for="Quote.QuoteBody" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    تصویر گوینده
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>افزودن تصویر</label>
+                        <input type="file" id="imgQuoteUp" name="imgQuoteUp">
+                        <span asp-validation-for="Quote.QuoteImageName" class="text-danger"></span>
+                    </div>
+                    <img id="imgQuote" class="img-fluid img-thumbnail" src="/img/Service/DefualtQ.jpg" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ثبت</button>
+        </div>
+    </form>
+</div>
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgQuote').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgQuoteUp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Quote_QuoteBody', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+   
+}

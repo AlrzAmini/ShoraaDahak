@@ -92,6 +92,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<ILetterService, LetterService>();
 
+            services.AddScoped<IQuoteService, QuoteService>();
+
 
             #endregion
         }

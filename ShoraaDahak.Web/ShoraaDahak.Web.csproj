@@ -23,9 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\News\" />
     <Folder Include="wwwroot\MyImages\" />
     <Folder Include="wwwroot\Letter\" />
+    <Folder Include="wwwroot\Quote\image\" />
+    <Folder Include="wwwroot\Quote\thumb\" />
     <Folder Include="wwwroot\Service\video\" />
   </ItemGroup>
 

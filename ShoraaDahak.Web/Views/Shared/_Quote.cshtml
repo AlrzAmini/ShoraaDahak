@@ -1,0 +1,53 @@
+﻿@using ShoraaDahak.Core.Services.Interfaces
+@using ShoraaDahak.DataLayer.Models.quote
+@inject IQuoteService _quoteService;
+@{
+    List<Quote> Model = _quoteService.GetAllQuotesForAdmin();
+}
+<section class="bg-cover" id="news">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-10 col-sm-12">
+                <div class="sec-heading">
+                    <div class="sec-heading center">
+                        <span class="theme-cl">امیدواریم روز خوبی داشته باشید . </span>
+                        <h2 class="grocery_title">بخوانید</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <div class="customers-carousel owl-carousel owl-theme products-slider " id="customers-carousel">
+                    @foreach (var quote in Model)
+                    {
+                        <div class="single_customers_box">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 col-md-7">
+                                    <div class="single_customers_wraps">
+                                        <div class="single_customers_caption">
+                                            <div class="quote_icon_2"><i class="fas fa-quote-right"></i></div>
+                                            <p class="customers_description">@Html.Raw(quote.QuoteBody)</p>
+                                            <div class="review_author_box">
+                                                <div class="reviews_img">
+                                                    <img src="/Quote/thumb/@quote.QuoteImageName" class="img-fluid" alt="@quote.QuoteBy" />
+                                                </div>
+                                                <div class="reviews_caption">
+                                                    <h4 class="testi2_title">@quote.QuoteBy</h4>
+                                                    <span>@quote.QuoterJob</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
