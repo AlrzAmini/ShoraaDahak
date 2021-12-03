@@ -109,6 +109,8 @@ namespace ShoraaDahak.DataLayer.Models.User
 
         public List<Discussion.Discussion> Discussions { get; set; }
 
+        public List<Blog.Blog> Blogs { get; set; }
+
 
         #endregion
 

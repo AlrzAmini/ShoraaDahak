@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211203161032_changgender")]
+    partial class changgender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,50 +28,14 @@ namespace ShoraaDahak.DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BlogBody")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BlogImageName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("BlogTitle")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("GenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LittleDescription")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<int?>("SubCatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WriterId")
                         .HasColumnType("int");
 
                     b.HasKey("BlogId");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("GenderId");
 
-                    b.HasIndex("SubCatId");
-
-                    b.HasIndex("WriterId");
-
-                    b.ToTable("Blogs");
+                    b.ToTable("Blog");
                 });
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", b =>
@@ -559,35 +525,13 @@ namespace ShoraaDahak.DataLayer.Migrations
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.Blog", b =>
                 {
-                    b.HasOne("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", "BlogCategory")
-                        .WithMany("Blogs")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ShoraaDahak.DataLayer.Models.Blog.Gender", "Gender")
                         .WithMany("Blogs")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", "SubCategory")
-                        .WithMany("SubBloges")
-                        .HasForeignKey("SubCatId");
-
-                    b.HasOne("ShoraaDahak.DataLayer.Models.User.User", "User")
-                        .WithMany("Blogs")
-                        .HasForeignKey("WriterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BlogCategory");
-
                     b.Navigation("Gender");
-
-                    b.Navigation("SubCategory");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", b =>
@@ -763,10 +707,6 @@ namespace ShoraaDahak.DataLayer.Migrations
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", b =>
                 {
                     b.Navigation("BlogCategories");
-
-                    b.Navigation("Blogs");
-
-                    b.Navigation("SubBloges");
                 });
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.Gender", b =>
@@ -829,8 +769,6 @@ namespace ShoraaDahak.DataLayer.Migrations
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.User.User", b =>
                 {
-                    b.Navigation("Blogs");
-
                     b.Navigation("Discussions");
 
                     b.Navigation("Services");

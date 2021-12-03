@@ -1,0 +1,119 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.Blogs.CreateBlogModel
+@{
+    ViewData["Title"] = "افزودن بلاگ جدید";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">افزودن بلاگ جدید</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست بلاگ ها</a>
+    </div>
+</div>
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات بلاگ
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>تیتر</label>
+                        <input type="text" asp-for="Blog.BlogTitle" class="form-control" placeholder="تیتر بلاگ را وارد کنید ">
+                        <span asp-validation-for="Blog.BlogTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>دسته بندی</label>
+                        <select class="form-control" asp-for="Blog.CategoryId" asp-items="@(ViewData["Category"] as SelectList)"></select>
+                        <span asp-validation-for="Blog.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>زیر گروه</label>
+                        <select class="form-control" asp-for="Blog.SubCatId" asp-items="@(ViewData["SubCat"] as SelectList)"></select>
+                        <span asp-validation-for="Blog.SubCatId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>نویسنده</label>
+                        <select class="form-control" asp-for="Blog.WriterId" asp-items="@(ViewData["Writer"] as SelectList)"></select>
+                        <span asp-validation-for="Blog.WriterId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>جنسیت نویسنده</label>
+                        <select class="form-control" asp-for="Blog.GenderId" asp-items="@(ViewData["Gender"] as SelectList)"></select>
+                        <span asp-validation-for="Blog.GenderId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>توضیح کوتاه</label>
+                        <textarea type="text" asp-for="Blog.LittleDescription" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Blog.LittleDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>متن بلاگ</label>
+                        <textarea type="text" asp-for="Blog.BlogBody" class="form-control" rows="12"></textarea>
+                        <span asp-validation-for="Blog.BlogBody" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    جزییات
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>افزودن تصویر</label>
+                        <input type="file" id="imgBlogUp" name="imgBlogUp">
+                        <span asp-validation-for="Blog.BlogImageName" class="text-danger"></span>
+                    </div>
+                    <img id="imgBlg" class="img-fluid img-thumbnail" src="/img/Service/Defualt.webp" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ثبت</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        $("#Blog_CategoryId").change(function () {
+            $("#Blog_SubCatId").empty();
+            $.getJSON("/HomeAdmin/GetSubCats/" + $("#Blog_CategoryId :selected").val(),
+                function (data) {
+                    $.each(data,
+                        function () {
+                            $("#Blog_SubCatId").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgBlg').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgBlogUp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Blog_BlogBody', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+}
+

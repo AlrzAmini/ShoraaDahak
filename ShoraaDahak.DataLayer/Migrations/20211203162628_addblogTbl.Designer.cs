@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211203162628_addblogTbl")]
+    partial class addblogTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +71,7 @@ namespace ShoraaDahak.DataLayer.Migrations
 
                     b.HasIndex("WriterId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blog");
                 });
 
             modelBuilder.Entity("ShoraaDahak.DataLayer.Models.Blog.BlogCategory", b =>

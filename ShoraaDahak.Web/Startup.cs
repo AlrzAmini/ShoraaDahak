@@ -94,6 +94,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<IQuoteService, QuoteService>();
 
+            services.AddScoped<IBlogService, BlogService>();
+
 
             #endregion
         }

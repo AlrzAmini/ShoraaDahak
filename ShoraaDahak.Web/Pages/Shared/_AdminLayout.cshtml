@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
 </head>
 
@@ -57,7 +58,7 @@
                                     </button>
                                 </span>
                             </div>
-                            <!-- /input-group -->
+                            
                         </li>
                         <li>
                             <a href="/Admin"><i class="fa fa-dashboard fa-fw"></i> پنل ادمین </a>
@@ -105,10 +106,24 @@
                                         </ul>
                                     </li>
                                 }
-                                @if (_permissionService.CheckPermission(PerIds.AdminLetters, User.FindFirstValue(ClaimTypes.Email)))
+                                @if (_permissionService.CheckPermission(PerIds.AdminQuotes, User.FindFirstValue(ClaimTypes.Email)))
                                 {
                                     <li>
                                         <a href="/Admin/Quotes">نقل قول ها</a>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.AdminBlogs, User.FindFirstValue(ClaimTypes.Email)))
+                                {
+                                    <li>
+                                        <a href="/Admin">بخش بلاگ ها<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="/Admin/BlogCategories"> دسته بندی های بلاگ ها</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Admin/Blogs">بلاگ ها</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 }
                             </ul>
@@ -131,6 +146,7 @@
     <script src="/AdminPanel/js/demo/dashboard-demo.js"></script>
     <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
     <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label>نویسنده</label>
-                        <select class="form-control" asp-for="Service.WriterId" asp-items="@(ViewData["Teachers"] as SelectList)"></select>
+                        <select class="form-control" asp-for="Service.WriterId" asp-items="@(ViewData["Writer"] as SelectList)"></select>
                         <span asp-validation-for="Service.WriterId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -48,17 +48,17 @@
                     </div>
                     <div class="form-group">
                         <label>تاریخ شروع</label>
-                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control" >
+                        <input type="date" asp-for="Service.ServiceStartDate" class="form-control sDate" id="sDate" >
                         <span asp-validation-for="Service.ServiceStartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>تاریخ پایان</label>
-                        <input type="date" asp-for="Service.ServiceEndDate" class="form-control">
+                        <input type="date" asp-for="Service.ServiceEndDate" class="form-control sDate" id="sDate">
                         <span asp-validation-for="Service.ServiceEndDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>سازمان های مربوطه</label>
-                        <input type="text" asp-for="Service.RelatedInstitutions" class="form-control">
+                        <input type="text" asp-for="Service.RelatedInstitutions" class="form-control ">
                         <p class="help-block">نام سازمان ها را با - جدا کنید</p>
                         <span asp-validation-for="Service.RelatedInstitutions" class="text-danger"></span>
                     </div>
@@ -117,10 +117,8 @@
         });
     </script>
 
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-            $(".sDate").persianDatepicker();
-        });
+    @*<script>
+        $(".sDate").persianDatepicker();
     </script>*@
 
     <script>

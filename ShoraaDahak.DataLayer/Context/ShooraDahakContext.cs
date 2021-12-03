@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ShoraaDahak.DataLayer.Models.Blog;
 using ShoraaDahak.DataLayer.Models.Discussion;
 using ShoraaDahak.DataLayer.Models.Letter;
 using ShoraaDahak.DataLayer.Models.Permission;
@@ -75,8 +76,21 @@ namespace ShoraaDahak.DataLayer.Context
 
         #endregion
 
+        #region Blogs
+
+        public DbSet<BlogCategory> BlogCategories { get; set; }
+
+        public DbSet<Gender> Genders { get; set; }
+
+        public DbSet<Blog> Blogs { get; set; }
+
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BlogCategory>()
+                .HasQueryFilter(c => !c.IsDelete);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -37,7 +37,7 @@ namespace ShoraaDahak.Web.Pages.Admin.Services
             ViewData["SubGroups"] = new SelectList(subGroups, "Value", "Text");
 
             var writers = _serviceService.GetWriters();
-            ViewData["Teachers"] = new SelectList(writers, "Value", "Text");
+            ViewData["Writer"] = new SelectList(writers, "Value", "Text");
 
             var statuses = _serviceService.GetStatuses();
             ViewData["Statuses"] = new SelectList(statuses, "Value", "Text");

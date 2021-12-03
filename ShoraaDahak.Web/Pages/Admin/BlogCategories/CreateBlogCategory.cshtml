@@ -1,0 +1,35 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.BlogCategories.CreateBlogCategoryModel
+@{
+    ViewData["Title"] = "افزودن دسته بندی جدید";
+}
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-header">افزودن دسته بندی جدید</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست دسته بندی ها</a>
+    </div>
+</div>
+<div class="row">
+    <form method="post">
+        <input type="hidden" asp-for="BlogCategory.ParrentId" />
+        <div class="col-12 col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات دسته بندی
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان دسته بندی</label>
+                        <input type="text" asp-for="BlogCategory.BlogCategoryTitle" class="form-control" placeholder="عنوان دسته بندی را وارد کنید ">
+                        <span asp-validation-for=" BlogCategory.BlogCategoryTitle" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ثبت دسته بندی</button>
+        </div>
+    </form>
+</div>

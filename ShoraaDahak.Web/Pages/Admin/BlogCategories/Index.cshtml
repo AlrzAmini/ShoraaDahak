@@ -1,0 +1,71 @@
+﻿@page
+@model ShoraaDahak.Web.Pages.Admin.BlogCategories.IndexModel
+@{
+    ViewData["Title"] = "لیست دسته بندی های بلاگ ها";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">لیست دسته بندی های بلاگ ها</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-page="CreateBlogCategory" class="btn btn-outline btn-success">افزودن دسته بندی جدید</a>
+    </div>
+</div>
+<br />
+
+<div class="col-lg-12">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            لیست دسته بندی های بلاگ ها
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <br />
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr>
+                                <th>عنوان دسته بندی</th>
+                                <th>عنوان زیر گروه</th>
+                                <th>دستورات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Categories.Where(g => g.ParrentId == null))
+                            {
+                                <tr>
+                                    <td>@item.BlogCategoryTitle</td>
+                                    <td>
+                                        @if (Model.Categories.Any(g => g.ParrentId == item.BlogCategoryId))
+                                        {
+                                            <ul>
+                                                @foreach (var sub in Model.Categories.Where(g => g.ParrentId == item.BlogCategoryId))
+                                                {
+                                                    <li>
+                                                        @sub.BlogCategoryTitle
+                                                        <a asp-page="EditBlogCategory" asp-route-Id="@sub.BlogCategoryId" class="btn btn-outline btn-info btn-sm">ویرایش</a>
+                                                        <a asp-page-handler="Delete" onclick="return confirm('آیا از حذف این دسته بندی مطمعن هستید ؟')" asp-route-Id="@sub.BlogCategoryId" class="btn btn-outline btn-danger btn-sm">حذف</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-page="CreateBlogCategory" asp-route-Id="@item.BlogCategoryId" class="btn btn-info">افزودن زیرگروه</a>
+                                        <a asp-page="EditBlogCategory" asp-route-Id="@item.BlogCategoryId" class="btn btn-outline btn-primary">ویرایش</a>
+                                        <a asp-page-handler="Delete" onclick="return confirm('آیا از حذف این دسته بندی مطمعن هستید ؟')" asp-route-Id="@item.BlogCategoryId" class="btn btn-outline btn-danger">حذف</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

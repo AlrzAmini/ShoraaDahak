@@ -6,9 +6,7 @@
     <div class="header_topbar light">
         <div class="container">
             <div class="row">
-
                 <div class="col-lg-6 col-md-6 col-sm-6 col-4">
-
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-8 text-right">
                     <div class="topbar_menu">
@@ -21,7 +19,6 @@
                                 }
                                 <li><a href="/UserPanel" class="btn btn-outline-info btn-sm">@User.Identity.Name خوش آمدید</a></li>
                                 <li><a href="/Logout" class="btn btn-outline-danger btn-sm">خروج</a></li>
-
                             }
                             else
                             {
@@ -35,7 +32,6 @@
             </div>
         </div>
     </div>
-
     <!-- Main header -->
     <div class="main_header">
         <div class="container">
@@ -88,14 +84,12 @@
             </div>
         </div>
     </div>
-
     <div class="header_nav">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4 col-sm-8 col-10">
 
                 </div>
-
                 <div class="col-lg-9 col-md-8 col-sm-4 col-2">
                     <nav id="navigation" class="navigation navigation-landscape">
                         <div class="nav-header">
@@ -109,39 +103,10 @@
                                 @await Component.InvokeAsync("ServiceGroupComponent")
 
                                 <li>
-                                    <a href="/News">اخبار</a>
+                                    <a href="#Quotes">نقل قول ها</a>
                                 </li>
 
-                                <li class="">
-                                    <a href="#">محصولات<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-                                    <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-                                        <li>
-                                            <a href="#">محصولات 1<span class="submenu-indicator"></span><span class="submenu-indicator"><span class="submenu-indicator-chevron"></span></span></a>
-                                            <ul class="nav-dropdown nav-submenu" style="">
-                                                <li><a href="search-sidebar.html">با نوار کناری 1</a></li>
-                                                <li><a href="search-sidebar-2.html">با نوار کناری 2</a></li>
-                                                <li><a href="search-sidebar-3.html">با نوار کناری 3</a></li>
-                                                <li><a href="search-sidebar-4.html">با نوار کناری 4</a></li>
-                                                <li><a href="search-sidebar-5.html">با نوار کناری 5</a></li>
-                                                <li><a href="search-sidebar-6.html">با نوار کناری 6</a></li>
-                                                <li><a href="search-sidebar-7.html">با نوار کناری 7</a></li>
-                                                <li><a href="search-sidebar-8.html">با نوار کناری 8</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">محصولات 2<span class="submenu-indicator"></span><span class="submenu-indicator"><span class="submenu-indicator-chevron"></span></span></a>
-                                            <ul class="nav-dropdown nav-submenu" style="">
-                                                <li><a href="detail-1.html">محصول پیش فرض 1</a></li>
-                                                <li><a href="detail-2.html">محصول پیش فرض 2</a></li>
-                                                <li><a href="detail-3.html">محصولات گروهی</a></li>
-                                                <li><a href="detail-4.html">محصول ساده</a></li>
-                                                <li><a href="detail-5.html">محصولات گروهی</a></li>
-                                                <li><a href="detail-6.html">محصول دیجیتالی</a></li>
-                                                <li><a href="vendor.html">جزئیات فروشنده</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                @await Component.InvokeAsync("BlogCategoryComponent")
 
                                 <li>
                                     <a href="#">صفحات فروشگاه<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
@@ -178,13 +143,10 @@
                                 </li>
 
                             </ul>
-
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
