@@ -23,6 +23,10 @@
   font-style: normal;
 }
 
+.rrr0 {
+    right: 0;
+}
+
 .preloader {
     background-color: #fff;
     background-image: url(../img/loader.svg);

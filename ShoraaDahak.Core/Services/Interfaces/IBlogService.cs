@@ -36,13 +36,23 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         List<SelectListItem> GetGenders();
 
-        void AddBlog(Blog blog,IFormFile imgBlog);
+        void AddBlog(Blog blog, IFormFile imgBlog);
 
         List<BlogsForAdminIndexViewModel> GetBlogsForShowInIndexAdmin();
 
         void DeleteBlog(int blogId);
 
         Blog GetBlogById(int blogId);
+
+        void UpdateBlog(Blog blog, IFormFile imgBlog);
+
+        List<BlogInIndexViewModel> GetBlogsInIndex();
+
+        List<BlogInBlogIndexViewModel> GetBlogsInBlogIndex(int pageNum = 1, List<int> categories = null,string searchBlog="", int take = 9);
+
+        Blog GetBlogForShowById(int id);
+
+        List<RelatedBlogViewModel> GetRelatedBlogsByCatId(int catId);
 
         #endregion
 

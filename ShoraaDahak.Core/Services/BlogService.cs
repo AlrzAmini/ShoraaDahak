@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ShoraaDahak.Core.Consts;
 using ShoraaDahak.Core.Convertors;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Generators;
@@ -99,6 +100,14 @@ namespace ShoraaDahak.Core.Services
             return _context.BlogCategories.Find(id);
         }
 
+        public Blog GetBlogForShowById(int id)
+        {
+            return _context.Blogs
+                .Include(b => b.User)
+                .Include(b => b.BlogCategory)
+                .FirstOrDefault(b => b.BlogId == id);
+        }
+
         public List<BlogsForAdminIndexViewModel> GetBlogsForShowInIndexAdmin()
         {
             return _context.Blogs
@@ -107,11 +116,68 @@ namespace ShoraaDahak.Core.Services
                 .Select(b => new BlogsForAdminIndexViewModel()
                 {
                     Category = b.BlogCategory.BlogCategoryTitle,
-                    CreateDate = b.CreateDate.ToShamsi(),
                     MiniDescription = b.LittleDescription,
                     Title = b.BlogTitle,
                     Writer = b.User.Name,
-                    BlogId = b.BlogId
+                    BlogId = b.BlogId,
+                    GenderId = b.GenderId
+                }).ToList();
+        }
+
+        public List<BlogInBlogIndexViewModel> GetBlogsInBlogIndex(int pageNum = 1, List<int> categories = null, string searchBlog = "", int take = 0)
+        {
+            IQueryable<Blog> result = _context.Blogs;
+
+            if (categories != null && categories.Any())
+            {
+                foreach (int catId in categories)
+                {
+                    result = result.Where(s => s.CategoryId == catId || s.SubCatId == catId);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchBlog))
+            {
+                result = result.Where(r => r.BlogTitle.Contains(searchBlog));
+            }
+
+            if (take == 0)
+            {
+                take = 9;
+            }
+
+            take = Pagings.TakeBlogInIndex;
+            int skip = (pageNum - 1) * take;
+
+            return result
+                 .Include(b => b.BlogCategory)
+                 .Include(b => b.User)
+                 .Select(b => new BlogInBlogIndexViewModel()
+                 {
+                     BlogCreateDate = b.CreateDate,
+                     BlogId = b.BlogId,
+                     CategoryTitle = b.BlogCategory.BlogCategoryTitle,
+                     GenderId = b.GenderId,
+                     ImageName = b.BlogImageName,
+                     MiniDescription = b.LittleDescription,
+                     Title = b.BlogTitle,
+                     Writer = b.User.Name
+                 }).Skip(skip).Take(take).ToList();
+
+        }
+
+        public List<BlogInIndexViewModel> GetBlogsInIndex()
+        {
+            return _context.Blogs
+                .Include(b => b.BlogCategory)
+                .Include(b => b.User)
+                .Select(b => new BlogInIndexViewModel()
+                {
+                    Title = b.BlogTitle,
+                    Writer = b.User.Name,
+                    CategoryTitle = b.BlogCategory.BlogCategoryTitle,
+                    BlogId = b.BlogId,
+                    ImageName = b.BlogImageName
                 }).ToList();
         }
 
@@ -134,6 +200,22 @@ namespace ShoraaDahak.Core.Services
             }).ToList();
         }
 
+        public List<RelatedBlogViewModel> GetRelatedBlogsByCatId(int catId)
+        {
+            return _context.Blogs
+                .Include(b => b.BlogCategory)
+                .Where(b => b.CategoryId == catId)
+                .Select(b => new RelatedBlogViewModel()
+                {
+                    Title = b.BlogTitle,
+                    BlogCreateDate = b.CreateDate,
+                    BlogId = b.BlogId,
+                    CatId = b.CategoryId,
+                    CategoryTitle = b.BlogCategory.BlogCategoryTitle,
+                    ImageName = b.BlogImageName
+                }).ToList();
+        }
+
         public List<SelectListItem> GetSubCats(int catId)
         {
             return _context.BlogCategories.Where(c => c.ParrentId == catId)
@@ -153,6 +235,39 @@ namespace ShoraaDahak.Core.Services
                     Value = u.UserId.ToString(),
                     Text = u.User.Name
                 }).ToList();
+        }
+
+        public void UpdateBlog(Blog blog, IFormFile imgBlog)
+        {
+
+            #region Edit Image
+
+            if (imgBlog != null)
+            {
+                // Delete it
+                string imgDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Blog/image",
+                        blog.BlogImageName);
+                if (File.Exists(imgDeletePath))
+                {
+                    File.Delete(imgDeletePath);
+                }
+
+                // Create New Image
+                blog.BlogImageName = CodeGenerator.GenerateUniqCode() + Path.GetExtension(imgBlog.FileName);
+                string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Blog/image", blog.BlogImageName);
+
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    imgBlog.CopyTo(stream);
+                }
+            }
+
+            #endregion
+
+            blog.CreateDate = DateTime.Now;
+
+            _context.Blogs.Update(blog);
+            _context.SaveChanges();
         }
 
         public void UpdateBlogCategory(BlogCategory blogCategory)

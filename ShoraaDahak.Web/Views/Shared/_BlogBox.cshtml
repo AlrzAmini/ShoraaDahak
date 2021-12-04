@@ -1,0 +1,38 @@
+﻿@using ShoraaDahak.Core.Convertors
+@using ShoraaDahak.Core.Consts
+@model ShoraaDahak.Core.DTOs.BlogInBlogIndexViewModel
+
+<div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+    <article class="post-grid-layout">
+        <a href="/Blogs/@Model.BlogId">
+            <div class="post-article-header">
+                <img src="/Blog/image/@Model.ImageName" class="img-fluid mx-auto" alt="@Model.Title">
+            </div>
+        </a>
+        <div class="post-article box-inner">
+            <div class="post-grid-caption-header">
+                <span class="post-article-cat theme-bg">@Model.CategoryTitle</span>
+                <h4 class="entry-title"><a href="blog-detail.html">@Model.Title</a></h4>
+                <div class="post-short-des">
+                    @Model.MiniDescription
+                </div>
+            </div>
+        </div>
+        <div class="post-article-footer">
+            <div class="post-author">
+                @if (Model.GenderId == Gender.Man)
+                {
+                    <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/100/000000/external-man-back-to-school-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-2.png" class="img-fluid" alt="@Model.Writer">
+                }
+                @if (Model.GenderId == Gender.Woman)
+                {
+                    <img src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/100/000000/external-woman-back-to-school-vitaliy-gorbachev-flat-vitaly-gorbachev-2.png" class="img-fluid" alt="@Model.Writer">
+                }
+                <a href="#" class="theme-cl">
+                    @Model.Writer
+                </a>
+            </div>
+            <span><i class="ti-calendar ml-1"></i> @Model.BlogCreateDate.ToShamsi() </span>
+        </div>
+    </article>
+</div>

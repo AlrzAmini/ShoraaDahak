@@ -1,17 +1,17 @@
 ﻿@model List<ShoraaDahak.DataLayer.Models.Blog.BlogCategory>
 <li>
-    <a href="/Blog">بلاگ ها<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
+    <a href="/Blog">وبلاگ ها<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
     <ul class="nav-dropdown nav-submenu" id="rautu">
         @foreach (var group in Model.Where(g => g.ParrentId == null))
         {
             <li>
-                <a href="/Blog?selectedCategories=@group.BlogCategoryId">@group.BlogCategoryTitle<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
+                <a href="/Blog?Categories=@group.BlogCategoryId">@group.BlogCategoryTitle<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
                 @if (Model.Any(g => g.ParrentId == group.ParrentId))
                 {
                     <ul class="nav-dropdown nav-submenu">
                         @foreach (var sub in Model.Where(g => g.ParrentId == group.BlogCategoryId))
                         {
-                            <li><a href="/Blog?selectedCategories=@sub.BlogCategoryId">@sub.BlogCategoryTitle</a></li>
+                            <li><a href="/Blog?Categories=@sub.BlogCategoryId">@sub.BlogCategoryTitle</a></li>
                         }
                     </ul>
                 }

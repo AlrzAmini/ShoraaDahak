@@ -25,14 +25,11 @@
     <input type="hidden" name="pageNum" id="pageNum" value="@ViewBag.pageNum.ToString()" />
     <section>
         <div class="container">
-
             <div class="row">
-
                 <!-- Single Product -->
                 <div class="col-lg-4 col-md-12">
-                    <div class="search-sidebar sm-sidebar" id="filter_search" style="right: 0;">
+                    <div class="search-sidebar sm-sidebar rrr0" id="filter_search">
                         <div class="search-sidebar-body">
-
                             <!-- Single Option -->
                             <div class="single_search_boxed">
                                 <div class="widget-boxed-header">
@@ -41,8 +38,6 @@
                                 <div class="widget-boxed-body">
                                     <div class="side-list no-border">
                                         <div class="filter-card" id="shop-categories">
-
-                                            <!-- Single Filter Card -->
                                             @{
                                                 List<ServiceGroup> serviceGroups = ViewBag.ServicesGroups as List<ServiceGroup>;
                                                 List<int> selectedGroups = ViewBag.selectedGroups as List<int>;

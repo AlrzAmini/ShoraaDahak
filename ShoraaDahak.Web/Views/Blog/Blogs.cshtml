@@ -1,0 +1,178 @@
+﻿@using ShoraaDahak.Core.Convertors
+@using ShoraaDahak.Core.DTOs
+@model ShoraaDahak.DataLayer.Models.Blog.Blog
+@{
+    ViewData["Title"] = Model.BlogTitle;
+}
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/Blog">وبلاگ ها</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@Model.BlogTitle</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <article class="blog-news big-detail-wrap">
+                    <div class="blog-detail-wrap">
+                        <figure class="img-holder">
+                            <a href="#"><img src="/Blog/image/@Model.BlogImageName" class="img-responsive" alt="@Model.BlogTitle"></a>
+                            <div class="blog-post-date theme-bg">
+                                @Model.CreateDate.ToShamsi()
+                            </div>
+                        </figure>
+                        <div class="full blog-content">
+                            <div class="post-meta">توسط : <a href="#" class="author theme-cl">@Model.User.Name</a> | 10 نظر </div>
+                            <a href="#"><h3>@Model.BlogTitle</h3></a>
+                            <div class="blog-text">
+                                @Html.Raw(Model.BlogBody)
+                                <div class="post-meta">دسته بندی مقاله: <span class="category"><a href="/Blog?Categories=@Model.CategoryId" class="theme-cl">@Model.BlogCategory.BlogCategoryTitle</a></span></div>
+                            </div>
+                        </div>
+                        <!-- Blog Content -->
+
+                    </div>
+                </article>
+
+                <!-- Comment -->
+                <div class="comment-wrap">
+                    <div class="comment-detail">
+                        <div class="comment-detail-title">
+                            <h4> نظرات (2)</h4>
+                        </div>
+
+                        <ul id="singlecomment-detail" class="comment-detail-list">
+                            <li class="comment" id="comment-56">
+                                <div class="comment">
+                                    <div class="comment__image">
+                                        <img alt="" src="assets/img/user-3.jpg" class="avatar avatar-75 photo" height="75" width="75">
+                                    </div>
+                                    <div class="comment__text">
+                                        <h5>دانیال</h5>
+                                        <span>
+                                            <em>9 مهر 1399</em>
+                                        </span>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون.</p>
+
+                                    </div>
+                                    <hr>
+                                </div><!--end comment-->
+
+                                <ul class="children">
+
+                                    <li class="comment" id="comment-57">
+                                        <div class="comment">
+                                            <div class="comment__image">
+                                                <img alt="" src="assets/img/user-4.jpg" class="avatar avatar-75 photo" height="75" width="75">
+                                            </div>
+                                            <div class="comment__text">
+                                                <h5>الناز</h5>
+                                                <span>
+                                                    <em>9 مهر 1399</em>
+                                                </span>
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون.</p>
+
+                                            </div>
+                                            <hr>
+                                        </div><!--end comment-->
+
+                                    </li><!-- #comment-## -->
+                                </ul><!-- .children -->
+                            </li><!-- #comment-## -->
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="comment-detail-form">
+                    <div class="section-title2">
+                        <h3 id="reply-title" class="comment-reply-title">
+                            ارسال نظرات
+                            <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">لغو پاسخ</a></small>
+                        </h3>
+                    </div>
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-md-6 col-sm-6">
+                                <input type="text" class="form-control" placeholder="نام">
+                            </div>
+
+                            <div class="form-group col-md-6 col-sm-6">
+                                <input type="email" class="form-control" placeholder="ایمیل">
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <textarea class="form-control" placeholder="نظرات"></textarea>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <button class="btn btn-primary" type="submit">ارسال</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="blog-sidebar">
+
+                    <div class="side-widget">
+                        <div class="side-widget-header border-0">
+                            <h4><i class="ti-search"></i>جستجو مقالات</h4>
+                        </div>
+                        <form action="/Blog">
+                            <div class="side-widget-body p-t-10">
+                                <div class="input-group">
+                                    <input type="text" name="searchBlog" class="form-control" placeholder="جستجو …">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary btn-lg">برو</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="side-widget">
+                        <div class="side-widget-header">
+                            <h4><i class="ti-check-box"></i>وبلاگ های پیشنهادی</h4>
+                        </div>
+                        <div class="side-widget-body p-t-10">
+                            <div class="side-list">
+                                <ul class="side-blog-list">
+                                    @{
+                                        List<RelatedBlogViewModel> list = ViewBag.RelatedBlogs as List<RelatedBlogViewModel>;
+                                    }
+                                    @foreach (var item in list)
+                                    {
+                                        @if (ViewBag.CurrentBlogId != item.BlogId)
+                                        {
+                                            <partial name="_RelatedBlogs" model="item" />
+                                        }
+                                        else
+                                        {
+                                            <li></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

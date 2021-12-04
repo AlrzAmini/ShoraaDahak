@@ -1,0 +1,16 @@
+﻿@using ShoraaDahak.Core.DTOs
+@using ShoraaDahak.Core.Convertors
+@model RelatedBlogViewModel
+<li>
+    <a href="/Blogs/@Model.BlogId">
+        <div class="blog-list-img">
+            <img src="/Blog/image/@Model.ImageName" class="img-responsive" alt="@Model.Title">
+        </div>
+    </a>
+    <div class="blog-list-info">
+        <h5><a href="/Blogs/@Model.BlogId" title="blog">@Model.Title</a></h5>
+        <div class="blog-post-meta">
+            <span class="updated">@Model.BlogCreateDate.ToShamsi()</span> | <a href="/Blog?Categories=@Model.CatId" rel="tag">@Model.CategoryTitle</a>
+        </div>
+    </div>
+</li>

@@ -42,7 +42,6 @@
                     </a>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-9 col-8">
-                    <!-- Show on Mobile & iPad -->
                     <div class="blocks shop_cart d-xl-none d-lg-none">
                         <div class="single_shop_cart">
                             <div class="ss_cart_left">
@@ -50,8 +49,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Show on Desktop -->
                     <div class="blocks shop_cart d-none d-xl-block d-lg-block">
                         <div class="single_shop_cart">
 
@@ -63,7 +60,7 @@
                     <form action="/Service" method="get">
                         <div class="blocks search_blocks d-none d-xl-block d-lg-block">
                             <div class="input-group">
-                                <input type="text" name="filterServiceName" class="form-control" placeholder="جستجو در سایت ...">
+                                <input type="text" name="search" class="form-control" placeholder="جستجو ...">
                                 <div class="input-group-append">
                                     <button class="btn search_btn" type="submit"><i class="ti-search"></i></button>
                                 </div>
@@ -73,16 +70,18 @@
                 </div>
             </div>
         </div>
-        <div class="collapse" id="mySearch">
-            <div class="blocks search_blocks">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="جستجو در سایت ...">
-                    <div class="input-group-append">
-                        <button class="btn search_btn" type="button"><i class="ti-search"></i></button>
+        <form action="/Service">
+            <div class="collapse" id="mySearch">
+                <div class="blocks search_blocks">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="جستجو ...">
+                        <div class="input-group-append">
+                            <button class="btn search_btn" type="button"><i class="ti-search"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="header_nav">
         <div class="container">
@@ -98,50 +97,11 @@
                         <div class="nav-menus-wrapper" id="trpnone">
                             <span class="nav-menus-wrapper-close-button"></span>
                             <ul class="nav-menu">
-
-                                
                                 @await Component.InvokeAsync("ServiceGroupComponent")
-
+                                @await Component.InvokeAsync("BlogCategoryComponent")
                                 <li>
                                     <a href="#Quotes">نقل قول ها</a>
                                 </li>
-
-                                @await Component.InvokeAsync("BlogCategoryComponent")
-
-                                <li>
-                                    <a href="#">صفحات فروشگاه<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-                                    <ul class="nav-dropdown nav-submenu" style="right: auto;">
-                                        <li>
-                                            <a href="#">داشبورد کاربری<span class="submenu-indicator"></span><span class="submenu-indicator"><span class="submenu-indicator-chevron"></span></span></a>
-                                            <ul class="nav-dropdown nav-submenu" style="">
-                                                <li><a href="order.html">سفارشات من</a></li>
-                                                <li><a href="order-history.html">تاریخچه سفارشات</a></li>
-                                                <li><a href="order-tracking.html">رهگیری سفارش</a></li>
-                                                <li><a href="wishlist.html">محصولات مورد علاقه</a></li>
-                                                <li><a href="account-info.html">تنظیمات حساب</a></li>
-                                                <li><a href="payment-methode.html">روش های پرداخت</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="add-to-cart.html">افزودن به سبد خرید</a></li>
-                                        <li><a href="billing.html">صفحه صورتحساب</a></li>
-                                        <li><a href="checkout-complete.html">تأیید تسویه حساب</a></li>
-                                        <li><a href="admin-login.html">ورود ادمین</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="#">صفحات<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
-                                    <ul class="nav-dropdown nav-submenu" style="right: auto;">
-                                        <li><a href="blog.html">صفحه وبلاگ</a></li>
-                                        <li><a href="blog-detail.html">جزئیات وبلاگ</a></li>
-                                        <li><a href="about.html">درباره ما</a></li>
-                                        <li><a href="contact.html">تماس</a></li>
-                                        <li><a href="login-signup.html">ورود / ثبت نام</a></li>
-                                        <li><a href="faq.html">سوالات متداول</a></li>
-                                        <li><a href="404.html">404</a></li>
-                                    </ul>
-                                </li>
-
                             </ul>
                         </div>
                     </nav>

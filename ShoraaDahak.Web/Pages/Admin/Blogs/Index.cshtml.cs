@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ShoraaDahak.Core.Consts;
 using ShoraaDahak.Core.DTOs;
 using ShoraaDahak.Core.Services.Interfaces;
 
@@ -23,6 +24,10 @@ namespace ShoraaDahak.Web.Pages.Admin.Blogs
         public IActionResult OnGet()
         {
             Blogs = _blogService.GetBlogsForShowInIndexAdmin();
+
+            ViewData["BlogByMans"] = Blogs.Count(b => b.GenderId == Gender.Man);
+            ViewData["BlogByWomen"] = Blogs.Count(b => b.GenderId == Gender.Woman);
+
             return Page();
         }
 

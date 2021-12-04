@@ -16,17 +16,17 @@ namespace ShoraaDahak.Web.Controllers
             _serviceService = serviceService;
         }
 
-        public IActionResult Index(int pageNum = 1, string filterServiceName = "",
+        public IActionResult Index(int pageNum = 1, string search = "",
             string orderBy = "sTitle", List<int> selectedGroups = null)
         {
             ViewBag.selectedGroups = selectedGroups;
             ViewBag.orderBy = orderBy;
             ViewBag.ServicesGroups = _serviceService.GetAllServicesGroups();
             ViewBag.pageNum = pageNum;
-            
+
             int totalPage = (int)Math.Ceiling((decimal)_serviceService.GetServices().Count() / 9);
             ViewBag.totalPage = totalPage;
-            return View(_serviceService.GetServices(pageNum,filterServiceName,orderBy,selectedGroups,9));
+            return View(_serviceService.GetServices(pageNum, search, orderBy, selectedGroups, 9));
         }
 
 

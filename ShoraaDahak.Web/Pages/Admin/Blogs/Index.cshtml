@@ -1,4 +1,5 @@
 ﻿@page
+@using ShoraaDahak.Core.Convertors
 @model ShoraaDahak.Web.Pages.Admin.Blogs.IndexModel
 @{
     ViewData["Title"] = "لیست بلاگ ها";
@@ -30,7 +31,6 @@
                                 <th>نویسنده</th>
                                 <th>توضیح کوتاه</th>
                                 <th>دسته بندی</th>
-                                <th>تاریخ ثبت</th>
                                 <th>دستورات</th>
                             </tr>
                         </thead>
@@ -42,7 +42,6 @@
                                         <td>@item.Writer</td>
                                         <td>@item.MiniDescription</td>
                                         <td>@item.Category</td>
-                                        <td>@item.CreateDate</td>
                                         <td>
                                             <a asp-page="EditBlog" asp-route-Id="@item.BlogId" class="btn btn-outline btn-info btn-sm">ویرایش</a>
                                             <a asp-page-handler="DeleteBlog" onclick="return confirm('آیا از حذف این بلاگ مطمعن هستید ؟')" asp-route-Id="@item.BlogId" class="btn btn-outline btn-danger btn-sm">حذف</a>
@@ -60,20 +59,20 @@
 <div class="col-12 col-md-3">
     <div class="panel panel-success">
         <div class="panel-heading">
-            <i class="fa fa-bell fa-fw"></i>  آمار بخش نامه ها
+            <i class="fa fa-bell fa-fw"></i>  آمار بخش بلاگ ها
         </div>
         <div class="panel-body">
             <div class="list-group">
                 <a class="list-group-item">
-                    <i class="fa fa-question"></i> نامه های ثبت شده
-                    <span class="pull-left text-success small">
-                        <em>@ViewData["TotalLetters"] مورد</em>
+                    <i class="fa fa-question"></i> بلاگ های ثبت شده توسط آقایان
+                    <span class="pull-left text-info small">
+                        <em>@ViewData["BlogByMans"] مورد</em>
                     </span>
                 </a>
                 <a class="list-group-item">
-                    <i class="fa fa-react"></i> خوانده نشده
+                    <i class="fa fa-react"></i> بلاگ های ثبت شده توسط خانم ها
                     <span class="pull-left text-muted small">
-                        <em class="text-danger">@ViewData["TotalIsntReaded"] مورد </em>
+                        <em class="txtpurp">@ViewData["BlogByWomen"] مورد </em>
                     </span>
                 </a>
             </div>

@@ -1,0 +1,50 @@
+﻿@model List<ShoraaDahak.Core.DTOs.BlogInBlogIndexViewModel>
+@{
+    ViewData["Title"] = "بلاگ ها";
+}
+
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">وبلاگ ها</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <form action="/Blog" method="get">
+        <div class="container">
+            @if (Model.Count != 0)
+            {
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <partial name="_BlogBox" model="item" />
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row align-items-center justify-content-center mb-5">
+                    <div class="col-md-8 col-sm-8 col-lg-8 alert alert-info m-4">
+                        <p>موردی که به دنبال آن هستید یافت نشد.</p>
+                    </div>
+                </div>
+                <div class="row align-items-center justify-content-center mb-5">
+                    <div class="col-md-8 col-sm-8 col-lg-8 m-4 text-center">
+                        <a href="/" class="btn btn-outline-info">بازگشت به خانه</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+</section>
+
