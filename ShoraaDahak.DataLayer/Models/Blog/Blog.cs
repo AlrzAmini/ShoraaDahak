@@ -68,6 +68,8 @@ namespace ShoraaDahak.DataLayer.Models.Blog
         [ForeignKey("SubCatId")]
         public BlogCategory SubCategory { get; set; }
 
+        public List<Comment> Comments { get; set; }
+
         #endregion
     }
 }

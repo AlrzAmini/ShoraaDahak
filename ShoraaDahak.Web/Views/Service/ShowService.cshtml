@@ -65,10 +65,17 @@
                         </div>
                         <div class="cart_sku_preflix">
                             <div class="sku_preflix_first">
-                                <strong>تاریخ پایان :</strong>
+                                <strong>تاریخ اتمام :</strong>
                             </div>
                             <div class="sku_preflix_last">
-                                @Model.ServiceEndDate?.ToShamsi()
+                                @if (Model.ServiceEndDate == null)
+                                {
+                                    <p class="text-megna">توکل بر خدا</p>
+                                }
+                                else
+                                {
+                                    @Model.ServiceEndDate?.ToShamsi()
+                                }
                             </div>
                         </div>
                         <div class="cart_sku_preflix">

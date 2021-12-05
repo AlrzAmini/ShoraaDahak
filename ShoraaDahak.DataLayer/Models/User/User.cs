@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.DataLayer.Models.Blog;
 using ShoraaDahak.DataLayer.Models.Services;
 
 namespace ShoraaDahak.DataLayer.Models.User
@@ -110,6 +111,10 @@ namespace ShoraaDahak.DataLayer.Models.User
         public List<Discussion.Discussion> Discussions { get; set; }
 
         public List<Blog.Blog> Blogs { get; set; }
+
+        public List<Comment> Comments { get; set; }
+
+        public List<Letter.Letter> Letters { get; set; }
 
 
         #endregion

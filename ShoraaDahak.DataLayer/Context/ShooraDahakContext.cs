@@ -84,12 +84,22 @@ namespace ShoraaDahak.DataLayer.Context
 
         public DbSet<Blog> Blogs { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+        
+        public DbSet<CommentAnswer> CommentAnswers { get; set; }
+
 
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlogCategory>()
+                .HasQueryFilter(c => !c.IsDelete);
+
+            modelBuilder.Entity<Comment>()
+                .HasQueryFilter(c => !c.IsDelete);
+
+            modelBuilder.Entity<CommentAnswer>()
                 .HasQueryFilter(c => !c.IsDelete);
 
             base.OnModelCreating(modelBuilder);

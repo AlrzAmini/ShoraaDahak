@@ -15,5 +15,7 @@ namespace ShoraaDahak.Core.Consts
         public const int TakeLetterInIndexAdmin = 10;
 
         public const int TakeBlogInIndex = 9;
+
+        public const int TakeCommentPerPage = 6;
     }
 }

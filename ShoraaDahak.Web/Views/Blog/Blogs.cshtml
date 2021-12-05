@@ -43,88 +43,50 @@
                         </div>
                     </div>
                 </article>
-
+                <hr />
                 <!-- Comment -->
-                <div class="comment-wrap">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Blog" asp-action="CreateComment" 
+                          data-ajax="true"
+                          data-ajax-method="post"
+                          data-ajax-mode="replace"
+                          data-ajax-update="#CommentList"
+                          data-ajax-success="Success">
+                        <input type="hidden" name="Comment.BlogId" value="@Model.BlogId" />
+                        <div class="comment-detail-form mb-5 border p-3 rounded">
+                            <div class="section-title2">
+                                <h3 id="reply-title" class="comment-reply-title">
+                                    ارسال نظرات
+                                </h3>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <textarea id="CMBody" name="comment.CommentBody" class="form-control" placeholder="نظر خود را درباره این وبلاگ وارد کنید ..."></textarea>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <button class="btn btn-primary" type="submit">ارسال</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-info">برای ثبت نظر میبایست <a href="/Register">عضو</a> سایت سایت باشید. </div>
+                }
+                <div class="comment-wrap border p-3 rounded" id="CommentList">
                     <div class="comment-detail">
                         <div class="comment-detail-title">
                             <h4> نظرات (2)</h4>
                         </div>
 
-                        <ul id="singlecomment-detail" class="comment-detail-list">
-                            <li class="comment" id="comment-56">
-                                <div class="comment">
-                                    <div class="comment__image">
-                                        <img alt="" src="assets/img/user-3.jpg" class="avatar avatar-75 photo" height="75" width="75">
-                                    </div>
-                                    <div class="comment__text">
-                                        <h5>دانیال</h5>
-                                        <span>
-                                            <em>9 مهر 1399</em>
-                                        </span>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون.</p>
-
-                                    </div>
-                                    <hr>
-                                </div><!--end comment-->
-
-                                <ul class="children">
-
-                                    <li class="comment" id="comment-57">
-                                        <div class="comment">
-                                            <div class="comment__image">
-                                                <img alt="" src="assets/img/user-4.jpg" class="avatar avatar-75 photo" height="75" width="75">
-                                            </div>
-                                            <div class="comment__text">
-                                                <h5>الناز</h5>
-                                                <span>
-                                                    <em>9 مهر 1399</em>
-                                                </span>
-                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون.</p>
-
-                                            </div>
-                                            <hr>
-                                        </div><!--end comment-->
-
-                                    </li><!-- #comment-## -->
-                                </ul><!-- .children -->
-                            </li><!-- #comment-## -->
-                        </ul>
-
+                        
                     </div>
                 </div>
-
-                <div class="comment-detail-form">
-                    <div class="section-title2">
-                        <h3 id="reply-title" class="comment-reply-title">
-                            ارسال نظرات
-                            <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">لغو پاسخ</a></small>
-                        </h3>
-                    </div>
-
-                    <form>
-                        <div class="row">
-                            <div class="form-group col-md-6 col-sm-6">
-                                <input type="text" class="form-control" placeholder="نام">
-                            </div>
-
-                            <div class="form-group col-md-6 col-sm-6">
-                                <input type="email" class="form-control" placeholder="ایمیل">
-                            </div>
-
-                            <div class="form-group col-md-12 col-sm-12">
-                                <textarea class="form-control" placeholder="نظرات"></textarea>
-                            </div>
-
-                            <div class="col-md-12 col-sm-12">
-                                <button class="btn btn-primary" type="submit">ارسال</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
             </div>
-
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="blog-sidebar">
 
@@ -174,3 +136,16 @@
         </div>
     </div>
 </section>
+@section Scripts
+{
+    <script>
+        function Success() {
+            $("#CMBody").val("");
+        }
+
+        $(function() {
+            $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId);
+        });
+    </script>
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+}

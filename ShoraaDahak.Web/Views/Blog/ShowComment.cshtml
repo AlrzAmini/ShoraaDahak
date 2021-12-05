@@ -1,0 +1,53 @@
+﻿@using ShoraaDahak.Core.Convertors
+@using ShoraaDahak.Core.Services.Interfaces
+@using ShoraaDahak.DataLayer.Models.Blog
+@model Tuple<List<ShoraaDahak.DataLayer.Models.Blog.Comment>, int>
+@inject ICommentService _commentService;
+@{
+    Layout = null;
+}
+<ul id="singlecomment-detail" class="comment-detail-list">
+    @foreach (var item in Model.Item1)
+    {
+        <li class="comment" id="comment-56">
+            <div class="comment">
+                <div class="comment__image">
+                    <img alt="Avatar" src="/img/CAvatar.png" class="avatar avatar-75 photo" height="75" width="75">
+                </div>
+                <div class="comment__text">
+                    <h5>@item.User.Name</h5>
+                    <span>
+                        <em>@item.CommentCreateDate.ToShamsi()</em>
+                    </span>
+                    <p>@Html.Raw(item.CommentBody)</p>
+                </div>
+            </div>
+            @if (item.Answers.Count != 0)
+            {
+                <ul id="singlecomment-detail" class="comment-detail-list border border-info rounded p-1 m-5">
+                    @{
+                        List<CommentAnswer> Answers = _commentService.GetAnswersByCommentId(item.CommentId);
+                    }
+                    @foreach (var answer in Answers)
+                    {
+                        <li class="comment border rounded p-3 m-1" id="comment-56">
+                            <div class="comment">
+                                <div class="comment__image">
+                                    <img alt="Avatar" src="/img/CAvatar2.png" class="avatar avatar-75 photo" height="50" width="50">
+                                </div>
+                                <div class="comment__text">
+                                    <h5>@answer.User.Name</h5>
+                                    <span>
+                                        <em>@answer.CreateDate.ToShamsi()</em>
+                                    </span>
+                                    <p>@Html.Raw(answer.AnswerBody)</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+            <hr>
+        </li>
+    }
+</ul>

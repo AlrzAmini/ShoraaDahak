@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoraaDahak.DataLayer.Models.Blog;
 
 namespace ShoraaDahak.Core.DTOs
 {
@@ -66,5 +67,12 @@ namespace ShoraaDahak.Core.DTOs
         public DateTime BlogCreateDate { get; set; }
 
         public string CategoryTitle { get; set; }
+    }
+
+    public class CommentsWithAnswersViewModel
+    {
+        public Tuple<List<Comment>, int> Comments { get; set; }
+
+        public List<CommentAnswer> Answers { get; set; }
     }
 }

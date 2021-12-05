@@ -61,7 +61,9 @@ namespace ShoraaDahak.Core.Services
         {
             var discussion = new ShowDiscussionViewModel()
             {
-                Discussion = _context.Discussions.Include(d => d.DiscussionImpLevel).Include(d => d.Answers).Include(d => d.User)
+                Discussion = _context.Discussions
+                    .Include(d => d.DiscussionImpLevel)
+                    .Include(d => d.Answers).Include(d => d.User)
                     .FirstOrDefault(d => d.DiscussionId == discussionId),
                 Answers = _context.Answers.Where(a => a.DiscussionId == discussionId).Include(a => a.User).ToList()
             };
