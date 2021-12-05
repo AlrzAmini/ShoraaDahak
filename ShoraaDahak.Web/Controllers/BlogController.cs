@@ -67,7 +67,7 @@ namespace ShoraaDahak.Web.Controllers
 
             _commentService.AddComment(comment);
 
-            return null;
+            return View("ShowComment",_commentService.GetCommentsByBlogId(comment.BlogId));
         }
 
         public IActionResult ShowComment(int id , int pageNum = 1) // id = blogId

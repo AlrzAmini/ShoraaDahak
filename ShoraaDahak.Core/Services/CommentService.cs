@@ -36,7 +36,7 @@ namespace ShoraaDahak.Core.Services
             int take = Pagings.TakeCommentPerPage;
             int skip = (pageNum - 1) * take;
 
-            var res = _context.Comments.Include(c=>c.Answers).Include(c=>c.User).Where(c => c.BlogId == blogId).ToList();
+            var res = _context.Comments.Include(c=>c.Answers).Include(c=>c.User).Where(c => c.BlogId == blogId).OrderByDescending(c=>c.CommentCreateDate).ToList();
 
             int totalPage = (int)Math.Ceiling((decimal)res.Count() / take);
 

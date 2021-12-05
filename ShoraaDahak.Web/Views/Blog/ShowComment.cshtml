@@ -51,3 +51,19 @@
         </li>
     }
 </ul>
+<div class="row">
+    <div class="col-lg-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item right">
+                </li>
+                @for (int i = 1; i <= Model.Item2; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="pageComment(@i)">@i</a></li>
+                }
+                <li class="page-item left">
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

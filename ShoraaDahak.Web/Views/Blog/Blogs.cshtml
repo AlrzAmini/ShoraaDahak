@@ -146,6 +146,10 @@
         $(function() {
             $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId);
         });
+
+        function pageComment(pageNum) {
+            $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId + "?pageNum="+pageNum);
+        }
     </script>
     <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
 }
