@@ -30,7 +30,6 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="search-sidebar sm-sidebar rrr0" id="filter_search">
                         <div class="search-sidebar-body">
-                            <!-- Single Option -->
                             <div class="single_search_boxed">
                                 <div class="widget-boxed-header">
                                     <h4 class="mr-4 mt-4">دسته بندی ها</h4>
@@ -79,9 +78,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-8 col-md-12">
-                    <!-- Shorter Toolbar -->
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="toolbar toolbar-products">
@@ -108,16 +105,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- row -->
                     <div class="row">
                         @foreach (var item in Model)
                         {
                             <partial name="_BoxService2" model="item" />
                         }
                     </div>
-                    <!-- row -->
-
                     <div class="row">
                         <div class="col-lg-12">
                             <nav aria-label="Page navigation example">
@@ -125,7 +118,6 @@
                                     <li class="page-item right">
 
                                     </li>
-
                                     @for (int i = 1; i <= ViewBag.totalPage; i++)
                                     {
                                         <li class="page-item"><a class="page-link" onclick="changePage(@i)" href="#">@i</a></li>
@@ -137,11 +129,8 @@
                             </nav>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </section>
 </form>

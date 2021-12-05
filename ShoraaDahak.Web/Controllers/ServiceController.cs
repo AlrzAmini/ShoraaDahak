@@ -26,6 +26,7 @@ namespace ShoraaDahak.Web.Controllers
 
             int totalPage = (int)Math.Ceiling((decimal)_serviceService.GetServices().Count() / 9);
             ViewBag.totalPage = totalPage;
+
             return View(_serviceService.GetServices(pageNum, search, orderBy, selectedGroups, 9));
         }
 

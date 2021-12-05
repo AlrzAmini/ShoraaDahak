@@ -318,7 +318,6 @@ namespace ShoraaDahak.Core.Services
                 }
             }
 
-            //(int)Math.Ceiling((decimal)result.Count() / take)
             int skip = (pageNum - 1) * take;
 
             return result.Include(s => s.User)

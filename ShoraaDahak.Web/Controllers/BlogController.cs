@@ -19,7 +19,11 @@ namespace ShoraaDahak.Web.Controllers
 
         public IActionResult Index(int pageNum = 1, List<int> categories = null, string searchBlog = "")
         {
-            return View(_blogService.GetBlogsInBlogIndex(pageNum, categories, searchBlog, 9));
+            ViewBag.PageNum = pageNum;
+            int totalPage = (int)Math.Ceiling((decimal)_blogService.GetBlogsInBlogIndex().Count() / 9);
+            ViewBag.totalPage = totalPage;
+
+            return View(_blogService.GetBlogsInBlogIndex(pageNum, categories, searchBlog));
         }
 
         [Route("Blogs/{id}")]

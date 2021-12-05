@@ -128,6 +128,8 @@ namespace ShoraaDahak.Core.Services
         {
             IQueryable<Blog> result = _context.Blogs;
 
+            
+
             if (categories != null && categories.Any())
             {
                 foreach (int catId in categories)
@@ -143,10 +145,8 @@ namespace ShoraaDahak.Core.Services
 
             if (take == 0)
             {
-                take = 9;
+                take = Pagings.TakeBlogInIndex;
             }
-
-            take = Pagings.TakeBlogInIndex;
             int skip = (pageNum - 1) * take;
 
             return result
