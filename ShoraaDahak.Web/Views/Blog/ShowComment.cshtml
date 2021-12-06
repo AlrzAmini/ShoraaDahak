@@ -1,8 +1,10 @@
 ﻿@using ShoraaDahak.Core.Convertors
 @using ShoraaDahak.Core.Services.Interfaces
 @using ShoraaDahak.DataLayer.Models.Blog
+@using System.Security.Claims
 @model Tuple<List<ShoraaDahak.DataLayer.Models.Blog.Comment>, int>
 @inject ICommentService _commentService;
+@inject IPermissionService _permissionService;
 @{
     Layout = null;
 }
@@ -13,6 +15,7 @@
             <div class="comment">
                 <div class="comment__image">
                     <img alt="Avatar" src="/img/CAvatar.png" class="avatar avatar-75 photo" height="75" width="75">
+                    @*<div class="btn btn-primary btn-sm text-white" id="btnShowAnswerTextArea">پاسخ دادن</div>*@
                 </div>
                 <div class="comment__text">
                     <h5>@item.User.Name</h5>
@@ -21,6 +24,25 @@
                     </span>
                     <p>@Html.Raw(item.CommentBody)</p>
                 </div>
+                @if (item.UserId == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) || _permissionService.CheckPermission(7,User.FindFirstValue(ClaimTypes.Email)))
+                {
+                    <form asp-controller="Blog" asp-action="DeleteComment">
+                        <input type="hidden" name="id" value="@item.CommentId" />
+                        <input type="hidden" name="blogId" value="@item.BlogId" />
+                        <div class="col-md-12 col-sm-12">
+                            <button class="btn btn-danger btn-sm" type="submit">حذف نظر</button>
+                        </div>
+                    </form>
+                }
+                <form asp-controller="Blog" asp-action="CreateAnswer">
+                    <input type="hidden" name="id" value="@item.CommentId" />
+                    <div class="border p-3 m-2 rounded">
+                        <textarea class="form-control" placeholder="پاسخ شما به این نظر " name="body"></textarea>
+                        <div class="col-md-12 col-sm-12">
+                            <button class="btn btn-primary btn-sm" type="submit">ارسال</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             @if (item.Answers.Count != 0)
             {
@@ -43,6 +65,16 @@
                                     <p>@Html.Raw(answer.AnswerBody)</p>
                                 </div>
                             </div>
+                            @if (answer.UserId == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) || _permissionService.CheckPermission(7, User.FindFirstValue(ClaimTypes.Email)))
+                            {
+                                <form asp-controller="Blog" asp-action="DeleteAnswer">
+                                    <input type="hidden" name="id" value="@answer.CAnswerId" />
+                                    <input type="hidden" name="blogId" value="@item.BlogId" />
+                                    <div class="col-md-12 col-sm-12">
+                                        <button class="btn btn-danger btn-sm" type="submit">حذف پاسخ</button>
+                                    </div>
+                                </form>
+                            }
                         </li>
                     }
                 </ul>

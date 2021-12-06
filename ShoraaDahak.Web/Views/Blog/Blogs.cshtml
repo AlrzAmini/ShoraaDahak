@@ -47,7 +47,7 @@
                 <!-- Comment -->
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <form asp-controller="Blog" asp-action="CreateComment" 
+                    <form asp-controller="Blog" asp-action="CreateComment"
                           data-ajax="true"
                           data-ajax-method="post"
                           data-ajax-mode="replace"
@@ -56,6 +56,9 @@
                         <input type="hidden" name="Comment.BlogId" value="@Model.BlogId" />
                         <div class="comment-detail-form mb-5 border p-3 rounded">
                             <div class="section-title2">
+                                <div class="comment-detail-title">
+                                    <h4> نظرات (@Model.Comments.Count)</h4>
+                                </div>
                                 <h3 id="reply-title" class="comment-reply-title">
                                     ارسال نظرات
                                 </h3>
@@ -75,15 +78,13 @@
                 }
                 else
                 {
-                    <div class="alert alert-info">برای ثبت نظر میبایست <a href="/Register">عضو</a> سایت سایت باشید. </div>
+                    <div class="alert alert-info">برای ثبت و مشاهده نظر میبایست <a href="/Register">عضو</a> سایت سایت باشید. </div>
                 }
                 <div class="comment-wrap border p-3 rounded" id="CommentList">
                     <div class="comment-detail">
-                        <div class="comment-detail-title">
-                            <h4> نظرات (2)</h4>
-                        </div>
-
                         
+
+
                     </div>
                 </div>
             </div>
@@ -138,6 +139,8 @@
 </section>
 @section Scripts
 {
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
     <script>
         function Success() {
             $("#CMBody").val("");
@@ -151,5 +154,11 @@
             $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId + "?pageNum="+pageNum);
         }
     </script>
-    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script>
+        $(function(){
+            $('#btnShowAnswerTextArea').click(function() {
+                $('#answerPanel').toggle();
+            });
+        });
+    </script>*@
 }

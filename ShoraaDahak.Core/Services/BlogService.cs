@@ -105,6 +105,7 @@ namespace ShoraaDahak.Core.Services
             return _context.Blogs
                 .Include(b => b.User)
                 .Include(b => b.BlogCategory)
+                .Include(b=>b.Comments)
                 .FirstOrDefault(b => b.BlogId == id);
         }
 

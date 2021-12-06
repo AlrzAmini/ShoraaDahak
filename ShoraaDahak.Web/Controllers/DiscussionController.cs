@@ -79,6 +79,7 @@ namespace ShoraaDahak.Web.Controllers
 
         #region Create Answer
 
+        [Authorize]
         public IActionResult CreateAnswer(int id,string answerBody) // id = discussion id
         {
             if (!string.IsNullOrEmpty(answerBody))

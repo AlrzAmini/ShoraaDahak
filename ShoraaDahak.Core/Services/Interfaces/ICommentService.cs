@@ -13,6 +13,16 @@ namespace ShoraaDahak.Core.Services.Interfaces
 
         List<CommentAnswer> GetAnswersByCommentId(int commentId);
 
+        int AddAnswer(CommentAnswer answer);
+
+        int GetBlogIdByCommentAnswerId(int commentAnswerId);
+
+        void DeleteAnswerById(int answerId);
+
+        CommentAnswer GetCommentAnswerById(int cAnswerId);
+
+        void UpdateCommentAnswer(CommentAnswer answer);
+
         #endregion
 
         #region Comment
@@ -20,6 +30,12 @@ namespace ShoraaDahak.Core.Services.Interfaces
         Tuple<List<Comment>,int> GetCommentsByBlogId(int blogId,int pageNum = 1);
 
         void AddComment(Comment comment);
+
+        Comment GetCommentById(int commentId);
+
+        void UpdateComment(Comment comment);
+
+        void DeleteCommentById(int commentId);
 
         #endregion
     }
