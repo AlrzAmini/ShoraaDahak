@@ -1,0 +1,86 @@
+﻿@model ShoraaDahak.DataLayer.Models.ReportAbuse.ReportAbuse
+@{
+    ViewData["Title"] = "گزارش تخلف";
+}
+<div class="breadcrumbs_wrap dark mb-1">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"><i class="ti-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">گزارش تخلف</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row align-items-center justify-content-center mt-5">
+    <div class="col-md-6 col-sm-6 col-lg-6 alert alert-warning">
+        <p> این اطلاعات به صورت محرمانه نگهداری می شوند از فاش شدن اطلاعات یا هویت خود واهمه ای نداشته باشید.</p>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="login_signup">
+                    <h3 class="login_sec_title text-danger">گزارش تخلف</h3>
+                    <form asp-action="SendReport">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>موضوع</label>
+                                    <input type="text" asp-for="ReportSubject" class="form-control">
+                                    <span asp-validation-for="ReportSubject" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>آدرس دقیق</label>
+                                    <input asp-for="ReportAddress" class="form-control" placeholder="لطفا ادرس را به صورت دقیق شامل : خیابان ٬ کوچه ٬ ... وارد کنید.">
+                                    <span asp-validation-for="ReportAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>توضیحات</label>
+                                    <textarea type="text" asp-for="ReportDescription" class="form-control"></textarea>
+                                    <span asp-validation-for="ReportDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="login_flex_2">
+                                    <div class="form-group mb-0">
+                                        <button type="submit" class="btn btn-md btn-danger">ثبت گزارش</button>
+                                    </div>
+                                </div>
+                                <div class="login_flex">
+                                    <div class="login_flex_1">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ReportDescription', {
+            customConfig: '/js/Config.js'
+        });
+    </script>
+
+}

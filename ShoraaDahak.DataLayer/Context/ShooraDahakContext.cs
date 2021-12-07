@@ -9,6 +9,7 @@ using ShoraaDahak.DataLayer.Models.Discussion;
 using ShoraaDahak.DataLayer.Models.Letter;
 using ShoraaDahak.DataLayer.Models.Permission;
 using ShoraaDahak.DataLayer.Models.quote;
+using ShoraaDahak.DataLayer.Models.ReportAbuse;
 using ShoraaDahak.DataLayer.Models.Services;
 using ShoraaDahak.DataLayer.Models.User;
 
@@ -88,6 +89,12 @@ namespace ShoraaDahak.DataLayer.Context
         
         public DbSet<CommentAnswer> CommentAnswers { get; set; }
 
+
+        #endregion
+
+        #region Report Abuse
+
+        public DbSet<ReportAbuse> ReportAbuses { get; set; }
 
         #endregion
 

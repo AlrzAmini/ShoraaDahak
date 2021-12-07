@@ -58,7 +58,7 @@
                                     </button>
                                 </span>
                             </div>
-                            
+
                         </li>
                         <li>
                             <a href="/Admin"><i class="fa fa-dashboard fa-fw"></i> پنل ادمین </a>
@@ -124,6 +124,12 @@
                                                 <a href="/Admin/Blogs">بلاگ ها</a>
                                             </li>
                                         </ul>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.AdminReportAbuses, User.FindFirstValue(ClaimTypes.Email)))
+                                {
+                                    <li>
+                                        <a href="/Admin/ReportAbuses">گزارشات تخلف</a>
                                     </li>
                                 }
                             </ul>

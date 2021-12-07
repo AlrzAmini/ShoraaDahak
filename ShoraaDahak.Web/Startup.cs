@@ -98,6 +98,8 @@ namespace ShoraaDahak.Web
 
             services.AddScoped<ICommentService, CommentService>();
 
+            services.AddScoped<IReportAbuseService, ReportAbuseService>();
+
 
             #endregion
         }

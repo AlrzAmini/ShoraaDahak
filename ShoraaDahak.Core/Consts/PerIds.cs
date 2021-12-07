@@ -15,5 +15,6 @@ namespace ShoraaDahak.Core.Consts
         public const int AdminQuotes = 5;
         public const int AdminLetters = 6;
         public const int AdminBlogs = 7;
+        public const int AdminReportAbuses = 8;
     }
 }

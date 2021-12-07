@@ -116,6 +116,8 @@ namespace ShoraaDahak.DataLayer.Models.User
 
         public List<Letter.Letter> Letters { get; set; }
 
+        public List<ReportAbuse.ReportAbuse> ReportAbuses { get; set; }
+
 
         #endregion
 

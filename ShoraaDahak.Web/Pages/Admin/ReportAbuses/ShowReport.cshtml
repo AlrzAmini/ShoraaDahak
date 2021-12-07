@@ -1,0 +1,47 @@
+﻿@page
+@using ShoraaDahak.Core.Convertors
+@model ShoraaDahak.Web.Pages.Admin.ReportAbuses.ShowReportModel
+@{
+    ViewData["Title"] = Model.ReportAbuse.ReportSubject;
+}
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">مشاهده گزارش تخلف</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست گزارش ها</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                اطلاعات گزارش
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-12 col-md-6">
+                    <label>موضوع</label>
+                    <input asp-for="ReportAbuse.ReportSubject" disabled="disabled" class="form-control" />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label>فرستنده :</label>
+                    <input asp-for="ReportAbuse.User.Name" disabled="disabled" class="form-control" />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label>مکان :</label>
+                    <input asp-for="ReportAbuse.ReportAddress" disabled="disabled" class="form-control" />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label>مکان :</label>
+                    <input value="@Model.ReportAbuse.CreateDate.ToShamsi()" disabled="disabled" class="form-control" />
+                </div>
+                <div class="form-group col-12 col-md-12">
+                    <label>متن گزارش :</label>
+                    <div class="card-body">
+                        @Html.Raw(Model.ReportAbuse.ReportDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoraaDahak.DataLayer.Context;
 
 namespace ShoraaDahak.DataLayer.Migrations
 {
     [DbContext(typeof(ShooraDahakContext))]
-    partial class ShooraDahakContextModelSnapshot : ModelSnapshot
+    [Migration("20211207090839_addreportabuse")]
+    partial class addreportabuse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -405,9 +407,6 @@ namespace ShoraaDahak.DataLayer.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ReportAddress")
                         .IsRequired()

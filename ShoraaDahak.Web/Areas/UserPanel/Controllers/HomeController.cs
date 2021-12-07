@@ -16,11 +16,13 @@ namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILetterService _letterService;
+        private readonly IReportAbuseService _reportAbuseService;
 
-        public HomeController(IUserService userService, ILetterService letterService)
+        public HomeController(IUserService userService, ILetterService letterService, IReportAbuseService reportAbuseService)
         {
             _userService = userService;
             _letterService = letterService;
+            _reportAbuseService = reportAbuseService;
         }
 
         public IActionResult Index()
@@ -116,5 +118,29 @@ namespace ShoraaDahak.Web.Areas.UserPanel.Controllers
         }
 
         #endregion
+
+        #region Reports
+
+        [Authorize]
+        [Route("UserPanel/Reports")]
+        public IActionResult Reports()
+        {
+            int senderId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            return View(_reportAbuseService.GetReportsForSender(senderId));
+        }
+
+        [Authorize]
+        [Route("UserPanel/DeleteReport")]
+        public IActionResult DeleteReport(int reportId)
+        {
+            _reportAbuseService.DeleteReportById(reportId);
+
+            return RedirectToAction("Reports");
+        }
+
+        #endregion
+
+
     }
 }
