@@ -23,65 +23,54 @@
 <section class="gray">
     <div class="container">
         <div class="row">
-
-            <partial name="_PanelSideBar"/>
-
+            <partial name="_PanelSideBar" />
             <div class="col-lg-8 col-md-9">
-                <!-- Total Items -->
                 <div class="card style-2">
                     <div class="card-header">
                         <h4 class="mb-0">جزییات حساب</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>نام</label>
-                                        <input class="form-control" type="text" value="@Model.Name" disabled="disabled">
-                                    </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>نام</label>
+                                    <input class="form-control" type="text" value="@Model.Name" disabled="disabled">
                                 </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>کد ملی</label>
-                                        <input class="form-control" type="number" value="@Model.NCode" disabled="disabled">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>ایمیل</label>
-                                        <input class="form-control" type="email" placeholder="ایمیل" value="@Model.Email" disabled="disabled">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>شماره تلفن</label>
-                                        <input class="form-control" type="number" value="@Model.PhoneNumber" disabled="disabled">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>تاریخ تولد</label>
-                                        <input class="form-control" type="text" value="@Model.BirthDate.ToShamsi()" disabled="disabled">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>تاریخ ثبت نام</label>
-                                        <input class="form-control" type="text" value="@Model.RegisterDate.ToShamsi()" disabled="disabled">
-                                    </div>
-                                </div>
-
                             </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>کد ملی</label>
+                                    <input class="form-control" type="number" value="@Model.NCode" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>ایمیل</label>
+                                    <input class="form-control" type="email" placeholder="ایمیل" value="@Model.Email" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>شماره تلفن</label>
+                                    <input class="form-control" type="number" value="@Model.PhoneNumber" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>تاریخ تولد</label>
+                                    <input class="form-control" type="text" value="@Model.BirthDate.ToShamsi()" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label>تاریخ ثبت نام</label>
+                                    <input class="form-control" type="text" value="@Model.RegisterDate.ToShamsi()" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

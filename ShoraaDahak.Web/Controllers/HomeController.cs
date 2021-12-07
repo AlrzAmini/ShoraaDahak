@@ -33,6 +33,18 @@ namespace ShoraaDahak.Web.Controllers
             return View();
         }
 
+        [Route("/AboutUs")]
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        [Route("/ContactUs")]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Route("file-upload")]
         public IActionResult UploadImage(IFormFile upload, string CKEditorFuncNum, string CKEditor, string langCode)

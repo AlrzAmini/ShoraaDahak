@@ -6,7 +6,6 @@
 <div class="breadcrumbs_wrap dark mb-1">
     <div class="container">
         <div class="row align-items-center">
-						
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="text-center">
                     <nav aria-label="breadcrumb">
@@ -20,7 +19,6 @@
         </div>
     </div>
 </div>
-
 <section>
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -29,7 +27,6 @@
                     <h3 class="login_sec_title">ایجاد حساب کاربری</h3>
                     <form asp-action="Register" method="post">
                         <div class="row">
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>نام کامل</label>
@@ -37,7 +34,6 @@
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>کد ملی</label>
@@ -45,7 +41,6 @@
                                     <span asp-validation-for="NCode" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>ایمیل</label>
@@ -53,7 +48,6 @@
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>شماره تلفن</label>
@@ -61,14 +55,12 @@
                                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>تاریخ تولد</label>
                                     <input type="date" asp-for="BirthDate" class="form-control">
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>رمز عبور</label>
@@ -76,7 +68,6 @@
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>تکرار رمز عبور</label>
@@ -84,7 +75,6 @@
                                     <span asp-validation-for="RePassword" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-12">
                                 <div class="login_flex">
                                     <div class="login_flex_1">
@@ -101,7 +91,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

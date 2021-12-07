@@ -44,7 +44,6 @@
                     </div>
                 </article>
                 <hr />
-                <!-- Comment -->
                 @if (User.Identity.IsAuthenticated)
                 {
                     <form asp-controller="Blog" asp-action="CreateComment"
@@ -63,7 +62,6 @@
                                     ارسال نظرات
                                 </h3>
                             </div>
-
                             <div class="row">
                                 <div class="form-group col-md-12 col-sm-12">
                                     <textarea id="CMBody" name="comment.CommentBody" class="form-control" placeholder="نظر خود را درباره این وبلاگ وارد کنید ..."></textarea>
@@ -82,9 +80,6 @@
                 }
                 <div class="comment-wrap border p-3 rounded" id="CommentList">
                     <div class="comment-detail">
-                        
-
-
                     </div>
                 </div>
             </div>
@@ -145,20 +140,11 @@
         function Success() {
             $("#CMBody").val("");
         }
-
         $(function() {
             $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId);
         });
-
         function pageComment(pageNum) {
             $("#CommentList").load("/Blog/ShowComment/" + @Model.BlogId + "?pageNum="+pageNum);
         }
     </script>
-    @*<script>
-        $(function(){
-            $('#btnShowAnswerTextArea').click(function() {
-                $('#answerPanel').toggle();
-            });
-        });
-    </script>*@
 }

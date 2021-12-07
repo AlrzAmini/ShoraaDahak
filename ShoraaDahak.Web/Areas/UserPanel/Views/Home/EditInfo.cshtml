@@ -22,14 +22,11 @@
         </div>
     </div>
 </div>
-
 <section class="gray">
     <div class="container">
         <div class="row">
             <partial name="_PanelSideBar" />
-
             <div class="col-lg-8 col-md-9">
-                <!-- Total Items -->
                 <div class="card style-2">
                     <div class="card-header">
                         @if (ViewBag.IsSuccess != null)
@@ -46,25 +43,20 @@
                     <div class="card-body">
                         <form asp-action="EditInfo" method="post" class="submit-page">
                             <div class="row">
-
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label>نام</label>
                                         <input class="form-control" type="text" asp-for="Name" >
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
-
                                 </div>
-
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label>کد ملی</label>
                                         <input class="form-control" type="text" asp-for="NCode">
                                         <span asp-validation-for="NCode" class="text-danger"></span>
                                     </div>
-
                                 </div>
-
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label>ایمیل ( قابل تغییر نیست )</label>
@@ -72,7 +64,6 @@
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label>شماره تلفن</label>
@@ -80,7 +71,6 @@
                                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label>تاریخ تولد</label>
@@ -88,17 +78,14 @@
                                         <span asp-validation-for="BirthDate" class="text-danger"></span>
                                     </div>
                                 </div>
-
                                 <div class="col-12">
                                     <button class="btn btn-success" type="submit">ویرایش</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

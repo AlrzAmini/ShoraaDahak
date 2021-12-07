@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "ایجاد بحث جدید";
 }
-
 <div class="breadcrumbs_wrap dark mb-1">
     <div class="container">
         <div class="row align-items-center">
@@ -30,7 +29,6 @@
                     <form asp-action="CreateDiscussion">
                         <input type="hidden" asp-for="ServiceId" />
                         <div class="row">
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>موضوع</label>
@@ -38,7 +36,6 @@
                                     <span asp-validation-for="DiscussionTitle" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>میزان اهمیت</label>
@@ -46,7 +43,6 @@
                                     <span asp-validation-for="ImpLevelId" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>متن</label>
@@ -54,7 +50,6 @@
                                     <span asp-validation-for="DiscussionBody" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-12">
                                 <div class="login_flex_2">
                                     <div class="form-group mb-0">
@@ -67,7 +62,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -78,7 +72,6 @@
 <div>
     <a asp-action="ShowDiscussionList">بازگشت</a>
 </div>
-
 @section Scripts
 {
     <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
