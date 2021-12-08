@@ -1,8 +1,9 @@
-﻿@model List<ShoraaDahak.Core.DTOs.ShowServiceInIndexViewModel>
-@{
+﻿@{
     ViewData["Title"] = "خانه";
 }
-<partial name="_Banner" />
+<cache expires-after="@TimeSpan.FromMinutes(20)">
+    <partial name="_Banner" />
+</cache>
 <partial name="_Subjects" />
 <section class="cen-mid">
     <div class="container">
@@ -17,15 +18,13 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="multi-tab">
-
                 </div>
             </div>
             <div class="col-lg-12 col-md-12">
                 <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <partial name="_BoxService" model="item"/>
-                    }
+                    <cache expires-after="@TimeSpan.FromMinutes(5)">
+                        @await Component.InvokeAsync("ServicesComponent")
+                    </cache>
                 </div>
             </div>
         </div>

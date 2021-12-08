@@ -95,9 +95,12 @@
                         <div class="nav-menus-wrapper" id="trpnone">
                             <span class="nav-menus-wrapper-close-button"></span>
                             <ul class="nav-menu">
-                                @await Component.InvokeAsync("ServiceGroupComponent")
-                                @await Component.InvokeAsync("BlogCategoryComponent")
-                                <li><a href="#Quotes">نقل قول ها</a></li>
+                                <cache expires-after="@TimeSpan.FromMinutes(45)">
+                                    @await Component.InvokeAsync("ServiceGroupComponent")
+                                </cache>
+                                <cache expires-after="@TimeSpan.FromMinutes(45)">
+                                    @await Component.InvokeAsync("BlogCategoryComponent")
+                                </cache>
                                 <li><a href="/SendLetter">ارسال نامه</a></li>
                                 <li><a href="/SendReport">گزارش تخلف</a></li>
                                 <li><a href="/AboutUs">درباره ما</a></li>

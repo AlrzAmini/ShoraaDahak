@@ -1,0 +1,20 @@
+﻿@model List<ShoraaDahak.Core.DTOs.BlogInIndexViewModel>
+@foreach (var blog in Model)
+{
+    <div class="item">
+        <div class="offer_item">
+            <div class="offer_item_thumb">
+                <div class="offer-overlay"></div>
+                <img src="/Blog/image/@blog.ImageName" alt="@blog.Title">
+            </div>
+            <div class="offer_caption">
+                <div class="offer_bottom_caption">
+                    <p>@blog.CategoryTitle</p>
+                    <div class="offer_title">@blog.Title</div>
+                    <span>@blog.Writer</span>
+                </div>
+                <a href="/Blogs/@blog.BlogId" class="btn offer_box_btn">خواندن</a>
+            </div>
+        </div>
+    </div>
+}
