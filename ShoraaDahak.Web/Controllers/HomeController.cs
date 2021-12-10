@@ -45,6 +45,26 @@ namespace ShoraaDahak.Web.Controllers
             return View();
         }
 
+        #region External Login
+
+        [Route("provider/{provider}")]
+        public IActionResult GetProvider(string provider)
+        {
+            var redirectUrl = Url.RouteUrl("ExternalLogin", Request.Scheme); // full url
+
+            return null;
+        }
+
+        [Route("external-login",Name = "ExternalLogin")]
+        public IActionResult ExternalLogin()
+        {
+            return null;
+        }
+
+        #endregion
+
+
+
         [HttpPost]
         [Route("file-upload")]
         public IActionResult UploadImage(IFormFile upload, string CKEditorFuncNum, string CKEditor, string langCode)
@@ -62,8 +82,6 @@ namespace ShoraaDahak.Web.Controllers
                 upload.CopyTo(stream);
 
             }
-
-
 
             var url = $"{"/MyImages/"}{fileName}";
 
