@@ -45,21 +45,22 @@ namespace ShoraaDahak.Web.Controllers
             return View();
         }
 
+        //TODO : 
         #region External Login
 
-        [Route("provider/{provider}")]
-        public IActionResult GetProvider(string provider)
-        {
-            var redirectUrl = Url.RouteUrl("ExternalLogin", Request.Scheme); // full url
+        //[Route("provider/{provider}")]
+        //public IActionResult GetProvider(string provider)
+        //{
+        //    var redirectUrl = Url.RouteUrl("ExternalLogin", Request.Scheme); // full url
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        [Route("external-login",Name = "ExternalLogin")]
-        public IActionResult ExternalLogin()
-        {
-            return null;
-        }
+        //[Route("external-login",Name = "ExternalLogin")]
+        //public IActionResult ExternalLogin()
+        //{
+        //    return null;
+        //}
 
         #endregion
 

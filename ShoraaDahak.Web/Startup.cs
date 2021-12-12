@@ -65,10 +65,6 @@ namespace ShoraaDahak.Web
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
-            }).AddGoogle(options =>
-            {
-                options.ClientId = "";
-                options.ClientSecret = "";
             });
 
             #endregion
